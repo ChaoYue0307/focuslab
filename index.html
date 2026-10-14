@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>FocusLab · 专注力实验室</title>
+    <meta name="description" content="FocusLab — a science-based attention training lab: measure, train and apply focus. 基于认知科学的专注力训练：测量、训练、应用。" />
+    <meta name="theme-color" content="#f5f4f0" />
+    <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="./icon-192.png" />
+    <link rel="manifest" href="./manifest.webmanifest" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="FocusLab" />
+    <meta property="og:title" content="FocusLab · 专注力实验室" />
+    <meta property="og:description" content="Science-based attention training: PVT, SART, Flanker, Stroop, N-Back, MOT, breath counting and a deep-focus timer." />
+    <script>
+      // Apply the theme before first paint to avoid a flash.
+      (function () {
+        try {
+          var d = JSON.parse(localStorage.getItem('focuslab:v1') || '{}');
+          var pref = (d.settings && d.settings.theme) || 'system';
+          var dark = pref === 'dark' || (pref === 'system' && matchMedia('(prefers-color-scheme: dark)').matches);
+          document.documentElement.dataset.theme = dark ? 'dark' : 'light';
+        } catch (e) {}
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <noscript>FocusLab needs JavaScript. / FocusLab 需要启用 JavaScript。</noscript>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
