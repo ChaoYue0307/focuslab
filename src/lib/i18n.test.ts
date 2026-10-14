@@ -46,6 +46,9 @@ describe('i18n runtime', () => {
     expect(detectLang(['zh-Hans-CN'])).toBe('zh');
     expect(detectLang(['ja-JP', 'en'])).toBe('ja');
     expect(detectLang(['nl-NL', 'ko-KR'])).toBe('ko');
+    expect(detectLang(['pt-BR', 'en'])).toBe('pt');
+    expect(detectLang(['nl-NL', 'de-DE'])).toBe('de');
+    expect(detectLang(['ru'])).toBe('ru');
     expect(detectLang(['nl-NL'])).toBe('en');
   });
 });

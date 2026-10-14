@@ -31,6 +31,7 @@ export default function Flow({ kind }: { kind: 'plan' | 'assess' }) {
   const label = kind === 'assess' ? t('评估', 'Assessment') : t('今日训练', 'Today');
 
   if (idx === -1) {
+    document.title = `${t('专注力评估', 'Focus assessment')} · FocusLab`;
     const mins = ASSESSMENT.reduce((s, x) => s + (taskMeta(x).assessMinutes ?? taskMeta(x).minutes), 0);
     return (
       <div className="stage">

@@ -43,8 +43,12 @@ export const isLangReady = (lang: Lang) => !needsDict(lang) || !!dicts[lang];
 export async function loadLang(lang: Lang): Promise<void> {
   if (isLangReady(lang)) return;
   const load = loaders[`../locales/${lang}.json`];
-  if (!load) return;
-  dicts[lang] = (await load()).default;
+  try {
+    dicts[lang] = load ? (await load()).default : {};
+  } catch {
+    // Network hiccup or a stale deploy: show English rather than a blank screen.
+    dicts[lang] = {};
+  }
   version++;
   listeners.forEach((l) => l());
 }

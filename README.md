@@ -5,7 +5,9 @@
 
 👉 **Live app: https://chaoyue0307.github.io/focuslab/**
 
-No account, no server, no tracking — all data stays in your browser. Works offline and can be installed as an app (PWA). 中文 / English.
+No account, no server, no tracking — all data stays in your browser. Works offline and can be installed as an app (PWA).
+
+**10 languages:** 简体中文 · 繁體中文 · English · 日本語 · 한국어 · Español · Français · Deutsch · Português · Русский — switch anytime from the sidebar, the globe icon on mobile, or Settings; the browser language is detected on first visit, and `?lang=ja` links open a specific language.
 
 ---
 
@@ -64,6 +66,18 @@ npm run build    # static build in dist/
 ```
 
 Stack: React 19 + TypeScript + Vite. No UI or chart libraries — charts are hand-built SVG with hover tooltips and table views. Deployed to GitHub Pages by `.github/workflows/deploy.yml` on every push to `main`.
+
+## Translations
+
+Strings are authored inline as Chinese/English pairs — `t('中文', 'English', {n})` or `{ zh, en }` content objects — so the two source languages never drift apart. Every other language is a dictionary in `src/locales/<code>.json` keyed by a hash of the English string and loaded on demand (~20 KB gzipped each).
+
+```bash
+npm run i18n     # re-extract source strings (TypeScript AST) and regenerate 繁體中文 via OpenCC
+node scripts/i18n-merge.mjs ja   # merge scripts/i18n-parts/ja.*.tsv sheets into src/locales/ja.json
+npm test         # fails if any language misses a string or breaks a {placeholder}
+```
+
+Stroop color words are shown in the user's language, because the interference effect depends on automatic reading.
 
 ## Project layout
 
