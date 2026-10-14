@@ -1,6 +1,8 @@
+import { fmtSeconds } from '../lib/date';
+import type { Lang } from '../lib/types';
 import type { MetricDef } from './registry';
 
-export function fmtMetric(def: MetricDef, v: number, lang: 'zh' | 'en'): string {
+export function fmtMetric(def: MetricDef, v: number, lang: Lang): string {
   if (!Number.isFinite(v)) return '—';
   switch (def.fmt) {
     case 'ms':
@@ -12,7 +14,7 @@ export function fmtMetric(def: MetricDef, v: number, lang: 'zh' | 'en'): string 
     case 'num2':
       return v.toFixed(2);
     case 's':
-      return lang === 'zh' ? `${v.toFixed(1)} 秒` : `${v.toFixed(1)} s`;
+      return fmtSeconds(v, lang);
     default:
       return String(Math.round(v));
   }

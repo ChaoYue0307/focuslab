@@ -1,4 +1,6 @@
 import { useEffect, useState, type ReactNode } from 'react';
+import { isLang, LANGS } from '../lib/langs';
+import { updateSettings, useSettings } from '../lib/store';
 import { Icon } from './Icon';
 
 export function Modal({ onClose, children, width }: { onClose?: () => void; children: ReactNode; width?: number }) {
@@ -102,5 +104,25 @@ export function Callout({ icon = 'info', tone, children }: { icon?: string; tone
       <Icon name={icon} size={18} />
       <div>{children}</div>
     </div>
+  );
+}
+
+/** Native <select> of every supported language — accessible, and works with phone pickers. */
+export function LanguagePicker({ compact, className = '' }: { compact?: boolean; className?: string }) {
+  const { lang } = useSettings();
+  const current = LANGS.find((l) => l.code === lang);
+  return (
+    <label className={`lang-picker ${compact ? 'compact' : ''} ${className}`} title="Language / 语言">
+      <Icon name="globe" size={compact ? 18 : 16} />
+      {!compact && <span className="lang-name">{current?.name}</span>}
+      <select value={lang} onChange={(e) => isLang(e.target.value) && updateSettings({ lang: e.target.value })} aria-label="Language / 语言">
+        {LANGS.map((l) => (
+          <option key={l.code} value={l.code} lang={l.locale}>
+            {l.name}
+          </option>
+        ))}
+      </select>
+      {!compact && <Icon name="chevronDown" size={14} />}
+    </label>
   );
 }

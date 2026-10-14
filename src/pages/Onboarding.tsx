@@ -1,10 +1,9 @@
 import { useState } from 'react';
 import { Icon } from '../components/Icon';
-import { Segmented } from '../components/ui';
+import { LanguagePicker, Segmented } from '../components/ui';
 import { useT } from '../lib/i18n';
 import { navigate } from '../lib/router';
 import { update, updateSettings, useData } from '../lib/store';
-import type { Lang } from '../lib/types';
 
 export default function Onboarding() {
   const t = useT();
@@ -53,7 +52,7 @@ export default function Onboarding() {
               ))}
             </div>
             <div className="row between">
-              <Segmented<Lang> value={settings.lang} onChange={(v) => updateSettings({ lang: v })} options={[{ value: 'zh', label: '中文' }, { value: 'en', label: 'EN' }]} />
+              <LanguagePicker />
               <button className="btn primary lg" onClick={() => setStep(1)} type="button" autoFocus>
                 {t('继续', 'Continue')} <Icon name="arrowRight" size={18} />
               </button>

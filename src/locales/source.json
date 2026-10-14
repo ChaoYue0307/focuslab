@@ -1,0 +1,3622 @@
+{
+ "1039cr5": {
+  "en": "Respond to the ink color and ignore the word.",
+  "zh": "按墨水的颜色作答，忽略字义。"
+ },
+ "106jprk": {
+  "en": "Time to retest.",
+  "zh": "建议现在复测。"
+ },
+ "106m0sc": {
+  "en": "Pace {l}",
+  "zh": "节奏 {l}"
+ },
+ "1072tca": {
+  "en": "Stand up, walk, stretch",
+  "zh": "站起来走一走、伸展一下"
+ },
+ "1086ua": {
+  "en": "Centurion",
+  "zh": "百炼成钢"
+ },
+ "10cg4mi": {
+  "en": "One concrete change for next week (as an \"if–then\" plan)",
+  "zh": "下周要尝试的一个具体改变（写成\"如果……就……\"）"
+ },
+ "10dihzp": {
+  "en": "Focus done",
+  "zh": "专注完成"
+ },
+ "10e2fxf": {
+  "en": "Name the ink, not the word",
+  "zh": "说出字的颜色，而不是字本身"
+ },
+ "10f5bbe": {
+  "en": "Your alertness has been dipping",
+  "zh": "最近警觉度在下滑"
+ },
+ "10fnick": {
+  "en": "③ Transfer",
+  "zh": "③ 迁移"
+ },
+ "10g5dhq": {
+  "en": "Best done somewhere quiet with a physical keyboard. All data stays in your browser.",
+  "zh": "建议在安静的环境中使用电脑键盘完成。所有数据只保存在你的浏览器里。"
+ },
+ "10hfn4u": {
+  "en": "~15-minute session: PVT state check → 3 core drills → breath counting",
+  "zh": "约 15 分钟今日训练：PVT 状态检测 → 3 项核心训练 → 数息收尾"
+ },
+ "10hl7s5": {
+  "en": "Hundred-hour craftsman",
+  "zh": "百小时匠人"
+ },
+ "10hlxi6": {
+  "en": "Personal insights are on their way",
+  "zh": "个人洞察正在积累中"
+ },
+ "10huzbu": {
+  "en": "The flanker task trains your attentional spotlight: when the side arrows point the other way, your brain must suppress them. The smaller your conflict cost (incongruent − congruent RT), the better you hold focus amid noise and open tabs.",
+  "zh": "Flanker 任务训练\"聚光灯\"式的选择性注意：两侧箭头方向相反时（冲突），大脑必须压制干扰才能正确反应。冲突代价（不一致 − 一致的反应时）越小，你越能在嘈杂环境、多窗口下守住焦点。"
+ },
+ "10kl058": {
+  "en": "RED",
+  "zh": "红"
+ },
+ "10lvjrk": {
+  "en": "hurting",
+  "zh": "不利"
+ },
+ "10n1cna": {
+  "en": "How many hours of deep focus do you want each day? You can change this anytime.",
+  "zh": "每天希望有多少小时的深度专注？之后可以随时修改。"
+ },
+ "10nlti9": {
+  "en": "Today: OFF (control)",
+  "zh": "今天：OFF（对照）"
+ },
+ "10nvn4m": {
+  "en": "Next time, then",
+  "zh": "下次继续"
+ },
+ "10rsgso": {
+  "en": "Avg focus rating",
+  "zh": "平均专注自评"
+ },
+ "10tcxbq": {
+  "en": "Test which habits work for you with an experiment",
+  "zh": "用个人实验检验哪些习惯对你有效"
+ },
+ "10tr4mn": {
+  "en": "Find a quiet spot where you won’t be interrupted; a physical keyboard works best. Leaving the page restarts the current test.",
+  "zh": "找一个安静、不会被打扰的环境，用电脑键盘效果最佳。中途离开页面会让当前测试重新开始。"
+ },
+ "10vuna0": {
+  "en": "See summary",
+  "zh": "查看总结"
+ },
+ "118y86m": {
+  "en": "Stopped",
+  "zh": "已停止"
+ },
+ "11f3evo": {
+  "en": "energized",
+  "zh": "充沛"
+ },
+ "11lm89y": {
+  "en": "Latest",
+  "zh": "最近"
+ },
+ "11n5xbm": {
+  "en": "Focus session complete! Take a break.",
+  "zh": "专注完成！休息一下。"
+ },
+ "11pbxwf": {
+  "en": "Intention",
+  "zh": "意图"
+ },
+ "11ph2ew": {
+  "en": "Scattered",
+  "zh": "很散"
+ },
+ "11quhpd": {
+  "en": "Want to know if a change really works?",
+  "zh": "想验证某个改变是否真的有效？"
+ },
+ "11t9k7y": {
+  "en": "Alertness",
+  "zh": "警觉度"
+ },
+ "11xb9vf": {
+  "en": "Use them as usual today (control day).",
+  "zh": "今天照常使用（对照日）。"
+ },
+ "11y5deq": {
+  "en": "{p} accuracy. Miscounts aren’t failure — each time you notice and return, you train the awareness muscle.",
+  "zh": "准确率 {p}。数错并不是失败——每次你发现并回到呼吸，都是在锻炼\"觉察肌肉\"。"
+ },
+ "11z7adp": {
+  "en": "Space 1–8 · Enter 9 · R reset",
+  "zh": "空格 1–8 · 回车 9 · R 重置"
+ },
+ "124ascw": {
+  "en": " Short sleep is the main drag.",
+  "zh": " 昨晚睡眠不足是主要原因。"
+ },
+ "124gdtu": {
+  "en": "Try {m} min?",
+  "zh": "试试 {m} 分钟？"
+ },
+ "12a29iu": {
+  "en": "Start 14-day experiment",
+  "zh": "开始 14 天实验"
+ },
+ "12coq6a": {
+  "en": "Performance by time of day",
+  "zh": "时段表现"
+ },
+ "12eigp5": {
+  "en": "Session complete!",
+  "zh": "专注完成！"
+ },
+ "12i6ipe": {
+  "en": "20-second check-in",
+  "zh": "20 秒打卡"
+ },
+ "12iob7z": {
+  "en": "Light",
+  "zh": "浅色"
+ },
+ "12lqo53": {
+  "en": "Caffeine today",
+  "zh": "今天咖啡因"
+ },
+ "12oalq": {
+  "en": "Do a daily breath-counting session (built in), gradually extending from 5 to 10–15 minutes.",
+  "zh": "每天做一次数息练习（本应用内置），并逐步从 5 分钟延长到 10–15 分钟。"
+ },
+ "12rm1e5": {
+  "en": "Pink",
+  "zh": "粉噪音"
+ },
+ "12spw76": {
+  "en": "Choose exercise",
+  "zh": "选择练习"
+ },
+ "12ste8z": {
+  "en": "Median RT",
+  "zh": "反应时中位数"
+ },
+ "12ugx04": {
+  "en": "Nicely done!",
+  "zh": "干得漂亮！"
+ },
+ "12xcnh4": {
+  "en": "neutral",
+  "zh": "中性"
+ },
+ "12zeb22": {
+  "en": "Never backed up",
+  "zh": "还没有备份过"
+ },
+ "133kcm6": {
+  "en": "Experience sampling is how researchers measure mind-wandering. Each honest answer trains the skill of noticing that you drifted.",
+  "zh": "经验取样是研究走神的标准方法。每次如实回答，都是在训练\"发现自己走神\"的能力。"
+ },
+ "134ms3y": {
+  "en": "No social media before noon",
+  "zh": "中午前不刷社交媒体"
+ },
+ "135awks": {
+  "en": "≥90% accuracy in a 10-minute breath count",
+  "zh": "10 分钟数息准确率 ≥90%"
+ },
+ "1390g8m": {
+  "en": "Your data lives only in this browser; clearing site data would erase it. Download a backup.",
+  "zh": "数据只保存在这个浏览器里。清除浏览器数据会让记录丢失——下载一份备份吧。"
+ },
+ "13cn9g1": {
+  "en": "Done",
+  "zh": "完成"
+ },
+ "13ipxdy": {
+  "en": "Breathe out",
+  "zh": "呼气"
+ },
+ "13oovfw": {
+  "en": "Today’s habits (you can update later)",
+  "zh": "今天的习惯（可稍后回来补充）"
+ },
+ "13qbhrw": {
+  "en": "System",
+  "zh": "跟随系统"
+ },
+ "13qcdw9": {
+  "en": "Start review",
+  "zh": "开始回顾"
+ },
+ "13twb0z": {
+  "en": "Your data stays on this device",
+  "zh": "你的数据只在这台设备上"
+ },
+ "13x10m5": {
+  "en": "poor",
+  "zh": "很差"
+ },
+ "146rexl": {
+  "en": "Blue frame: odd/even · Orange frame: low/high · ← / → or F / J",
+  "zh": "蓝框判奇偶，橙框判大小 · ← / → 或 F / J"
+ },
+ "147itg5": {
+  "en": "training performance",
+  "zh": "训练表现"
+ },
+ "148tgtu": {
+  "en": "Finish a 14-day personal experiment",
+  "zh": "完成一次 14 天个人实验"
+ },
+ "14ikily": {
+  "en": "Take the baseline assessment",
+  "zh": "开始基线评估"
+ },
+ "14jlry8": {
+  "en": "Then all balls look identical and start moving.",
+  "zh": "随后所有小球外观一致并开始移动。"
+ },
+ "14lmd4i": {
+  "en": "below",
+  "zh": "低于平均"
+ },
+ "14mwbl": {
+  "en": "Small, consistent practice beats occasional marathons.",
+  "zh": "稳定的小量练习，胜过偶尔的大量练习。"
+ },
+ "14q0cqx": {
+  "en": "A thought",
+  "zh": "冒出的念头"
+ },
+ "14q41cs": {
+  "en": "Colour-vision-friendly palette on: blue / yellow / grey (D F J or 1–3).",
+  "zh": "已启用色觉友好配色：蓝 / 黄 / 灰（D F J 或 1–3）。"
+ },
+ "14vz4k4": {
+  "en": "Round {r} / {t}",
+  "zh": "第 {r} / {t} 轮"
+ },
+ "150xh2f": {
+  "en": "Ability to tell matches from non-matches",
+  "zh": "区分匹配与不匹配的能力"
+ },
+ "152mjv5": {
+  "en": "Left: ← or F. Right: → or J (or tap the buttons).",
+  "zh": "向左按 ← 或 F，向右按 → 或 J（手机点击左右按钮）。"
+ },
+ "155nc4w": {
+  "en": "Add your own, e.g. \"no morning meetings\"",
+  "zh": "添加自定义习惯，例如\"上午不开会\""
+ },
+ "1573eni": {
+  "en": "Stroop colors",
+  "zh": "Stroop 颜色"
+ },
+ "15fageb": {
+  "en": "Next block: {n}-back",
+  "zh": "下一轮：{n}-back"
+ },
+ "15lcq5z": {
+  "en": "Today, take at least one 15-minute outdoor walk break without your phone.",
+  "zh": "今天至少一次休息到户外走 15 分钟，不看手机。"
+ },
+ "15payzm": {
+  "en": "Did you finish: ",
+  "zh": "完成了吗："
+ },
+ "15powin": {
+  "en": "Went well: ",
+  "zh": "做得好："
+ },
+ "15sdt3q": {
+  "en": "Goal",
+  "zh": "目标"
+ },
+ "15tqv0r": {
+  "en": "Start next session early",
+  "zh": "提前开始下一段"
+ },
+ "15v46l4": {
+  "en": "Memory master",
+  "zh": "记忆大师"
+ },
+ "15y32v6": {
+  "en": "Import backup",
+  "zh": "导入备份"
+ },
+ "15zuffa": {
+  "en": "{n} lapses (≥500 ms) this time. That usually signals sleep debt or fatigue — consider lighter work first, or a 10–20 minute nap.",
+  "zh": "本次有 {n} 次走神失误（≥500ms）。这通常意味着睡眠不足或疲劳——今天适合先处理轻量任务，或小睡 10–20 分钟。"
+ },
+ "1603ssf": {
+  "en": "Measure",
+  "zh": "测量"
+ },
+ "165wyh4": {
+  "en": "timeout",
+  "zh": "超时"
+ },
+ "16ag97w": {
+  "en": "Higher is better",
+  "zh": "越高越好"
+ },
+ "16d1184": {
+  "en": "(unnamed distraction)",
+  "zh": "（未命名的分心）"
+ },
+ "16fvxb1": {
+  "en": "Distr.",
+  "zh": "分心"
+ },
+ "16g05x1": {
+  "en": "Share of 3s you pressed on (autopilot marker)",
+  "zh": "在 3 上按键的比例（走神指标）"
+ },
+ "16inyxd": {
+  "en": "Deep focus, last 7 days",
+  "zh": "近 7 天深度专注"
+ },
+ "16kvdxl": {
+  "en": "Time outdoors",
+  "zh": "户外 / 自然时间"
+ },
+ "16pjlfs": {
+  "en": "Take assessment",
+  "zh": "开始评估"
+ },
+ "16ty0j4": {
+  "en": "Reset difficulty levels",
+  "zh": "重置训练难度"
+ },
+ "16us7mj": {
+  "en": "Language",
+  "zh": "语言"
+ },
+ "16vj3x5": {
+  "en": "Personal best",
+  "zh": "个人最佳"
+ },
+ "16zwoyy": {
+  "en": "No clear difference",
+  "zh": "无明显差异"
+ },
+ "171bs7a": {
+  "en": "Every day",
+  "zh": "每天"
+ },
+ "1737qx5": {
+  "en": "Speak letters (needs sound)",
+  "zh": "朗读字母（需要声音）"
+ },
+ "17chmxr": {
+  "en": "Skip the phone — it doesn’t rest your brain",
+  "zh": "尽量别拿手机——它不会让大脑休息"
+ },
+ "17dflul": {
+  "en": "Alerts for focus end and attention probes while the tab is in the background",
+  "zh": "专注结束和专注抽查时，页面在后台也能提醒你"
+ },
+ "17rv3f8": {
+  "en": "Add",
+  "zh": "添加"
+ },
+ "17s6er3": {
+  "en": "Put your phone out of sight",
+  "zh": "让手机离开视线"
+ },
+ "17spnvc": {
+  "en": "Break",
+  "zh": "休息"
+ },
+ "17w7h1t": {
+  "en": "Average time",
+  "zh": "平均用时"
+ },
+ "17xe30h": {
+  "en": "On breaths 1–8 press Space (or tap the left area); on breath 9 press Enter (or tap the right). Then start again at 1.",
+  "zh": "第 1–8 次呼气按空格（或点左侧大区域）；第 9 次按回车（或点右侧）。然后从 1 重新开始。"
+ },
+ "185ucaa": {
+  "en": "Finish",
+  "zh": "结束"
+ },
+ "187uzna": {
+  "en": "Task interrupted",
+  "zh": "任务被中断"
+ },
+ "188l2j0": {
+  "en": "Responses of 500 ms or slower",
+  "zh": "反应 ≥500ms 的次数"
+ },
+ "188qff": {
+  "en": "Fast and stable: you are highly alert right now. Put your hardest work in the next 1–2 hours.",
+  "zh": "反应快且稳定：你此刻处于很好的警觉状态。把最难的工作安排在接下来的 1–2 小时。"
+ },
+ "189b9jn": {
+  "en": "Streak",
+  "zh": "连续天数"
+ },
+ "189qrai": {
+  "en": "All data stays in your browser.",
+  "zh": "所有数据只保存在你的浏览器中。"
+ },
+ "18fiyup": {
+  "en": "Instead of guessing which advice works for you, test it: 14 days of randomized ON / OFF days, comparing training performance, focus ratings, distraction rate and mind-wandering between the two.",
+  "zh": "与其猜哪些建议对你有用，不如测一测：14 天里随机安排 ON / OFF 日，FocusLab 比较两组日子的训练表现、专注自评、分心频率和走神比例。"
+ },
+ "18k5w7z": {
+  "en": "Attention probe",
+  "zh": "专注抽查"
+ },
+ "18kejlu": {
+  "en": "Rock steady",
+  "zh": "稳如磐石"
+ },
+ "18tf2d4": {
+  "en": "You know the very first step",
+  "zh": "知道第一步要做什么"
+ },
+ "18u3mqg": {
+  "en": "Less",
+  "zh": "少"
+ },
+ "18vq2hh": {
+  "en": "Sustained attention",
+  "zh": "持续注意"
+ },
+ "18wuq59": {
+  "en": "Change",
+  "zh": "变化"
+ },
+ "18zcapm": {
+  "en": "Deep focus today",
+  "zh": "今日深度专注"
+ },
+ "1927k7i": {
+  "en": "Uses blue / yellow / grey instead, suitable for red–green colour vision deficiency",
+  "zh": "改用蓝 / 黄 / 灰三色，适合红绿色弱"
+ },
+ "1959kvo": {
+  "en": "Drink a glass of water",
+  "zh": "喝一杯水"
+ },
+ "1969xgj": {
+  "en": "{r} sessions · {s} focus blocks · {c} check-ins. No account, no server, no tracking.",
+  "zh": "{r} 次训练 · {s} 段专注 · {c} 次打卡。没有账号、没有服务器、没有追踪。"
+ },
+ "19d6nqk": {
+  "en": "Notifications not supported",
+  "zh": "此浏览器不支持通知"
+ },
+ "19exeeh": {
+  "en": "Space / tap for every digit · do nothing on 3",
+  "zh": "除了 3 都按 空格 / 点击 · 看到 3 不要按"
+ },
+ "19hwlpo": {
+  "en": "Schedule",
+  "zh": "实验日程"
+ },
+ "19jg3d6": {
+  "en": "above",
+  "zh": "高于平均"
+ },
+ "19qnzo5": {
+  "en": "Training mode · daily average",
+  "zh": "训练模式 · 每日平均"
+ },
+ "1a48qbu": {
+  "en": "Classic cognitive paradigms with adaptive difficulty keep you deliberately practicing at \"slightly too hard\".",
+  "zh": "经典认知范式 + 自适应难度，始终在\"有点难\"的区间刻意练习注意控制。"
+ },
+ "1a8nnrz": {
+  "en": "Stop this experiment?",
+  "zh": "停止这个实验？"
+ },
+ "1ah95tr": {
+  "en": "Strong evidence",
+  "zh": "证据充分"
+ },
+ "1ai8kl2": {
+  "en": "Keep your eyes on the marked balls as they move",
+  "zh": "在一群移动的小球里，盯住被标记的那几个"
+ },
+ "1aj3cub": {
+  "en": "Finished",
+  "zh": "已完成"
+ },
+ "1ammp6": {
+  "en": "Numbers are scattered in a grid.",
+  "zh": "方格中打乱排列着数字。"
+ },
+ "1amx9lx": {
+  "en": "Focusing",
+  "zh": "专注中"
+ },
+ "1ana0qe": {
+  "en": "Check-ins",
+  "zh": "状态打卡"
+ },
+ "1aokudu": {
+  "en": "Low state: aim to complete training, not to set records; use 25-minute focus blocks with more breaks. A 10–20 minute nap and an early night will help.",
+  "zh": "状态偏低：训练以完成为主、不追求成绩；深度专注用 25 分钟短时段并多休息。如果可以，小睡 10–20 分钟，今晚早点睡。"
+ },
+ "1apbt05": {
+  "en": "vs baseline",
+  "zh": "较基线"
+ },
+ "1aqoisd": {
+  "en": "Switch-trial accuracy",
+  "zh": "切换试次正确率"
+ },
+ "1atjsf0": {
+  "en": "Screens in the hour before bed",
+  "zh": "睡前 1 小时看屏幕"
+ },
+ "1atktwb": {
+  "en": "Concrete and checkable, e.g. \"Draft section 2 of the report\"",
+  "zh": "具体、可检验，例如：\"写完报告第 2 节的初稿\""
+ },
+ "1ay8mdg": {
+  "en": "Tracking capacity ≈ {c} objects. Difficulty rises after each perfect round.",
+  "zh": "追踪容量约 {c} 个目标。难度会随着全对的轮次自动提升。"
+ },
+ "1b2z1aw": {
+  "en": "Water within reach",
+  "zh": "水已备好"
+ },
+ "1b66rsb": {
+  "en": "Combine sleep, exercise and stress data to discover what really drives your focus.",
+  "zh": "结合睡眠、运动、压力数据，找出真正影响你专注的因素。"
+ },
+ "1b6fvii": {
+  "en": "Objectively measure 7 dimensions of attention with tests used at NASA and in cognitive science.",
+  "zh": "用 NASA 与认知科学的经典测试，客观测量 7 个专注维度。"
+ },
+ "1b8b5ey": {
+  "en": "What pulled you? Enter to park it and return",
+  "zh": "分心的念头是什么？回车保存后回到任务"
+ },
+ "1bb9ou4": {
+  "en": "Reminder time",
+  "zh": "提醒时间"
+ },
+ "1bcac69": {
+  "en": "Outdoor breaks",
+  "zh": "户外休息"
+ },
+ "1bhayfw": {
+  "en": "The page hit an unexpected error. Your data is still stored in this browser — download a backup, then reload.",
+  "zh": "页面遇到了意外错误。你的数据仍然保存在浏览器中——可以先下载一份备份，再重新加载。"
+ },
+ "1bhykf9": {
+  "en": "Move before focusing",
+  "zh": "先运动再专注"
+ },
+ "1bipuuc": {
+  "en": "Continue",
+  "zh": "继续"
+ },
+ "1bjx17g": {
+  "en": "GREEN",
+  "zh": "绿"
+ },
+ "1bmkj8g": {
+  "en": "Immersive",
+  "zh": "沉浸模式"
+ },
+ "1bnb0gz": {
+  "en": "Memorize the {k} flashing targets",
+  "zh": "记住闪烁的 {k} 个目标"
+ },
+ "1bnr5xt": {
+  "en": "e.g. If I sit down at 9am, then my phone goes in the drawer first",
+  "zh": "例如：如果上午 9 点坐到桌前，就先把手机放进抽屉"
+ },
+ "1brhct3": {
+  "en": "afternoon",
+  "zh": "下午"
+ },
+ "1bs146s": {
+  "en": "Cognitive flexibility",
+  "zh": "切换灵活性"
+ },
+ "1bymuth": {
+  "en": "Accuracy matters as much as speed; keep a steady rhythm.",
+  "zh": "准确与速度同等重要；保持稳定节奏。"
+ },
+ "1c24w7q": {
+  "en": "Tip: switch to your work app freely — the timer keeps running and the tab title shows the time left.",
+  "zh": "提示：可以切到其他应用工作，计时会继续。标签页标题会显示剩余时间。"
+ },
+ "1c2v414": {
+  "en": "10 extra minutes of mindfulness",
+  "zh": "额外 10 分钟正念"
+ },
+ "1c8xk8d": {
+  "en": "When off, letters are shown in the square",
+  "zh": "关闭则在方块中显示字母"
+ },
+ "1ccbion": {
+  "en": "About 6 breaths/min to settle in",
+  "zh": "约 6 次/分的慢呼吸，帮助平稳进入状态"
+ },
+ "1cdpddn": {
+  "en": "Track leaving this page",
+  "zh": "记录离开本页面"
+ },
+ "1cdwhp6": {
+  "en": "Today’s readiness",
+  "zh": "今日状态"
+ },
+ "1chgrz": {
+  "en": "Reach 3-back",
+  "zh": "N-Back 达到 3-back"
+ },
+ "1chtu17": {
+  "en": "Index",
+  "zh": "指数"
+ },
+ "1cjjrtr": {
+  "en": "Watch the box in the center.",
+  "zh": "盯住屏幕中央的方框。"
+ },
+ "1cnyep": {
+  "en": "Interrupted",
+  "zh": "被外界打断"
+ },
+ "1comrpx": {
+  "en": "Set your goal",
+  "zh": "设定你的目标"
+ },
+ "1cqb207": {
+  "en": "What was the biggest obstacle, and when did it show up?",
+  "zh": "最大的障碍是什么？它通常在什么情况下出现？"
+ },
+ "1cqhgud": {
+  "en": "Stress",
+  "zh": "压力"
+ },
+ "1cswhk6": {
+  "en": "GREY",
+  "zh": "灰"
+ },
+ "1cv4088": {
+  "en": "N-Back position / sound",
+  "zh": "N-Back 位置 / 声音"
+ },
+ "1cx28td": {
+  "en": "Stepping down — steady",
+  "zh": "降一级，稳住"
+ },
+ "1d0pvex": {
+  "en": "YELLOW",
+  "zh": "黄"
+ },
+ "1d195xl": {
+  "en": "Your response timing is variable ({cv}), a sign of attention drifting in and out. Aim for the same rhythm every trial.",
+  "zh": "反应时波动较大（{cv}），说明注意力时进时出。目标是让每一次反应的节奏都一样。"
+ },
+ "1d1pha4": {
+  "en": "Training + deep-focus minutes",
+  "zh": "训练 + 深度专注分钟数"
+ },
+ "1d2tenq": {
+  "en": "Hit the moment the counter appears — your alertness right now",
+  "zh": "数字一出现就按——测你此刻的清醒度"
+ },
+ "1d4yy65": {
+  "en": "Warming up",
+  "zh": "三天热身"
+ },
+ "1d5hzug": {
+  "en": "Task switching",
+  "zh": "规则切换"
+ },
+ "1d6br8u": {
+  "en": "Holding steady",
+  "zh": "保持"
+ },
+ "1d9153l": {
+  "en": "Set a caffeine cut-off at least 8 hours before bed. Use your check-ins to see if it really helps you.",
+  "zh": "设置一个咖啡因截止时间（睡前至少 8 小时）。用打卡数据看咖啡因对你是否真的有帮助。"
+ },
+ "1dajpe0": {
+  "en": "Roughly the same as before ({pa}%). Every time you catch yourself drifting, you train meta-awareness.",
+  "zh": "和之前（{pa}%）基本持平。每次\"抓到\"自己走神，都是在锻炼元觉察。"
+ },
+ "1dcndpd": {
+  "en": "Low",
+  "zh": "低"
+ },
+ "1dd2euy": {
+  "en": "Phone urge",
+  "zh": "想看手机"
+ },
+ "1dg5h4s": {
+  "en": "~10 min",
+  "zh": "约 10 分钟"
+ },
+ "1dkxye9": {
+  "en": "When you notice drifting, don’t judge — just label it \"thinking\" and return. Every return is a rep. This is breath counting applied to real work.",
+  "zh": "发现走神时，不批评自己，只在心里轻轻说一声\"想事情了\"，然后回到任务。每一次回来都是一次训练——这就是数息练习在真实工作中的用法。"
+ },
+ "1dm652e": {
+  "en": "Tap for every digit · do nothing on 3",
+  "zh": "除了 3 都点击屏幕 · 看到 3 不要点"
+ },
+ "1dndqwf": {
+  "en": "Physiological sigh",
+  "zh": "生理性叹息"
+ },
+ "1dneyvq": {
+  "en": "calm",
+  "zh": "放松"
+ },
+ "1dnj28": {
+  "en": "Daily deep focus (minutes)",
+  "zh": "每日深度专注（分钟）"
+ },
+ "1dqk5my": {
+  "en": "Back to Today",
+  "zh": "回到今日"
+ },
+ "1dqnczs": {
+  "en": "You make more errors on switch trials. When the cue appears, say the rule to yourself (\"odd/even\" or \"low/high\") before the digit arrives.",
+  "zh": "切换试次更容易出错。看到提示时，先在心里说出规则（\"奇偶\"或\"大小\"），再看数字。"
+ },
+ "1dudzcg": {
+  "en": "Yes",
+  "zh": "有"
+ },
+ "1dvvwok": {
+  "en": "Sound",
+  "zh": "声音相同"
+ },
+ "1dx9p1j": {
+  "en": "① Measure",
+  "zh": "① 测量"
+ },
+ "1dze62o": {
+  "en": "Breath counting length",
+  "zh": "数息练习时长"
+ },
+ "1e2rk3": {
+  "en": "A {ms} ms conflict cost is large: the flankers pull at you. Narrow your attention to the center like a spotlight.",
+  "zh": "冲突代价 {ms}ms 较大：两侧干扰对你影响明显。试着把注意力\"收窄\"到正中间，像聚光灯一样。"
+ },
+ "1efstfm": {
+  "en": "Strategy: don’t chase targets one by one — track them as the corners of one shape-shifting polygon, eyes resting near the center.",
+  "zh": "策略：不要逐个盯目标，而是把它们想象成一个会变形的多边形\"整体\"来追踪；眼睛可以停在中心。"
+ },
+ "1ek8kup": {
+  "en": "When off, letters appear in the square",
+  "zh": "关闭后字母显示在方块中"
+ },
+ "1eml05p": {
+  "en": "{n} per focused hour",
+  "zh": "每小时 {n} 次"
+ },
+ "1epvz6s": {
+  "en": "Past reviews",
+  "zh": "过往回顾"
+ },
+ "1esox7r": {
+  "en": "Attention escapes most when you’re stuck. Shrink the task to the next physical 2-minute action, like \"open the doc and write the first sentence\".",
+  "zh": "卡住时注意力最容易逃跑。把任务缩小到\"接下来 2 分钟要做的具体动作\"，例如\"打开文档写下第一句话\"。"
+ },
+ "1esyg9l": {
+  "en": "Baseline assessment on day 1, retest every 2 weeks",
+  "zh": "第 1 天做基线评估，之后每 2 周复测"
+ },
+ "1f0japm": {
+  "en": "{n}-day streak",
+  "zh": "连续 {n} 天"
+ },
+ "1f5w650": {
+  "en": "Run PVT for a better estimate",
+  "zh": "做 PVT 让估计更准"
+ },
+ "1f74pqt": {
+  "en": "About {m} minutes: 5 standardized tests covering alertness, sustained attention, interference control, switching and working memory. Fixed difficulty, so you can compare every 2 weeks and see objective change.",
+  "zh": "约 {m} 分钟，5 项标准化测试，覆盖警觉、持续注意、抗干扰、切换与工作记忆。难度固定，便于每 2 周对比一次，客观看到你的变化。"
+ },
+ "1fke2k7": {
+  "en": "Some balls flash to mark them as targets.",
+  "zh": "几个小球会先闪烁标记为目标。"
+ },
+ "1foqped": {
+  "en": "Many false alarms. When unsure, don’t press — a miss costs the same as a false alarm.",
+  "zh": "误按较多。没有把握时宁可不按——漏按的代价和误按一样。"
+ },
+ "1fqz4l0": {
+  "en": "{p} count accuracy: your attention stayed with the breath very steadily.",
+  "zh": "计数准确率 {p}：注意力非常稳定地停留在呼吸上。"
+ },
+ "1fsdwbq": {
+  "en": "Up from {pa}%. Research suggests people mind-wander nearly half their waking hours — you are pulling attention back.",
+  "zh": "比之前的 {pa}% 提高了。研究估计人们清醒时近一半时间在走神——你正在把注意力拉回来。"
+ },
+ "1fsh97": {
+  "en": "Focus assessment",
+  "zh": "专注力评估"
+ },
+ "1fslgct": {
+  "en": "Attention training",
+  "zh": "专注力实验室"
+ },
+ "1fszduf": {
+  "en": "Dual mode (position + letter)",
+  "zh": "双任务模式（位置 + 字母）"
+ },
+ "1g4ijr6": {
+  "en": "Sleep 7–9 hours",
+  "zh": "睡足 7–9 小时"
+ },
+ "1g6f3ul": {
+  "en": "Today, put your phone in another room for every focus session.",
+  "zh": "今天每段专注时，把手机放到另一个房间。"
+ },
+ "1g6o8o1": {
+  "en": "Last backup: {n} days ago",
+  "zh": "上次备份：{n} 天前"
+ },
+ "1g7g9re": {
+  "en": "100 hours of deep focus",
+  "zh": "累计深度专注 100 小时"
+ },
+ "1g9augj": {
+  "en": "Focus",
+  "zh": "专注"
+ },
+ "1gab4ji": {
+  "en": "This week’s signals",
+  "zh": "本周发现"
+ },
+ "1genyun": {
+  "en": "D F J K / 1–4",
+  "zh": "D F J K / 1–4"
+ },
+ "1geya1n": {
+  "en": "Export backup",
+  "zh": "导出备份"
+ },
+ "1gffl8g": {
+  "en": "Write a concrete intention first",
+  "zh": "开始前写下具体意图"
+ },
+ "1ggs8jb": {
+  "en": "Notifications are your main interrupter. Turn on Do Not Disturb, disable desktop alerts, and batch messages at set times.",
+  "zh": "通知是你的主要干扰源。专注时开启勿扰模式，关闭桌面通知，把消息集中到固定时间处理。"
+ },
+ "1giz9v9": {
+  "en": "Running · day {d}",
+  "zh": "进行中 · 第 {d} 天"
+ },
+ "1gl4k4r": {
+  "en": "Don’t anticipate — false starts are recorded.",
+  "zh": "别提前按——抢跑会被记录。"
+ },
+ "1gmzoqw": {
+  "en": "Start practice",
+  "zh": "开始练习"
+ },
+ "1gq11qg": {
+  "en": "Reflective",
+  "zh": "复盘者"
+ },
+ "1gq8xlp": {
+  "en": "High",
+  "zh": "高"
+ },
+ "1gr6tcs": {
+  "en": "Unlocked this week",
+  "zh": "本周解锁"
+ },
+ "1grmktv": {
+  "en": "Ten hours",
+  "zh": "十小时"
+ },
+ "1h5co7h": {
+  "en": "On task (probes)",
+  "zh": "专注抽查在任务上"
+ },
+ "1haw328": {
+  "en": "Why it works · the science",
+  "zh": "为什么有效 · 科学依据"
+ },
+ "1hb4c": {
+  "en": "Train a few more days to see the trend.",
+  "zh": "再训练几天就能看到趋势线。"
+ },
+ "1hcl0d6": {
+  "en": "You caught yourself drifting {n} time(s) and reset. That is exactly the skill everyday focus needs.",
+  "zh": "你主动发现了 {n} 次走神并重置。这正是日常专注最需要的能力。"
+ },
+ "1hi9l90": {
+  "en": "Space = 1–8 · Enter = 9 · feel free to close your eyes",
+  "zh": "空格 = 1–8 · 回车 = 9 · 可以闭上眼睛"
+ },
+ "1hlyp43": {
+  "en": "Count breaths 1 to 9 — mindfulness you can measure",
+  "zh": "数呼吸 1 到 9——可测量的正念"
+ },
+ "1hpqu3m": {
+  "en": "Skip",
+  "zh": "跳过"
+ },
+ "1hxfe3f": {
+  "en": "distraction rate",
+  "zh": "分心频率"
+ },
+ "1hxfuhe": {
+  "en": "At least one deep-focus session (start at 25 min, extend gradually)",
+  "zh": "至少 1 段深度专注（从 25 分钟开始，逐步延长）"
+ },
+ "1hyov2y": {
+  "en": "Deal with it, then come back — press D to park it if needed. Return to: ",
+  "zh": "处理完就回来，需要的话按 D 记一笔。回到："
+ },
+ "1hz0cfh": {
+  "en": "{m}/day",
+  "zh": "日均 {m}"
+ },
+ "1hzmxtu": {
+  "en": "Back",
+  "zh": "返回"
+ },
+ "1i1lcq9": {
+  "en": "Edit",
+  "zh": "修改"
+ },
+ "1i3m75v": {
+  "en": "Train at different times for a week, then check the time-of-day analysis on the Progress page.",
+  "zh": "在不同时段训练一周后，查看\"进展\"页的时段分析，找到你的黄金时段。"
+ },
+ "1i6728g": {
+  "en": "Extend focus gradually",
+  "zh": "循序渐进延长专注时长"
+ },
+ "1i6r4fk": {
+  "en": "Honestly report mind-wandering in 10 probes",
+  "zh": "在专注抽查中诚实报告走神 10 次"
+ },
+ "1i86lvu": {
+  "en": "Reflect",
+  "zh": "反思"
+ },
+ "1i8p05c": {
+  "en": "Needs at least 2 days of data",
+  "zh": "至少需要 2 天的数据"
+ },
+ "1iajg17": {
+  "en": "Reset all levels?",
+  "zh": "重置所有难度？"
+ },
+ "1iam3ce": {
+  "en": "Coefficient of variation — lower is steadier",
+  "zh": "反应时变异系数，越低越稳定"
+ },
+ "1iazkfj": {
+  "en": "evening",
+  "zh": "傍晚"
+ },
+ "1icu1hn": {
+  "en": "Download data backup",
+  "zh": "下载数据备份"
+ },
+ "1ie60xb": {
+  "en": "A ~15-minute standardized battery that sets your baseline.",
+  "zh": "约 15 分钟的标准化测试，建立你的专注基线。"
+ },
+ "1ifk684": {
+  "en": "If you notice you lost count, press R (or tap Reset) and start again at 1 — that is not a failure, it is a moment of awareness.",
+  "zh": "如果发现自己数丢了，按 R（或点\"重置\"），从 1 重新开始——这不是失败，而是一次成功的觉察。"
+ },
+ "1ig4qc0": {
+  "en": "omission",
+  "zh": "漏按"
+ },
+ "1in6snv": {
+  "en": "Rolling mean",
+  "zh": "滑动平均"
+ },
+ "1invspd": {
+  "en": "Check messages at set times (e.g. every 60–90 minutes); keep only the windows the current task needs.",
+  "zh": "固定时间处理消息（例如每 60–90 分钟一次）；专注时只保留当前任务需要的窗口。"
+ },
+ "1ipxqki": {
+  "en": "Press Space or tap as soon as the counter appears",
+  "zh": "计数器出现就按 空格 或点击屏幕"
+ },
+ "1ivq5ab": {
+  "en": "Retake",
+  "zh": "重新评估"
+ },
+ "1iy5cqn": {
+  "en": "Down from {pa}%. Check recent sleep, stress and phone use.",
+  "zh": "比之前的 {pa}% 有所下降。留意最近的睡眠、压力和手机使用。"
+ },
+ "1iyup8b": {
+  "en": "Keeping attention on a monotonous task without slipping into autopilot — where mind-wandering lives.",
+  "zh": "长时间把注意力保持在单调任务上、不进入\"自动驾驶\"的能力——走神的主要战场。"
+ },
+ "1jbfbre": {
+  "en": "5–6 days a week for 8 weeks; train at a consistent time for comparable data",
+  "zh": "每周 5–6 天，持续 8 周；固定时段训练，数据更可比"
+ },
+ "1jfg8zq": {
+  "en": "Vigilance (PVT)",
+  "zh": "警觉反应 PVT"
+ },
+ "1jg63mz": {
+  "en": "HIGH/LOW: below 5 → left, above 5 → right.",
+  "zh": "大小：小于 5 按左，大于 5 按右。"
+ },
+ "1jhvzym": {
+  "en": "N adapts after every block: few errors → up, many errors → down.",
+  "zh": "每轮结束后自动调整 N：错误少则升级，错误多则降级。"
+ },
+ "1jj5jj": {
+  "en": "Keep training and checking in (so far {n} sessions and {c} check-ins). FocusLab will then show how sleep, exercise, time of day and stress affect your own focus.",
+  "zh": "再完成一些训练和每日状态打卡（目前 {n} 次训练、{c} 次打卡），FocusLab 就能告诉你睡眠、运动、时段和压力如何影响你自己的专注。"
+ },
+ "1jm4407": {
+  "en": "Stay at {l}",
+  "zh": "保持 {l}"
+ },
+ "1jxbmtz": {
+  "en": "min",
+  "zh": "分钟"
+ },
+ "1jyd892": {
+  "en": "Practice calendar",
+  "zh": "练习日历"
+ },
+ "1jynt17": {
+  "en": "Today, walk briskly or exercise for 10–20 minutes before your first deep-work block.",
+  "zh": "今天在第一段深度工作前快走或运动 10–20 分钟。"
+ },
+ "1k19dys": {
+  "en": "retest",
+  "zh": "待复测"
+ },
+ "1k2udpl": {
+  "en": "Lapses in your last 3 PVT runs are clearly up. This usually signals accumulating sleep debt — an early night will help more than extra training.",
+  "zh": "最近 3 次 PVT 的走神失误明显增多。这通常是睡眠债积累的信号——今晚早点睡比多训练更有效。"
+ },
+ "1k57b2x": {
+  "en": "Park",
+  "zh": "停车"
+ },
+ "1k64kpn": {
+  "en": "Working memory",
+  "zh": "工作记忆"
+ },
+ "1k6e5zv": {
+  "en": "Apply",
+  "zh": "应用"
+ },
+ "1k7rljk": {
+  "en": "Pause / exit a task",
+  "zh": "暂停 / 退出任务"
+ },
+ "1kc284o": {
+  "en": "Interference control",
+  "zh": "抗干扰"
+ },
+ "1kdwam0": {
+  "en": "Lower is better",
+  "zh": "越低越好"
+ },
+ "1ki6zkb": {
+  "en": "Speech not supported here — letters will be shown",
+  "zh": "此浏览器不支持语音，将显示字母"
+ },
+ "1kihny9": {
+  "en": "Take screen-free breaks",
+  "zh": "休息时远离屏幕"
+ },
+ "1kky5ht": {
+  "en": "Energy OK",
+  "zh": "精力一般"
+ },
+ "1kn10ll": {
+  "en": "Miss / timeout / false start",
+  "zh": "漏按 / 超时 / 抢跑"
+ },
+ "1kn9hrk": {
+  "en": "Avg rating {r}/5",
+  "zh": "平均自评 {r}/5"
+ },
+ "1kqbg3p": {
+  "en": "Under a minute — not recorded",
+  "zh": "不足 1 分钟，未记录"
+ },
+ "1kr5zlu": {
+  "en": "Too slow",
+  "zh": "太慢了"
+ },
+ "1kvi8kg": {
+  "en": "Distractions",
+  "zh": "分心记录"
+ },
+ "1kwcvkj": {
+  "en": "Normal state: follow your plan and use your usual focus length.",
+  "zh": "状态正常：按计划训练，专注时段用你习惯的时长。"
+ },
+ "1kxizyp": {
+  "en": "Experiment started: 14 days of randomized ON / OFF days",
+  "zh": "实验已开始：14 天，随机安排 ON / OFF 日"
+ },
+ "1l0pym2": {
+  "en": "What FocusLab does, why, and what actually improves focus.",
+  "zh": "FocusLab 做什么、为什么这样做，以及什么才真正能提升专注。"
+ },
+ "1l0xxoj": {
+  "en": "Close",
+  "zh": "关闭"
+ },
+ "1l2fbod": {
+  "en": "Show more",
+  "zh": "显示更多"
+ },
+ "1l2vhfy": {
+  "en": "Mis-clicks",
+  "zh": "点错"
+ },
+ "1l35ceg": {
+  "en": "Caffeine isn’t helping",
+  "zh": "咖啡因没帮上忙"
+ },
+ "1l3jia9": {
+  "en": "Try fixing your gaze on the red center dot and finding numbers peripherally — this gradually widens your useful field of view.",
+  "zh": "试着把视线固定在中心红点，用余光寻找数字——这会逐步扩大你的有效注意视野。"
+ },
+ "1l3kj32": {
+  "en": "The second half was {ms} ms slower{e} — attention faded over time. That is exactly what sustained-attention practice targets: stay present to the very end.",
+  "zh": "后半程比前半程慢 {ms} ms{e}——注意力随时间衰减了。这正是持续注意要练的：最后几分钟也要\"在场\"。"
+ },
+ "1l3q31i": {
+  "en": "12 habits that actually help",
+  "zh": "12 个真正有效的习惯"
+ },
+ "1l5c5t0": {
+  "en": "~30 seconds with instant feedback. Recommended the first time.",
+  "zh": "约 30 秒，带即时反馈。第一次做这个练习时推荐。"
+ },
+ "1lagirr": {
+  "en": "Welcome to FocusLab",
+  "zh": "欢迎来到 FocusLab"
+ },
+ "1ldt6m8": {
+  "en": "Does this match what came N steps back?",
+  "zh": "判断当前刺激是否与 N 步之前相同"
+ },
+ "1lenh1y": {
+  "en": "20 seconds. It lets FocusLab find out what actually drives your focus.",
+  "zh": "20 秒。它让 FocusLab 找出到底是什么在影响你的专注。"
+ },
+ "1liq94q": {
+  "en": "All-rounder",
+  "zh": "全能选手"
+ },
+ "1lkiomv": {
+  "en": "Dual N-Back",
+  "zh": "N-Back 双任务"
+ },
+ "1llf32i": {
+  "en": "End",
+  "zh": "结束"
+ },
+ "1lotpsm": {
+  "en": "Can’t save: browser storage is full or blocked. Export a backup from Settings.",
+  "zh": "无法保存数据：浏览器存储已满或被禁用。请在设置中导出备份。"
+ },
+ "1lrzbkg": {
+  "en": "How it works",
+  "zh": "怎么做"
+ },
+ "1lsq9i8": {
+  "en": "In a focus session press D to log a distraction and return immediately; deal with the list afterwards.",
+  "zh": "专注时段里按 D 键记录干扰，然后立刻回到任务；结束后统一处理。"
+ },
+ "1lumrjp": {
+  "en": "A cue (ODD/EVEN or HIGH/LOW) appears, then a digit.",
+  "zh": "先出现提示（奇偶 或 大小），然后出现一个数字。"
+ },
+ "1lw7yqd": {
+  "en": "Complete a 90-minute focus session",
+  "zh": "完成一段 90 分钟专注"
+ },
+ "1lwzqs5": {
+  "en": "Green = targets",
+  "zh": "绿色 = 目标"
+ },
+ "1lxa7hb": {
+  "en": "Change: ",
+  "zh": "改变："
+ },
+ "1m4smjg": {
+  "en": "20-second check-in (sleep, energy, stress)",
+  "zh": "20 秒状态打卡（睡眠、精力、压力）"
+ },
+ "1m9a0wh": {
+  "en": "Try silence vs brown noise across focus sessions and compare your end-of-session focus ratings.",
+  "zh": "在专注时段里分别试试安静和棕噪音，比较结束后的专注自评。"
+ },
+ "1m9h4gy": {
+  "en": "60-day streak",
+  "zh": "连续 60 天练习"
+ },
+ "1mbfj5p": {
+  "en": "A row of five arrows appears.",
+  "zh": "屏幕会出现一排 5 个箭头。"
+ },
+ "1mdyl9b": {
+  "en": "Keys: D red · F green · J blue · K yellow (or 1–4, or tap).",
+  "zh": "按键：D 红 · F 绿 · J 蓝 · K 黄（或 1–4，或点击按钮）。"
+ },
+ "1mhenn5": {
+  "en": "First step",
+  "zh": "第一步"
+ },
+ "1mhu89x": {
+  "en": "Attention across the session",
+  "zh": "注意力随时间的变化"
+ },
+ "1mkkffz": {
+  "en": "Today, do an extra 10-minute breath-counting or meditation session.",
+  "zh": "今天额外做一次 10 分钟数息练习或冥想。"
+ },
+ "1mls86c": {
+  "en": "{k} targets",
+  "zh": "{k} 个目标"
+ },
+ "1mpqdw3": {
+  "en": "Accuracy was {p}. Get accurate first; speed follows good habits.",
+  "zh": "正确率 {p} 偏低。先求准、再求快——准确的习惯会自动带来速度。"
+ },
+ "1mqxe7j": {
+  "en": "15 minutes today",
+  "zh": "今天也来练 15 分钟"
+ },
+ "1mu2a8y": {
+  "en": "Sound effects",
+  "zh": "音效"
+ },
+ "1mult41": {
+  "en": "Your slowest responses are the best fatigue signal",
+  "zh": "最慢的反应最能反映疲劳"
+ },
+ "1mw8ks9": {
+  "en": "Center arrow only · ← / → or F / J",
+  "zh": "只看中间的箭头 · ← / → 或 F / J"
+ },
+ "1n0qzoq": {
+  "en": "Log sleep, energy and stress to find what really drives your focus.",
+  "zh": "记录睡眠、精力和压力，找到影响你专注的真正因素。"
+ },
+ "1n1dulp": {
+  "en": "Duration",
+  "zh": "时长"
+ },
+ "1n1rdjs": {
+  "en": "on-task rate",
+  "zh": "在任务上的比例"
+ },
+ "1nbjaxv": {
+  "en": "Respond to every digit — except 3",
+  "zh": "每个数字都按，唯独 3 不按"
+ },
+ "1ncurfe": {
+  "en": "Personal insights",
+  "zh": "个人洞察"
+ },
+ "1nekgkk": {
+  "en": "Best time",
+  "zh": "最佳用时"
+ },
+ "1nhgoaa": {
+  "en": "Focused",
+  "zh": "专注"
+ },
+ "1ni3wzj": {
+  "en": "This stops your current experiment. Continue?",
+  "zh": "这会停止当前进行中的实验，继续？"
+ },
+ "1nl30cc": {
+  "en": "Complete a full assessment",
+  "zh": "完成一次完整评估"
+ },
+ "1nmrk37": {
+  "en": "Slept well",
+  "zh": "睡眠充足"
+ },
+ "1o0qomo": {
+  "en": "People interrupt you often. Block focus time on your calendar, use headphones as a do-not-disturb signal, and agree on set times for questions.",
+  "zh": "你常被他人打断。试试在日历上标出专注时段、戴耳机作为\"请勿打扰\"信号，并约定统一的沟通时间。"
+ },
+ "1o3p751": {
+  "en": "Imported",
+  "zh": "导入成功"
+ },
+ "1o5uwlv": {
+  "en": "Press A / L only when it matches {n} steps back · unsure? don’t press",
+  "zh": "与 {n} 步之前相同才按 A / L · 不确定就不按"
+ },
+ "1o68dej": {
+  "en": "Late night",
+  "zh": "夜深了"
+ },
+ "1oa33z4": {
+  "en": "Incongruent accuracy",
+  "zh": "冲突试次正确率"
+ },
+ "1ojouuz": {
+  "en": "late night",
+  "zh": "深夜"
+ },
+ "1omwqzo": {
+  "en": "Tests whether extra mindfulness reduces your mind-wandering the same day.",
+  "zh": "检验更多正念练习是否当天就能减少你的走神。"
+ },
+ "1ooub2a": {
+  "en": "Still water",
+  "zh": "心如止水"
+ },
+ "1or94e5": {
+  "en": "Clearly better",
+  "zh": "明显更好"
+ },
+ "1otmyvp": {
+  "en": "High-stress days score about {pts} points lower. Try 3 minutes of breath counting or slow breathing before deep work to regulate arousal.",
+  "zh": "高压力日子的表现平均低约 {pts} 分。在开始深度工作前做 3 分钟数息或慢呼吸，可以帮助调节唤醒水平。"
+ },
+ "1otrt13": {
+  "en": "Ninety minutes",
+  "zh": "九十分钟"
+ },
+ "1owuhq9": {
+  "en": "Download a daily repeating calendar reminder (works with Apple, Google and Outlook calendars)",
+  "zh": "下载一个每天重复的日历提醒（Apple / Google / Outlook 日历都支持）"
+ },
+ "1p1qjdb": {
+  "en": "Level {l}",
+  "zh": "等级 {l}"
+ },
+ "1p1yprf": {
+  "en": "References",
+  "zh": "参考文献"
+ },
+ "1p9pg14": {
+  "en": "Appears after training in at least 2 areas.",
+  "zh": "完成至少 2 个不同领域的训练后显示。"
+ },
+ "1padbm0": {
+  "en": "Next",
+  "zh": "下一项"
+ },
+ "1pczbqa": {
+  "en": "← → or F J",
+  "zh": "← → 或 F J"
+ },
+ "1pdvyg5": {
+  "en": "vs recent avg",
+  "zh": "对比近期平均"
+ },
+ "1pfm88b": {
+  "en": "If the position matches N steps back, press A (or tap Position).",
+  "zh": "如果位置与 N 步之前相同，按 A（或点\"位置\"）。"
+ },
+ "1pg6nq7": {
+  "en": "Flanker / switching",
+  "zh": "Flanker / 规则切换"
+ },
+ "1phmc66": {
+  "en": "How much slower switch trials are than repeats",
+  "zh": "切换试次比重复试次慢多少"
+ },
+ "1phxo53": {
+  "en": "Research on deliberate practice found that even elite performers rarely sustain more than ~4 hours of intense focus a day. Start realistic and build up.",
+  "zh": "刻意练习研究发现，即使是顶尖专家，每天高强度专注的时间通常也不超过约 4 小时。从现实的目标开始，逐步提高。"
+ },
+ "1plomu": {
+  "en": "Verdict",
+  "zh": "结论"
+ },
+ "1pmqps5": {
+  "en": "Training score",
+  "zh": "训练分"
+ },
+ "1pn27zf": {
+  "en": "Paused",
+  "zh": "已暂停"
+ },
+ "1pnnnfn": {
+  "en": "Arrow flanker",
+  "zh": "箭头侧抑制 Flanker"
+ },
+ "1ps4orl": {
+  "en": "Center arrow only · tap left or right",
+  "zh": "只看中间的箭头 · 点击左右按钮"
+ },
+ "1psqeyk": {
+  "en": "{v}/h",
+  "zh": "{v} 次/时"
+ },
+ "1puisj2": {
+  "en": "Left: ← or F. Right: → or J.",
+  "zh": "左：← 或 F；右：→ 或 J。"
+ },
+ "1pvjuuq": {
+  "en": "10 hours of deep focus",
+  "zh": "累计深度专注 10 小时"
+ },
+ "1pxorao": {
+  "en": "Tracking capacity",
+  "zh": "追踪容量"
+ },
+ "1pxswey": {
+  "en": "Three tables; your average time counts.",
+  "zh": "一共 3 张表，取平均用时。"
+ },
+ "1pyb11s": {
+  "en": "Single-task and batch messages",
+  "zh": "单任务 + 批量处理消息"
+ },
+ "1q4a2vm": {
+  "en": "Relative to your own average",
+  "zh": "相对于你自己的平均水平"
+ },
+ "1q4eyv8": {
+  "en": "Time",
+  "zh": "时长"
+ },
+ "1q6xdbo": {
+  "en": "Session saved",
+  "zh": "专注已记录"
+ },
+ "1q8cz5g": {
+  "en": "a clear difference",
+  "zh": "差异明显"
+ },
+ "1qak7ck": {
+  "en": "Walk briskly or cycle for 10–20 minutes before your most important work block.",
+  "zh": "在最重要的工作前快走或骑车 10–20 分钟。"
+ },
+ "1qc3xs1": {
+  "en": "Log distraction",
+  "zh": "记录分心"
+ },
+ "1qdxg0s": {
+  "en": "Today’s training",
+  "zh": "今日训练"
+ },
+ "1qfh5e3": {
+  "en": "Schulte table",
+  "zh": "舒尔特方格"
+ },
+ "1ql9aix": {
+  "en": "Level up!",
+  "zh": "升级！"
+ },
+ "1qlky76": {
+  "en": "Over weeks",
+  "zh": "长期"
+ },
+ "1quewx6": {
+  "en": "Position",
+  "zh": "位置"
+ },
+ "1r1t29w": {
+  "en": "Habit formed",
+  "zh": "习惯成形"
+ },
+ "1r7hgg": {
+  "en": "Every 20 minutes look at something 20 feet (~6 m) away for 20 seconds. It eases eye strain and doubles as a micro-reset for attention.",
+  "zh": "每 20 分钟看 20 英尺（约 6 米）外的东西 20 秒，缓解视疲劳，也是一次微型注意力复位。"
+ },
+ "1ra8m2x": {
+  "en": "You’re getting interrupted less",
+  "zh": "你被打断的次数在减少"
+ },
+ "1raz6v7": {
+  "en": "SART is designed to catch autopilot. The rhythm is monotonous, so you slide into habitual pressing and fail to stop when a 3 appears. Commission errors and reaction-time variability are among the most sensitive behavioral markers of mind-wandering. The goal is not speed but steadiness — being present on every trial.",
+  "zh": "SART 专门捕捉\"自动驾驶\"式走神：节奏单调，你会不知不觉进入惯性按键，在 3 出现时来不及刹车。错按 3 的比例和反应时的波动（变异系数）是走神最灵敏的行为指标。训练目标不是更快，而是更稳——保持每一次都\"在场\"。"
+ },
+ "1rdkjbk": {
+  "en": "Over time, FocusLab estimates how each habit affects your focus.",
+  "zh": "积累一段时间后，FocusLab 会估计每个习惯对你专注的影响。"
+ },
+ "1rgagri": {
+  "en": "Tests how much your phone’s presence affects your distractions and focus ratings.",
+  "zh": "检验手机的存在对你的分心次数和专注自评有多大影响。"
+ },
+ "1rmdfe": {
+  "en": "{n} false starts: you are anticipating. Relax and respond only when you see it.",
+  "zh": "抢跑 {n} 次：你在预判刺激。放松等待，看到再按。"
+ },
+ "1rqfque": {
+  "en": "Attentional breadth",
+  "zh": "注意广度"
+ },
+ "1rvyk0s": {
+  "en": "Slowest 10%",
+  "zh": "最慢 10%"
+ },
+ "1s6d1ez": {
+  "en": "Session ended",
+  "zh": "已结束"
+ },
+ "1sa69dn": {
+  "en": "Low stress",
+  "zh": "压力小"
+ },
+ "1sawk0u": {
+  "en": "Today",
+  "zh": "今日"
+ },
+ "1sh99lf": {
+  "en": "Export",
+  "zh": "导出"
+ },
+ "1sq3v3k": {
+  "en": "Good morning",
+  "zh": "早上好"
+ },
+ "1t3roox": {
+  "en": "Expect: SART errors ↓, conflict costs ↓, N-back level ↑, breath accuracy ↑, deep-focus minutes ↑, distractions ↓",
+  "zh": "预期：SART 错误↓、冲突代价↓、N 值↑、数息准确率↑、深度专注分钟↑、分心次数↓"
+ },
+ "1t70wl6": {
+  "en": "~15 minutes a day of adaptive training, always at the edge of your ability.",
+  "zh": "每天约 15 分钟自适应训练，始终在你的能力边缘。"
+ },
+ "1t8ds33": {
+  "en": "Only your regular training today (control day).",
+  "zh": "今天只做常规训练（对照日）。"
+ },
+ "1t9eb8k": {
+  "en": "Personal experiment",
+  "zh": "个人实验"
+ },
+ "1tahbsx": {
+  "en": "Keep tracking the targets (you can fix your eyes at the center).",
+  "zh": "一直用注意力追踪目标（眼睛可以看中间）。"
+ },
+ "1taw7lm": {
+  "en": "Needs 2 areas",
+  "zh": "需 2 个领域数据"
+ },
+ "1tb6lt8": {
+  "en": "Alertness −{ms}ms",
+  "zh": "警觉 慢 {ms}ms"
+ },
+ "1tfz1d8": {
+  "en": "Daily deep-focus goal",
+  "zh": "每日深度专注目标"
+ },
+ "1tlbcsw": {
+  "en": "Practice",
+  "zh": "练习"
+ },
+ "1tr70nj": {
+  "en": "Trial {n}",
+  "zh": "第 {n} 次"
+ },
+ "1trsxg7": {
+  "en": "h",
+  "zh": "小时"
+ },
+ "1tsy4qn": {
+  "en": "Low energy",
+  "zh": "精力不足"
+ },
+ "1u2o4at": {
+  "en": "7-day streak",
+  "zh": "连续 7 天练习"
+ },
+ "1u3pgbl": {
+  "en": "First",
+  "zh": "第一次"
+ },
+ "1u5viv4": {
+  "en": "Research reports average effects, and you are not average. Pick a habit for a 14-day personal experiment: randomized ON / OFF days, then a comparison of your focus data between the two tells you whether it really works for you.",
+  "zh": "研究给出的是平均效果，而你不是平均人。选一个习惯做 14 天个人实验：系统随机安排 ON / OFF 日，最后比较两组日子的专注数据，告诉你它对你是否真的有效。"
+ },
+ "1u9gmbj": {
+  "en": "Personal scientist",
+  "zh": "个人科学家"
+ },
+ "1ubxcik": {
+  "en": "Start next session",
+  "zh": "开始下一段"
+ },
+ "1udd3oa": {
+  "en": "Switch cost",
+  "zh": "切换代价"
+ },
+ "1uenafy": {
+  "en": "Check-in saved",
+  "zh": "已记录今日状态"
+ },
+ "1uhx5vg": {
+  "en": "1-minute slow breathing first",
+  "zh": "开始前 1 分钟慢呼吸"
+ },
+ "1up1beh": {
+  "en": "Total training",
+  "zh": "累计训练"
+ },
+ "1usg9z6": {
+  "en": "State check",
+  "zh": "状态检测"
+ },
+ "1utuje7": {
+  "en": "How focused were you?",
+  "zh": "这段时间你有多专注？"
+ },
+ "1v21hzh": {
+  "en": "High stress is costing you focus",
+  "zh": "高压力正在拖累你的专注"
+ },
+ "1v417g4": {
+  "en": "Good evening",
+  "zh": "晚上好"
+ },
+ "1v5f69z": {
+  "en": "Time for your weekly review",
+  "zh": "周回顾时间到了"
+ },
+ "1v7fuor": {
+  "en": "All exercises go back to their starting level",
+  "zh": "所有练习回到初始难度"
+ },
+ "1v8vul6": {
+  "en": "Training days",
+  "zh": "训练天数"
+ },
+ "1v9mcwk": {
+  "en": "{n} achievements unlocked — see Progress",
+  "zh": "解锁了 {n} 个成就，去「进展」查看"
+ },
+ "1vaqtqi": {
+  "en": "Too early",
+  "zh": "太早了"
+ },
+ "1vh1n87": {
+  "en": "Did you do it today?",
+  "zh": "今天做到了吗？"
+ },
+ "1vks92p": {
+  "en": "Error",
+  "zh": "错误"
+ },
+ "1vq4zre": {
+  "en": "{n} pts",
+  "zh": "{n} 个百分点"
+ },
+ "1vq9hw2": {
+  "en": "Focus: log distraction / pause",
+  "zh": "专注：记录分心 / 暂停"
+ },
+ "1vsxe54": {
+  "en": "Even · High",
+  "zh": "偶数 · 大于 5"
+ },
+ "1vvjbpj": {
+  "en": "Mind wandered",
+  "zh": "走神了"
+ },
+ "1vyiv1y": {
+  "en": "Your top distraction is the urge to check your phone. Physical distance works best: put it in another room while focusing — test it with a personal experiment.",
+  "zh": "你的分心主要是想看手机。最有效的办法是物理隔离：专注时把手机放到另一个房间——可以用\"个人实验\"检验效果。"
+ },
+ "1wewy2y": {
+  "en": "days",
+  "zh": "天"
+ },
+ "1wio94n": {
+  "en": "Controls",
+  "zh": "操作"
+ },
+ "1wj9d21": {
+  "en": "Social-media-free mornings",
+  "zh": "上午远离社交媒体"
+ },
+ "1wkmmie": {
+  "en": "Mean N",
+  "zh": "平均 N"
+ },
+ "1wrx9bf": {
+  "en": "Lost count — reset",
+  "zh": "数丢了，重置"
+ },
+ "1wsths9": {
+  "en": "Later",
+  "zh": "稍后"
+ },
+ "1wyv4fl": {
+  "en": "Caffeine gives you a lift",
+  "zh": "咖啡因对你有提升作用"
+ },
+ "1x2j8iz": {
+  "en": "{n} mis-clicks. Speed comes from steady scanning, not guessing.",
+  "zh": "点错 {n} 次。速度来自稳定的扫视，而不是猜测。"
+ },
+ "1x6xym0": {
+  "en": "How fast and reliably you react to sudden events. Extremely sensitive to sleep and fatigue.",
+  "zh": "大脑的\"唤醒\"水平：对突然出现的事件能多快、多稳地反应。对睡眠和疲劳极其敏感。"
+ },
+ "1xbb8f7": {
+  "en": "Alertness +{ms}ms",
+  "zh": "警觉 快 {ms}ms"
+ },
+ "1xml8k6": {
+  "en": "Complete 100 exercises",
+  "zh": "完成 100 次训练"
+ },
+ "1xnx8tq": {
+  "en": "great",
+  "zh": "很好"
+ },
+ "1xox9tv": {
+  "en": "Start {m}-minute focus",
+  "zh": "开始 {m} 分钟专注"
+ },
+ "1xpduzx": {
+  "en": "Open source, MIT licensed",
+  "zh": "开源，MIT 许可"
+ },
+ "1xpnp33": {
+  "en": "Only {s} s per cell — very fast. You will move to a larger grid once it is consistent.",
+  "zh": "每格仅 {s} 秒，非常快。表现稳定后会自动升级到更大的方格。"
+ },
+ "1y53kg4": {
+  "en": "Attention probes",
+  "zh": "专注抽查"
+ },
+ "1y866un": {
+  "en": "One well-known study found a phone merely on the desk drains cognitive capacity; replications are mixed. But notifications and reflexive checking certainly interrupt you — moving it away costs nothing.",
+  "zh": "有研究发现手机仅仅放在桌上就会占用认知资源；后续重复研究结果不一。但手机带来的通知和\"顺手一刷\"确实会打断你——把它放远几乎零成本。"
+ },
+ "1yc4vsv": {
+  "en": "N-Back",
+  "zh": "N-Back 工作记忆"
+ },
+ "1ynmwzh": {
+  "en": "focus ratings",
+  "zh": "专注自评"
+ },
+ "1yxozvv": {
+  "en": "10 minutes of mindfulness a day",
+  "zh": "每天 10 分钟正念"
+ },
+ "228ene": {
+  "en": "Keep going",
+  "zh": "继续专注"
+ },
+ "269ega": {
+  "en": "Instead, we use the exercises as precise measurement tools and deliberate practice of attentional control, and put the weight on methods with stronger evidence that transfer directly — mindfulness practice, deep-focus sessions on real work, and lifestyle levers like sleep, exercise and phone management. Your own data shows what works for you.",
+  "zh": "我们的做法是：把训练任务当作精确的测量工具和注意控制的刻意练习，再把重心放在证据更强、能直接迁移的方法上——正念练习、真实工作中的深度专注时段，以及睡眠、运动、手机管理等生活杠杆。你的数据会告诉你哪些对你有效。"
+ },
+ "29xlpb": {
+  "en": "9 exercises built on classic cognitive-science paradigms, covering 7 dimensions of attention. Difficulty adapts to you.",
+  "zh": "9 个基于经典认知科学范式的练习，覆盖专注力的 7 个维度。难度会自动适应你。"
+ },
+ "2a8hom": {
+  "en": "Cognitive performance rises and falls with your circadian rhythm, which differs between people (larks vs owls). Deep work in your own peak window pays double.",
+  "zh": "认知表现随昼夜节律起伏，而且因人而异（\"早鸟\"与\"夜猫子\"）。在自己的高峰时段做深度工作，事半功倍。"
+ },
+ "2fcopk": {
+  "en": "Move before deep work",
+  "zh": "在深度工作前动一动"
+ },
+ "2fhooq": {
+  "en": "Use caffeine wisely",
+  "zh": "聪明地用咖啡因"
+ },
+ "2ltnc6": {
+  "en": "Benchmarks updated",
+  "zh": "很好，基准已更新"
+ },
+ "2m7fab": {
+  "en": "You score about {pts} points higher in this window than in your weakest one ({worst}). Schedule your deepest work here.",
+  "zh": "你在这个时段的表现，比最弱的时段（{worst}）平均高约 {pts} 分。把最需要深度思考的工作安排在这里。"
+ },
+ "2myvvl": {
+  "en": "When you exercised in the previous 24 h you scored about {pts} points higher. Even a 10–20 minute brisk walk helps.",
+  "zh": "过去 24 小时内运动过的日子，你的表现平均高约 {pts} 分。哪怕 10–20 分钟的快走也有帮助。"
+ },
+ "2oecu3": {
+  "en": "View progress",
+  "zh": "查看进展"
+ },
+ "2oz3sm": {
+  "en": "The noticer",
+  "zh": "觉察者"
+ },
+ "2p7tb2": {
+  "en": "Check in",
+  "zh": "打卡"
+ },
+ "2pbr86": {
+  "en": "Medium",
+  "zh": "中"
+ },
+ "2q0iyb": {
+  "en": "Rain",
+  "zh": "雨声"
+ },
+ "2ui7pm": {
+  "en": "Track positions and letters together",
+  "zh": "同时记忆位置和字母"
+ },
+ "2vbx1j": {
+  "en": "Drifty",
+  "zh": "经常走神"
+ },
+ "2vro06": {
+  "en": "Turn on attention probes on the Focus page to see how often your mind wanders during real work.",
+  "zh": "在专注页开启\"专注抽查\"后，这里会显示你在真实工作中的走神比例。"
+ },
+ "2zps2o": {
+  "en": "Reset",
+  "zh": "已重置"
+ },
+ "30xvgf": {
+  "en": "Start",
+  "zh": "开始"
+ },
+ "35c6o0": {
+  "en": "Meta-awareness",
+  "zh": "元觉察"
+ },
+ "3e36m7": {
+  "en": "Block {b} of {t} done",
+  "zh": "第 {b} / {t} 轮完成"
+ },
+ "3hfxfq": {
+  "en": "vs prior week",
+  "zh": "较前一周"
+ },
+ "3kgeg7": {
+  "en": "Look out the window, far away, for 20+ seconds",
+  "zh": "看向窗外远处 20 秒以上"
+ },
+ "3tlu3u": {
+  "en": "Off",
+  "zh": "无"
+ },
+ "3ucle8": {
+  "en": "A science-based attention training lab. Not another Pomodoro timer, and not games that just keep you busy.",
+  "zh": "一个基于科学的专注力训练实验室。不是又一个番茄钟，也不是哄你玩的小游戏。"
+ },
+ "3vh79a": {
+  "en": "Train another round",
+  "zh": "再练一轮"
+ },
+ "3y74hh": {
+  "en": "Erase",
+  "zh": "清除"
+ },
+ "43f6md": {
+  "en": "Details",
+  "zh": "详情"
+ },
+ "46a9yq": {
+  "en": "Mouse / touch",
+  "zh": "鼠标 / 触摸"
+ },
+ "4aoiiq": {
+  "en": "Sustained attention (SART)",
+  "zh": "持续注意 SART"
+ },
+ "4aqlxh": {
+  "en": "False starts",
+  "zh": "抢跑"
+ },
+ "4b5tty": {
+  "en": "Not done",
+  "zh": "未完成"
+ },
+ "4g68zs": {
+  "en": "Continue session",
+  "zh": "继续今日训练"
+ },
+ "4hg6db": {
+  "en": "Five minutes to look at the week, name the biggest obstacle and pick one concrete change.",
+  "zh": "5 分钟看看这周的数据、找出最大的障碍，并定下一个具体改变。"
+ },
+ "4kqu0t": {
+  "en": "Take the baseline (15 min)",
+  "zh": "开始基线评估（15 分钟）"
+ },
+ "4m666s": {
+  "en": "Notice · Name · Return",
+  "zh": "觉察 · 命名 · 回来"
+ },
+ "4sfckj": {
+  "en": "Partly",
+  "zh": "部分"
+ },
+ "4szjms": {
+  "en": "Better focus on “{tag}” days",
+  "zh": "「{tag}」的日子更专注"
+ },
+ "4zf9oq": {
+  "en": "See experiment progress",
+  "zh": "查看实验进展"
+ },
+ "4zzour": {
+  "en": "Check in → today’s training → deep focus",
+  "zh": "打卡 → 今日训练 → 深度专注"
+ },
+ "51kd1d": {
+  "en": "Position errors",
+  "zh": "位置错误"
+ },
+ "5mwqpf": {
+  "en": "N-back keeps working memory at full load: hold the new, drop the old, compare with N steps back. Difficulty adapts to the edge of your ability (~80% correct), the most effective training zone. Honestly: far transfer to general intelligence is weak, but it directly exercises holding information in mind and is a great \"weighted vest\" for focus.",
+  "zh": "N-back 让工作记忆持续满载：不断记住新的、丢掉旧的、比对 N 步之前。难度会自动调整到你的极限边缘（约 80% 正确率），这是训练最有效的区间。诚实地说：它对\"更聪明\"的远迁移证据有限，但对需要在脑中操作信息的任务直接有效，也是极好的专注\"负重训练\"。"
+ },
+ "5nwzty": {
+  "en": "Notification",
+  "zh": "通知 / 消息"
+ },
+ "5vxlzl": {
+  "en": "Complete a 25+ minute focus session",
+  "zh": "完成一段 ≥25 分钟的专注"
+ },
+ "62mcbk": {
+  "en": "Training library",
+  "zh": "训练库"
+ },
+ "62n6k1": {
+  "en": "correct",
+  "zh": "正确"
+ },
+ "63iaaw": {
+  "en": "Download a JSON file you can import elsewhere",
+  "zh": "下载 JSON 文件，可在其他设备导入"
+ },
+ "63p8jp": {
+  "en": "Last 30 sessions",
+  "zh": "最近 30 段专注"
+ },
+ "64ydvh": {
+  "en": "Fastest 10%",
+  "zh": "最快 10%"
+ },
+ "6b07mu": {
+  "en": "Keep your gaze on the red center dot; search with peripheral vision",
+  "zh": "视线尽量停在中心红点，用余光寻找"
+ },
+ "6fa7xx": {
+  "en": "Energy",
+  "zh": "精力"
+ },
+ "6glbd1": {
+  "en": "Be fast and accurate; higher levels shorten the response window.",
+  "zh": "又快又准；等级越高反应窗口越短。"
+ },
+ "6jcok2": {
+  "en": "Session complete",
+  "zh": "今日训练完成"
+ },
+ "6oqmy5": {
+  "en": "Start with a baseline",
+  "zh": "先建立基线"
+ },
+ "6pscw3": {
+  "en": "an early signal",
+  "zh": "初步迹象"
+ },
+ "6q5vjg": {
+  "en": "Good afternoon",
+  "zh": "下午好"
+ },
+ "6r1ba1": {
+  "en": "Table {a} / {b}",
+  "zh": "第 {a} / {b} 张"
+ },
+ "6rgcve": {
+  "en": "Every 25–50 minutes take 5: stand, look into the distance, drink water, get to a window or outside.",
+  "zh": "每 25–50 分钟休息 5 分钟：站起来、看远处、喝水、走到窗边或户外。"
+ },
+ "6utk3": {
+  "en": "Breathe with the circle",
+  "zh": "跟随圆圈呼吸"
+ },
+ "79u6hy": {
+  "en": "Progress",
+  "zh": "进展"
+ },
+ "7acg4s": {
+  "en": "Reload",
+  "zh": "重新加载"
+ },
+ "7cw13j": {
+  "en": "Max N",
+  "zh": "最高 N"
+ },
+ "7ir63i": {
+  "en": "Caffeine boosts alertness, but even 6 hours before bed it can cut sleep by over an hour — next-day focus losses may outweigh the gains.",
+  "zh": "咖啡因能提升警觉，但睡前 6 小时摄入仍会让睡眠减少一个多小时——第二天专注力的损失可能超过咖啡带来的收益。"
+ },
+ "7oft69": {
+  "en": "The 7 dimensions of attention",
+  "zh": "专注力的 7 个维度"
+ },
+ "7p4ole": {
+  "en": "Random \"where is your attention?\" check-ins during focus sessions to measure and train awareness of mind-wandering",
+  "zh": "专注时段中随机询问\"此刻注意力在哪\"，测量并训练对走神的觉察"
+ },
+ "7pi4ab": {
+  "en": "Best {n}",
+  "zh": "最长 {n} 天"
+ },
+ "7xe3st": {
+  "en": "Breathe in",
+  "zh": "吸气"
+ },
+ "7ztbg": {
+  "en": "Caffeine days actually score slightly lower — possibly because coffee is compensating for poor sleep. Fix sleep first.",
+  "zh": "喝了咖啡的日子表现反而略低——可能是用咖啡弥补了睡眠不足。试着先解决睡眠。"
+ },
+ "840zdj": {
+  "en": "{m}-minute blocks suit you best",
+  "zh": "你最适合 {m} 分钟的专注时段"
+ },
+ "89eoft": {
+  "en": "Phone away / Do Not Disturb",
+  "zh": "手机已放远 / 勿扰模式"
+ },
+ "8cdq15": {
+  "en": "Train",
+  "zh": "训练"
+ },
+ "8dzcll": {
+  "en": "Try all 9 exercises",
+  "zh": "尝试全部 9 个练习"
+ },
+ "8kmli2": {
+  "en": "Five minutes of reflection for a more focused week",
+  "zh": "5 分钟复盘，让下周更专注"
+ },
+ "8oym9v": {
+  "en": "Breathe naturally. Count each out-breath silently.",
+  "zh": "自然呼吸。每次呼气时，在心里数一个数。"
+ },
+ "8tdt0r": {
+  "en": "Average of your last 3 sessions per domain",
+  "zh": "各维度最近 3 次训练的平均"
+ },
+ "8z3f3x": {
+  "en": "Inhale through the nose, top up with a second short inhale, then exhale slowly through the mouth. Repeat for 1–5 minutes. Daily practice has been shown to improve mood and reduce anxiety — useful when tense or restless.",
+  "zh": "用鼻子吸气，再补吸一小口，然后用嘴长长地呼气。重复 1–5 分钟。研究显示每天练习这种呼吸能改善情绪、降低焦虑，适合在紧张或烦躁时快速调整。"
+ },
+ "94wkll": {
+  "en": "SART commission errors ≤10% at pace 3+",
+  "zh": "SART 错按率 ≤10%（节奏 ≥3）"
+ },
+ "96hnzs": {
+  "en": "Attention measurements need to run uninterrupted, so this task restarts from the beginning.",
+  "zh": "注意力测量需要连续完成，暂停后需要重新开始这一项。"
+ },
+ "99a10u": {
+  "en": "Find ",
+  "zh": "找到 "
+ },
+ "9bb0pd": {
+  "en": "error",
+  "zh": "错误"
+ },
+ "9bm2kz": {
+  "en": "Park stray thoughts here during focus; handle them on a break.",
+  "zh": "专注时冒出的念头先停在这里，休息时再处理。"
+ },
+ "9cw0bw": {
+  "en": "Left = breaths 1–8 · right = breath 9 · feel free to close your eyes",
+  "zh": "左侧 = 第 1–8 次 · 右侧 = 第 9 次 · 可以闭上眼睛"
+ },
+ "9dh8e9": {
+  "en": "In-the-moment toolkit",
+  "zh": "走神时的急救包"
+ },
+ "9eyh2j": {
+  "en": "When you see a 3, do nothing.",
+  "zh": "看到 3 时，什么都不要按。"
+ },
+ "9g0kke": {
+  "en": "Erase everything? This cannot be undone.",
+  "zh": "确定清除所有数据？此操作不可撤销。"
+ },
+ "9k4nu9": {
+  "en": "Two weeks of 6-hour nights impairs vigilance about as much as one to two nights of total sleep deprivation — and people barely notice their own decline. Sleep is the foundation.",
+  "zh": "连续两周每晚只睡 6 小时，警觉度下降的程度相当于整夜不睡一到两晚——而当事人往往察觉不到自己变差了。睡眠是专注力的地基。"
+ },
+ "9ket0l": {
+  "en": "Based on",
+  "zh": "依据"
+ },
+ "9tqxgr": {
+  "en": "Some stress",
+  "zh": "压力一般"
+ },
+ "9vpxe7": {
+  "en": "Distractions have crept up",
+  "zh": "最近分心变多了"
+ },
+ "9y82rb": {
+  "en": "Recent sessions",
+  "zh": "最近的专注"
+ },
+ "9ysprq": {
+  "en": "7 daily check-ins",
+  "zh": "累计 7 次状态打卡"
+ },
+ "a0ft48": {
+  "en": "~5 min",
+  "zh": "约 5 分钟"
+ },
+ "a1g80t": {
+  "en": "Reach 5-back",
+  "zh": "N-Back 达到 5-back"
+ },
+ "a23grh": {
+  "en": "This level is still hard for you — that is normal. Strategy: rehearse the last N items silently like a rolling queue.",
+  "zh": "这个难度对你还偏高，这完全正常。策略：在心里默念最近 N 个位置/字母，像一个滚动的队列。"
+ },
+ "a2p149": {
+  "en": "Research shows that jotting a quick \"ready-to-resume\" plan when interrupted reduces attention residue. Likewise, writing down an intrusive thought lets your brain stop holding on to it.",
+  "zh": "研究发现，被打断时先快速记下\"回来后要做什么\"，可以显著减少注意力残留。同理，把突然冒出的念头写下来，大脑就不必一直惦记它。"
+ },
+ "a5lkaw": {
+  "en": "{n} sessions",
+  "zh": "{n} 次练习"
+ },
+ "a64awr": {
+  "en": "So far, longer-sleep days haven’t scored higher. Keep logging — the sample is small and other factors (time of day, stress) may be at play.",
+  "zh": "目前睡得更多的日子表现并没有更好。继续记录——样本还小，也可能其他因素（时段、压力）在起作用。"
+ },
+ "ab0tkl": {
+  "en": "Learn",
+  "zh": "方法"
+ },
+ "ak4d1n": {
+  "en": "Insight",
+  "zh": "个人洞察"
+ },
+ "amm14p": {
+  "en": "If the letter matches N steps back, press L (or tap Sound).",
+  "zh": "如果字母与 N 步之前相同，按 L（或点\"声音\"）。"
+ },
+ "aq8f03": {
+  "en": "Colour-vision-friendly Stroop",
+  "zh": "Stroop 色觉友好配色"
+ },
+ "ayw7db": {
+  "en": "Session history",
+  "zh": "训练记录"
+ },
+ "az9n5r": {
+  "en": "Dual",
+  "zh": "双任务"
+ },
+ "b22z20": {
+  "en": "Next: {l}",
+  "zh": "下次：{l}"
+ },
+ "b2rlem": {
+  "en": "Baseline set",
+  "zh": "建立基线"
+ },
+ "b3ojtr": {
+  "en": "Start at 25 minutes; after 3 completed sessions rated ≥4, add 5–10 minutes, working toward 50–90.",
+  "zh": "从 25 分钟开始；连续 3 次完成且自评 ≥4 分后，延长 5–10 分钟，逐步走向 50–90 分钟。"
+ },
+ "b9nz23": {
+  "en": "Left page",
+  "zh": "离开页面"
+ },
+ "b9s0vp": {
+  "en": "When they stop, click every target. Perfect rounds raise the difficulty.",
+  "zh": "停止后，点出所有目标。全部正确会增加难度。"
+ },
+ "ba68wv": {
+  "en": "Commission errors",
+  "zh": "错按 3"
+ },
+ "bdiiz": {
+  "en": "Treat the PVT as a daily state thermometer. After a few days you will see how sleep and time of day move it.",
+  "zh": "把 PVT 当作每日\"状态体温计\"。持续记录几天后，你会看到睡眠和时段如何影响它。"
+ },
+ "be4on9": {
+  "en": "Space / tap",
+  "zh": "空格 / 点击"
+ },
+ "bf0i6y": {
+  "en": "lapse",
+  "zh": "走神失误"
+ },
+ "bg0ko": {
+  "en": "Parking lot",
+  "zh": "停车场"
+ },
+ "blypb": {
+  "en": "Click the targets ({p} / {k})",
+  "zh": "点出目标（{p} / {k}）"
+ },
+ "bm8jse": {
+  "en": "Obstacle: ",
+  "zh": "障碍："
+ },
+ "bmyhvk": {
+  "en": "Trials",
+  "zh": "试次"
+ },
+ "bnxncj": {
+  "en": "Randomizing ON/OFF days rules out biases like \"I only do it on good days\". \"Clear\" means the difference is about 2× the noise; 14 days is still a small sample, so treat results as personal guidance.",
+  "zh": "随机安排 ON/OFF 日可以排除\"状态好的日子才去做\"这类偏差。\"明显\"表示差异约为波动的 2 倍以上；14 天的样本仍然较小，请把结论当作对你个人的参考。"
+ },
+ "bo440c": {
+  "en": "Worse focus on “{tag}” days",
+  "zh": "「{tag}」的日子专注更差"
+ },
+ "brh6bc": {
+  "en": "Find 1 to 25 in order, fast",
+  "zh": "按顺序尽快点出 1 到 25"
+ },
+ "brrmtl": {
+  "en": "A ~15-minute standardized assessment measures your current alertness, sustained attention, interference control, switching and working memory. Retest every 2 weeks to see progress in data.",
+  "zh": "约 15 分钟的标准化评估会测量你当前的警觉、持续注意、抗干扰、切换和工作记忆。之后每 2 周复测，用数据看到进步。"
+ },
+ "bsiu1i": {
+  "en": "What went well for your focus this week?",
+  "zh": "这周专注做得好的一件事是什么？"
+ },
+ "c66xa3": {
+  "en": "Sound errors",
+  "zh": "声音错误"
+ },
+ "cenhn1": {
+  "en": "BLUE",
+  "zh": "蓝"
+ },
+ "cjza8h": {
+  "en": "Correct",
+  "zh": "正确"
+ },
+ "cl9fg2": {
+  "en": "A square appears in a 3×3 grid while a letter is spoken (dual mode).",
+  "zh": "方块会在 3×3 网格的某个位置出现，同时会读出一个字母（双任务）。"
+ },
+ "cmhrsh": {
+  "en": "Put your trained attention to work on what matters.",
+  "zh": "把训练出来的专注用到真正重要的事情上。"
+ },
+ "cmwemv": {
+  "en": "90 days",
+  "zh": "90 天"
+ },
+ "coef4v": {
+  "en": "Shrink to the next step",
+  "zh": "缩小到下一步"
+ },
+ "cqz2lj": {
+  "en": "{m} focused · {d} distractions logged",
+  "zh": "专注 {m} · 记录分心 {d} 次"
+ },
+ "cy6oii": {
+  "en": "Recommended program: 8 weeks, retest every 2 weeks",
+  "zh": "推荐方案：8 周，每 2 周复测"
+ },
+ "cz9s6b": {
+  "en": "your task",
+  "zh": "当前任务"
+ },
+ "d030v9": {
+  "en": "Harder, but trains working memory more broadly",
+  "zh": "更难，但更全面地训练工作记忆"
+ },
+ "d0yd4e": {
+  "en": "Erase all data",
+  "zh": "清除所有数据"
+ },
+ "d45qj0": {
+  "en": "Restart",
+  "zh": "重新开始"
+ },
+ "d5pcaq": {
+  "en": "The method & the science",
+  "zh": "方法与科学"
+ },
+ "d7l1mi": {
+  "en": "Week ending {d}",
+  "zh": "截至 {d}"
+ },
+ "dbbxmt": {
+  "en": "Test",
+  "zh": "测试"
+ },
+ "dbn5k6": {
+  "en": "Block {b}",
+  "zh": "第 {b} 轮"
+ },
+ "dkd6k4": {
+  "en": "Judge only the direction of the center arrow.",
+  "zh": "只判断正中间那个箭头的方向。"
+ },
+ "dli9wf": {
+  "en": "Appearance",
+  "zh": "外观"
+ },
+ "dqiixj": {
+  "en": "Manage your sound environment",
+  "zh": "管理声音环境"
+ },
+ "du043s": {
+  "en": "Nothing completed this time.",
+  "zh": "这次没有完成的项目。"
+ },
+ "duhbuy": {
+  "en": "Level up → {l}",
+  "zh": "升级 → {l}"
+ },
+ "dum0fr": {
+  "en": "Keyboard shortcuts",
+  "zh": "键盘快捷键"
+ },
+ "dvv54p": {
+  "en": "Omissions",
+  "zh": "漏按"
+ },
+ "dxscy": {
+  "en": "Exercised in last 24 h",
+  "zh": "过去 24 小时运动过"
+ },
+ "e0nuiv": {
+  "en": "What will you get done?",
+  "zh": "这段时间要完成什么？"
+ },
+ "e3ulw7": {
+  "en": "Skipped",
+  "zh": "已跳过"
+ },
+ "e6165a": {
+  "en": "{n} presses/min is fast. Make sure each press matches a real, natural out-breath.",
+  "zh": "按键频率 {n} 次/分偏快。确保每次按键对应一次真实、自然的呼气。"
+ },
+ "e6b2pr": {
+  "en": "Pre-flight check",
+  "zh": "开始前检查"
+ },
+ "e9knim": {
+  "en": "Research consistently shows that people get better at the trained tasks themselves, but evidence that gains transfer to untrained everyday tasks is limited (Simons et al., 2016). So FocusLab doesn’t promise that games make you smarter.",
+  "zh": "大量研究表明：认知训练任务本身的成绩会稳定提升，但这种提升\"远迁移\"到未训练的日常任务上的证据有限（Simons 等，2016）。所以 FocusLab 不承诺\"玩游戏变聪明\"。"
+ },
+ "eeidd3": {
+  "en": "As soon as the red millisecond counter appears, press Space (or tap).",
+  "zh": "红色毫秒计数器一出现，立刻按空格键（或点击屏幕）。"
+ },
+ "egjiwe": {
+  "en": "Take a break",
+  "zh": "休息一下"
+ },
+ "egl5p3": {
+  "en": "No complete 9-breath cycles were recorded. Remember to press Enter (or the right side) on the 9th breath.",
+  "zh": "没有完成完整的 9 次循环。记得在第 9 次呼气时按回车（或右侧区域）。"
+ },
+ "eh35p": {
+  "en": "Switch between odd/even and high/low on cue",
+  "zh": "按提示在\"奇偶\"和\"大小\"之间切换"
+ },
+ "ehyxbn": {
+  "en": "{n}",
+  "zh": "{n} 次"
+ },
+ "ejz5h0": {
+  "en": "Suddenly remembered a message to send or something to buy? Put it in the parking lot (press D during a focus session) so your mind can let go.",
+  "zh": "突然想起要回的消息、要买的东西？写进停车场（专注时段中按 D），大脑就能放下它。"
+ },
+ "engmg5": {
+  "en": "Exit",
+  "zh": "退出"
+ },
+ "ep58mw": {
+  "en": "Speak N-Back letters",
+  "zh": "N-Back 朗读字母"
+ },
+ "epsu96": {
+  "en": "Explore first",
+  "zh": "先随便看看"
+ },
+ "eqdix7": {
+  "en": "Delete this session?",
+  "zh": "删除这条训练记录？"
+ },
+ "ess4ad": {
+  "en": "Weekly review saved",
+  "zh": "周回顾已保存"
+ },
+ "evelsd": {
+  "en": "Empty. Nice.",
+  "zh": "空空如也，很好。"
+ },
+ "extept": {
+  "en": "20-20-20 for your eyes",
+  "zh": "20-20-20 护眼"
+ },
+ "exymzc": {
+  "en": "You pressed on {p} of the 3s — classic autopilot. Strategy: silently name each digit as it appears so every press is a conscious decision.",
+  "zh": "有 {p} 的 3 你没刹住——典型的\"自动驾驶\"。策略：每个数字出现时在心里轻轻念出它，让每一次按键都是有意识的决定。"
+ },
+ "f12hdp": {
+  "en": "That file isn’t a FocusLab backup",
+  "zh": "文件格式不正确"
+ },
+ "f136nx": {
+  "en": "Letter",
+  "zh": "字母相同"
+ },
+ "f2836t": {
+  "en": "3 physiological sighs: inhale, top-up inhale, long exhale",
+  "zh": "做 3 次生理性叹息：吸气、补吸一口、长呼气"
+ },
+ "f433mk": {
+  "en": "Distractions rose from {a} to {b} per hour. Try leaving your phone in another room and silencing notifications before you start.",
+  "zh": "专注时段中的分心从每小时 {a} 次升到 {b} 次。试试把手机放到另一个房间，并在开始前关闭通知。"
+ },
+ "f5mflo": {
+  "en": "Attention probe: where is your attention right now?",
+  "zh": "专注抽查：此刻你的注意力在哪里？"
+ },
+ "f7vpn2": {
+  "en": "Minutes",
+  "zh": "分钟"
+ },
+ "feoog5": {
+  "en": "On task",
+  "zh": "在任务上"
+ },
+ "fnhn7g": {
+  "en": "Today, no social media or short videos before noon.",
+  "zh": "今天中午 12 点前不打开任何社交媒体和短视频。"
+ },
+ "fnyjzk": {
+  "en": "Caffeine days score about {pts} points higher. Avoid it within 6 hours of bedtime — sleep matters more.",
+  "zh": "摄入咖啡因的日子表现高约 {pts} 分。注意睡前 6 小时内避免，以免影响睡眠——睡眠的影响更大。"
+ },
+ "foy2yl": {
+  "en": "Add to calendar",
+  "zh": "添加到日历"
+ },
+ "fph5dc": {
+  "en": "Rating",
+  "zh": "自评"
+ },
+ "fq63d9": {
+  "en": "Training & focus",
+  "zh": "训练与专注"
+ },
+ "fqfdkg": {
+  "en": "No data yet",
+  "zh": "还没有数据"
+ },
+ "frk2ta": {
+  "en": "Time to retest",
+  "zh": "该复测了"
+ },
+ "frnaqj": {
+  "en": "Know thyself",
+  "zh": "了解自己"
+ },
+ "fzlmz4": {
+  "en": "commission",
+  "zh": "错按"
+ },
+ "g52pfr": {
+  "en": "Sleep hours",
+  "zh": "睡眠小时"
+ },
+ "g56jha": {
+  "en": "Begin",
+  "zh": "开始评估"
+ },
+ "g9y0kl": {
+  "en": "Breaths / min",
+  "zh": "呼吸 / 分钟"
+ },
+ "gb9wfd": {
+  "en": "Okay",
+  "zh": "一般"
+ },
+ "ggjuyh": {
+  "en": "Date",
+  "zh": "日期"
+ },
+ "ggweiw": {
+  "en": "You were away for {d}. Welcome back — continue with:",
+  "zh": "你离开了 {d}。欢迎回来——继续："
+ },
+ "ghwhz3": {
+  "en": "~15 min",
+  "zh": "约 15 分钟"
+ },
+ "gk78ch": {
+  "en": "Week {w} / 8",
+  "zh": "第 {w} / 8 周"
+ },
+ "gr4aak": {
+  "en": "Complete a weekly review",
+  "zh": "完成一次周回顾"
+ },
+ "grgo7a": {
+  "en": "Phone away while focusing",
+  "zh": "专注时手机放在别处"
+ },
+ "gthgyi": {
+  "en": "Sleep OK",
+  "zh": "睡眠一般"
+ },
+ "guwn2u": {
+  "en": "Three back",
+  "zh": "三步之遥"
+ },
+ "gya3md": {
+  "en": "Start working directly today (control day).",
+  "zh": "今天直接开始工作（对照日）。"
+ },
+ "h3otem": {
+  "en": "Tick = your baseline (first week)",
+  "zh": "竖线 = 你的基线（第一周）"
+ },
+ "h4wbuz": {
+  "en": "How much slower incongruent trials are",
+  "zh": "不一致比一致慢多少"
+ },
+ "h5yol9": {
+  "en": "high",
+  "zh": "很大"
+ },
+ "h6uiet": {
+  "en": "Flow",
+  "zh": "心流"
+ },
+ "ha0y8x": {
+  "en": "Breath-counting mindfulness, real deep-work sessions and lifestyle data — where focus really improves.",
+  "zh": "正念数息 + 真实的深度专注时段 + 生活方式数据——这是专注力真正提升的地方。"
+ },
+ "hbehaf": {
+  "en": "vs base",
+  "zh": "较基线"
+ },
+ "hh188h": {
+  "en": "Train at different times of day and this will reveal when you focus best.",
+  "zh": "在不同时段训练后，这里会告诉你何时最专注。"
+ },
+ "hh5kou": {
+  "en": "Daily check-in",
+  "zh": "今日状态打卡"
+ },
+ "hh6u6a": {
+  "en": "You’re sharp: put your hardest, most creative work in the next 2 hours, and try a longer focus block than usual.",
+  "zh": "状态很好：把最难、最需要创造力的工作放在接下来 2 小时，今天可以尝试比平时更长的专注时段。"
+ },
+ "hipjjv": {
+  "en": "{v} min",
+  "zh": "{v} 分钟"
+ },
+ "hki9qd": {
+  "en": "Data",
+  "zh": "数据"
+ },
+ "hlee02": {
+  "en": "The delay is random, so stay ready.",
+  "zh": "每次出现的间隔是随机的，保持准备状态。"
+ },
+ "hrj5ga": {
+  "en": "Mean RT",
+  "zh": "平均反应时"
+ },
+ "hs3sm1": {
+  "en": "Multiple object tracking",
+  "zh": "多目标追踪"
+ },
+ "htilqq": {
+  "en": "Do this: ",
+  "zh": "怎么做："
+ },
+ "hwea26": {
+  "en": "Retest every 2 weeks.",
+  "zh": "建议每 2 周复测一次。"
+ },
+ "hwoobj": {
+  "en": "Comparing {on} days with and {off} without “{tag}”, your {outcome} is worse (effect size d={d}, {strength}). Run a personal experiment to test cause and effect.",
+  "zh": "对比 {on} 个有和 {off} 个没有「{tag}」的日子，你的{outcome}更差（效应量 d={d}，{strength}）。想确认因果关系，可以做一次个人实验。"
+ },
+ "i04j5g": {
+  "en": "Click to remove",
+  "zh": "点击移除"
+ },
+ "i3fq9i": {
+  "en": "Sensitivity d′",
+  "zh": "辨别力 d′"
+ },
+ "i4lhtp": {
+  "en": "Level",
+  "zh": "难度"
+ },
+ "i7ewkt": {
+  "en": "Mixed evidence",
+  "zh": "证据不一"
+ },
+ "i7rs9t": {
+  "en": "Assessments use fixed difficulty so you can compare them directly over time.",
+  "zh": "评估使用固定难度，以便和以后的评估直接比较。"
+ },
+ "i846ss": {
+  "en": "FocusLab · 15-minute focus training",
+  "zh": "FocusLab · 15 分钟专注训练"
+ },
+ "i95jax": {
+  "en": "{d} distractions/hour",
+  "zh": "分心 {d} 次/小时"
+ },
+ "i9imjk": {
+  "en": "It’s been {n} days since your last assessment. Retest in 15 minutes to see objective change.",
+  "zh": "距上次评估已 {n} 天。15 分钟复测，客观看到你的变化。"
+ },
+ "ibvbm6": {
+  "en": "Possibly worse",
+  "zh": "可能更差"
+ },
+ "ie1o50": {
+  "en": "Possibly better",
+  "zh": "可能更好"
+ },
+ "ifk9j2": {
+  "en": "Day {d} / {n}",
+  "zh": "第 {d} / {n} 天"
+ },
+ "ij5x3a": {
+  "en": "Selection accuracy",
+  "zh": "选中正确率"
+ },
+ "ijkqj2": {
+  "en": "No new achievements this week — next week, then.",
+  "zh": "这周还没有解锁新成就——下周继续。"
+ },
+ "ikd5hk": {
+  "en": "System notifications",
+  "zh": "系统通知"
+ },
+ "ipdms5": {
+  "en": "Set your focus baseline",
+  "zh": "建立你的专注基线"
+ },
+ "itbk47": {
+  "en": "Distractions during focus sessions fell from {a} to {b} per hour. That is real-world focus improving.",
+  "zh": "专注时段中的分心从每小时 {a} 次降到 {b} 次。这就是真实世界的专注力提升。"
+ },
+ "j12a6z": {
+  "en": "Exercise",
+  "zh": "练习"
+ },
+ "j3jk3v": {
+  "en": "Tracking several objects at once and scanning a visual field efficiently.",
+  "zh": "同时追踪多个目标、高效扫描视野的能力。"
+ },
+ "j3ymrj": {
+  "en": "A {ms} ms switch cost: your brain \"reloads\" every time the rule changes. This is exactly why checking messages and switching windows slows you down.",
+  "zh": "切换代价 {ms}ms：大脑每次换规则都要\"重新加载\"。这正是频繁切换任务（看消息、切窗口）让你变慢的原因。"
+ },
+ "j49o1s": {
+  "en": "Key metric",
+  "zh": "核心指标"
+ },
+ "j4z771": {
+  "en": "Pause",
+  "zh": "暂停"
+ },
+ "j6ts6k": {
+  "en": "Running",
+  "zh": "进行中"
+ },
+ "j704nt": {
+  "en": "You focus better after 7+ hours of sleep",
+  "zh": "睡够 7 小时，你明显更专注"
+ },
+ "j88ayy": {
+  "en": "Resume",
+  "zh": "继续"
+ },
+ "j8b4h9": {
+  "en": "Only {p} commission errors — excellent inhibitory control.",
+  "zh": "只错按了 {p} 的 3，抑制控制非常出色。"
+ },
+ "j8lflk": {
+  "en": "Meta-analyses show small but reliable short-term boosts to executive function after a bout of moderate aerobic exercise; regular exercise is linked to better executive function over time.",
+  "zh": "元分析显示，一次中等强度的有氧运动后，执行功能和注意力会有小幅但可靠的短时提升；长期规律运动与更好的执行功能相关。"
+ },
+ "j8m6w5": {
+  "en": "Dark",
+  "zh": "深色"
+ },
+ "jdnzrk": {
+  "en": "Take breaks as usual (control day).",
+  "zh": "今天照常休息（对照日）。"
+ },
+ "je3g16": {
+  "en": "PVT, SART response",
+  "zh": "PVT、SART 响应"
+ },
+ "je5b9y": {
+  "en": "Cool-down · mindfulness",
+  "zh": "收尾 · 正念"
+ },
+ "jkuhme": {
+  "en": "Best {n} days",
+  "zh": "最长 {n} 天"
+ },
+ "jkvmd": {
+  "en": "{p}% of distractions: “{kind}”",
+  "zh": "{p}% 的分心是「{kind}」"
+ },
+ "jl03vu": {
+  "en": "Assessment complete",
+  "zh": "评估完成"
+ },
+ "jl9ice": {
+  "en": "Background sound",
+  "zh": "背景声音"
+ },
+ "jld80a": {
+  "en": "Probes {n}: {on} on task · {mw} mind-wandering · {ext} interrupted",
+  "zh": "专注抽查 {n} 次：{on} 次在任务上 · {mw} 次走神 · {ext} 次被打断"
+ },
+ "jll38m": {
+  "en": "Phone out of the room",
+  "zh": "手机离开房间"
+ },
+ "jmfgr1": {
+  "en": " Stress is high: start with 3 minutes of breath counting or physiological sighs.",
+  "zh": " 压力偏高：开始前先做 3 分钟数息或生理性叹息。"
+ },
+ "jmmh1y": {
+  "en": "Tap the ink colour, ignore the word",
+  "zh": "按墨水的颜色点击按钮，忽略字义"
+ },
+ "jpo29q": {
+  "en": "Tests the short-term executive-function boost from a bout of exercise.",
+  "zh": "检验急性运动对你执行功能的短时提升。"
+ },
+ "jpp8t7": {
+  "en": "If distracted: ",
+  "zh": "如果想分心："
+ },
+ "jqvgmj": {
+  "en": "Deep focus",
+  "zh": "深度专注"
+ },
+ "jxsaht": {
+  "en": "Tap only when it matches {n} steps back · unsure? don’t tap",
+  "zh": "与 {n} 步之前相同才点 · 不确定就不点"
+ },
+ "jzhx44": {
+  "en": "Breath counting",
+  "zh": "数息练习"
+ },
+ "k43nyi": {
+  "en": "Distractions (saved to parking lot)",
+  "zh": "分心记录（已放入停车场）"
+ },
+ "k7gxs5": {
+  "en": "Moderate evidence",
+  "zh": "中等证据"
+ },
+ "k9er4": {
+  "en": "drained",
+  "zh": "疲惫"
+ },
+ "kbbh6f": {
+  "en": "Sleep isn’t showing its usual effect yet",
+  "zh": "睡眠与表现的关系还不明显"
+ },
+ "kgw9o9": {
+  "en": "optional",
+  "zh": "可选"
+ },
+ "ktdb8o": {
+  "en": "Settings",
+  "zh": "设置"
+ },
+ "kx5zwf": {
+  "en": "Importing replaces all current data. Continue?",
+  "zh": "导入会覆盖当前所有数据，继续？"
+ },
+ "ky4lc5": {
+  "en": "Stop",
+  "zh": "停止"
+ },
+ "l5nax": {
+  "en": "When",
+  "zh": "时间"
+ },
+ "l7olyj": {
+  "en": "Baseline week (first 7 days)",
+  "zh": "基线周（前 7 天）"
+ },
+ "ldjmat": {
+  "en": "1 year",
+  "zh": "1 年"
+ },
+ "leck3y": {
+  "en": "Good interference control. The response window will shrink automatically to keep it challenging.",
+  "zh": "干扰控制良好，继续保持。系统会自动缩短反应窗口来增加挑战。"
+ },
+ "lewgh4": {
+  "en": "Save",
+  "zh": "保存"
+ },
+ "lg4goe": {
+  "en": "Park distractions",
+  "zh": "把干扰\"停车\""
+ },
+ "lihm57": {
+  "en": "Complete your first exercise",
+  "zh": "完成第一次训练"
+ },
+ "liu25t": {
+  "en": "Alcohol last night",
+  "zh": "昨晚饮酒"
+ },
+ "lk42ea": {
+  "en": "Before each focus session write one line: what will be done? If I want to check my phone, I will…",
+  "zh": "每次专注时段开始前写一句：要完成什么？如果想刷手机，我就……"
+ },
+ "lmvv8l": {
+  "en": "Exercise trends",
+  "zh": "单项趋势"
+ },
+ "lo2q7": {
+  "en": "Times you noticed you drifted",
+  "zh": "主动发现走神的次数"
+ },
+ "lr92oc": {
+  "en": "First run — this is your baseline.",
+  "zh": "第一次记录——这是你的基线。"
+ },
+ "lsewwd": {
+  "en": "Tap the screen as soon as the counter appears",
+  "zh": "计数器一出现就点击屏幕"
+ },
+ "lyi0d": {
+  "en": "Today: ON",
+  "zh": "今天：ON"
+ },
+ "lyyosu": {
+  "en": "You got {ms} ms faster in the second half: you warmed into it.",
+  "zh": "后半程反而更快了 {ms} ms：你在逐渐进入状态。"
+ },
+ "lz65mo": {
+  "en": "More",
+  "zh": "多"
+ },
+ "lzxd7v": {
+  "en": "Multiple object tracking measures how many moving things attention can hold at once. It is used to train situational awareness in athletes and pilots. Drift for a second and you lose a target — immediate, honest feedback on focus.",
+  "zh": "多目标追踪测量注意力能同时\"抓住\"多少个移动物体。它被用于训练运动员和飞行员的态势感知。追踪时，你必须持续分配注意力，一走神目标就丢——非常直观的专注反馈。"
+ },
+ "m0aa9t": {
+  "en": "low",
+  "zh": "低落"
+ },
+ "m334hx": {
+  "en": "Only if your work happens in this browser tab",
+  "zh": "仅当你的工作就在这个浏览器标签页中时开启"
+ },
+ "m4kwuw": {
+  "en": "~{m} min · {d} of {n} done",
+  "zh": "约 {m} 分钟 · 已完成 {d}/{n}"
+ },
+ "m5fszo": {
+  "en": "Miscounts",
+  "zh": "数错"
+ },
+ "m8fx7f": {
+  "en": "Breath: 1–8 / 9 / reset",
+  "zh": "数息：1–8 / 9 / 重置"
+ },
+ "mdvoet": {
+  "en": "RT variability",
+  "zh": "反应波动"
+ },
+ "mdzir7": {
+  "en": "Don’t just take advice — test it",
+  "zh": "别只听建议——亲自验证"
+ },
+ "mkcb40": {
+  "en": "Begin assessment",
+  "zh": "开始评估"
+ },
+ "mkrrwi": {
+  "en": "Back up your data",
+  "zh": "备份一下你的数据"
+ },
+ "mngvdd": {
+  "en": "Achievements",
+  "zh": "成就"
+ },
+ "mns63d": {
+  "en": "Exercise before deep work",
+  "zh": "深度工作前运动"
+ },
+ "mqfcnc": {
+  "en": "LOW · HIGH",
+  "zh": "小 · 大"
+ },
+ "mr6xq6": {
+  "en": "Interference cost",
+  "zh": "干扰代价"
+ },
+ "mtv9n3": {
+  "en": "Start / next",
+  "zh": "开始 / 下一项"
+ },
+ "mxpqz9": {
+  "en": "No sessions yet. Start with 25 minutes.",
+  "zh": "还没有专注记录。第一段从 25 分钟开始吧。"
+ },
+ "myk73r": {
+  "en": "Tests whether attention restoration works for you.",
+  "zh": "检验注意力恢复理论在你身上是否成立。"
+ },
+ "mzk5xy": {
+  "en": "Right now, where is your attention?",
+  "zh": "此刻，你的注意力在哪里？"
+ },
+ "n3vnkw": {
+  "en": "Keep your phone wherever you usually do (control day).",
+  "zh": "今天照常放置手机（对照日）。"
+ },
+ "ndcog0": {
+  "en": "Every task switch carries a switch cost, and \"attention residue\" from the previous task keeps dragging on the next. Constant message-checking means paying that tax all day.",
+  "zh": "每次切换任务都有\"切换代价\"，而且上一个任务的\"注意力残留\"会持续拖累下一个任务。频繁查看消息等于不停地付这笔税。"
+ },
+ "nov4ln": {
+  "en": "General",
+  "zh": "通用"
+ },
+ "nqm2p7": {
+  "en": "Every switch forces your brain to reload task rules — the switch cost. It is why checking messages wrecks productivity. Practice shrinks the cost, and lets you feel the true price of multitasking.",
+  "zh": "每次从一件事切到另一件事，大脑都要\"重新加载规则\"，这就是切换代价。它解释了为什么频繁看消息让你效率骤降。练习可以缩小切换代价，同时让你亲身感受多任务的真实成本。"
+ },
+ "nuaqn8": {
+  "en": "Try to keep your gaze at the center and find numbers peripherally.",
+  "zh": "尽量把视线固定在中心，用余光寻找。"
+ },
+ "o0kfpq": {
+  "en": "Check in or run the PVT and FocusLab will estimate today’s focus readiness and suggest how to plan your day.",
+  "zh": "完成状态打卡或 PVT 后，这里会估计你今天的专注状态，并给出安排建议。"
+ },
+ "o2c898": {
+  "en": "Measured progress",
+  "zh": "用数据说话"
+ },
+ "o752fd": {
+  "en": "Sleep quality",
+  "zh": "睡眠质量"
+ },
+ "o7cqsw": {
+  "en": "One full week",
+  "zh": "一周不断"
+ },
+ "o7fto4": {
+  "en": "Import",
+  "zh": "导入"
+ },
+ "oabfsb": {
+  "en": "Nice — keep going.",
+  "zh": "很好，继续保持。"
+ },
+ "ont6je": {
+  "en": "Delete this entry",
+  "zh": "删除这条记录"
+ },
+ "ootbe7": {
+  "en": "Again",
+  "zh": "再来一次"
+ },
+ "osq2w1": {
+  "en": "Press D during focus to log distractions by type, and this shows which one to tackle first.",
+  "zh": "专注时按 D 记录分心并选择类型，这里会告诉你最该先解决哪一种。"
+ },
+ "oun96a": {
+  "en": "Short sleep",
+  "zh": "睡眠不足"
+ },
+ "p4782m": {
+  "en": "Attention Restoration Theory proposes that nature rests directed attention; some studies found better attention after a nature walk, though not all replicate. Phone-scrolling breaks almost certainly don’t restore anything.",
+  "zh": "注意力恢复理论认为，自然环境能让定向注意得到休息；部分研究发现散步于自然环境后注意力测验成绩提升，但并非所有研究都能复现。刷手机式的休息则几乎肯定无法恢复注意力。"
+ },
+ "p59hrp": {
+  "en": "Personal experiments",
+  "zh": "个人实验"
+ },
+ "p93p1z": {
+  "en": "Retake the assessment 10+ days after your baseline",
+  "zh": "在基线 10 天后再次评估"
+ },
+ "pamsr7": {
+  "en": "An honest note",
+  "zh": "诚实说明"
+ },
+ "pbpscn": {
+  "en": "Custom minutes",
+  "zh": "自定义分钟"
+ },
+ "pf82hf": {
+  "en": "High energy",
+  "zh": "精力充沛"
+ },
+ "pi28w3": {
+  "en": "Digits 1–9 flash one after another.",
+  "zh": "数字 1–9 会快速依次出现。"
+ },
+ "pj4hoo": {
+  "en": "Correct cycles",
+  "zh": "正确循环"
+ },
+ "plw5mq": {
+  "en": "In a randomized trial, two weeks of mindfulness training reduced mind-wandering and improved working memory and GRE reading scores. It trains noticing drift and coming back — the core everyday focus skill.",
+  "zh": "一项随机对照研究中，两周正念训练减少了走神，并提升了工作记忆和 GRE 阅读成绩。正念训练的是\"发现走神并回来\"——日常专注最核心的技能。"
+ },
+ "pmfhbf": {
+  "en": "Lapses",
+  "zh": "走神失误"
+ },
+ "po83eu": {
+  "en": "Press Space (or tap) for every digit except 3.",
+  "zh": "看到除 3 以外的任何数字，按空格（或点击）。"
+ },
+ "pppblx": {
+  "en": ", with {n} more errors",
+  "zh": "，错误多了 {n} 次"
+ },
+ "q0juhv": {
+  "en": "After your first training or assessment, your Focus Index, domain trends and personal insights appear here.",
+  "zh": "完成第一次训练或评估后，这里会显示你的专注指数、各维度变化和个人洞察。"
+ },
+ "q2l4mu": {
+  "en": "Most of your distractions are internal thoughts. Empty your head into the parking lot before starting and use Notice · Name · Return — breath counting trains exactly this.",
+  "zh": "你的分心大多来自内部念头。开始前写下\"停车场\"清单，并在专注中用\"觉察 · 命名 · 回来\"；数息练习正是在训练这个能力。"
+ },
+ "q6h7f5": {
+  "en": "Odd · Low",
+  "zh": "奇数 · 小于 5"
+ },
+ "qau5vq": {
+  "en": "helping",
+  "zh": "有利"
+ },
+ "qiywhm": {
+  "en": "You left the page. To keep the data accurate, this task needs to restart.",
+  "zh": "你离开了页面。为保证数据准确，这一项需要重新开始。"
+ },
+ "qpy1qv": {
+  "en": "A 15-minute standardized assessment. Retake every 2 weeks to see real, measured progress.",
+  "zh": "15 分钟标准化评估，之后每 2 周复测一次，用数据看到真实的进步。"
+ },
+ "qq8d0x": {
+  "en": "Only the windows and tabs you need",
+  "zh": "只保留需要的窗口和标签页"
+ },
+ "qtrymx": {
+  "en": "Download backup",
+  "zh": "下载备份"
+ },
+ "qyxhx8": {
+  "en": "Last {s}",
+  "zh": "上次 {s}"
+ },
+ "r5wqai": {
+  "en": "No",
+  "zh": "没有"
+ },
+ "r6ewyz": {
+  "en": "Seconds per cell",
+  "zh": "每格秒数"
+ },
+ "r6nyn": {
+  "en": "Brown",
+  "zh": "棕噪音"
+ },
+ "r6z7uo": {
+  "en": "Attention probes (random gentle chime: where is your attention?)",
+  "zh": "专注抽查（随机轻提示：此刻注意力在哪？）"
+ },
+ "r8eigr": {
+  "en": "A color word appears, e.g. \"RED\" printed in blue.",
+  "zh": "屏幕会出现一个颜色词，例如用蓝色写的\"红\"。"
+ },
+ "rat53y": {
+  "en": "Mood",
+  "zh": "心情"
+ },
+ "rfmu2m": {
+  "en": "Color-word Stroop",
+  "zh": "色词干扰 Stroop"
+ },
+ "rnahi8": {
+  "en": "Where attention was when the chime sounded, last 30 sessions",
+  "zh": "最近 30 段专注中，提示响起那一刻注意力在哪"
+ },
+ "rnn9xq": {
+  "en": "You reached {n}-back. Staying at \"slightly too hard\" is where training works.",
+  "zh": "最高达到 {n}-back。保持在\"有点难\"的区间是最有效的训练。"
+ },
+ "ro8424": {
+  "en": "Good catch — that is meta-awareness in action. Gently return to: ",
+  "zh": "很好，你发现了它——这正是在训练元觉察。温和地回到："
+ },
+ "ros4r6": {
+  "en": "Weekly review",
+  "zh": "周回顾"
+ },
+ "rpwnoa": {
+  "en": "On days after 7+ hours of sleep ({yes} days) you scored about {pts} points higher than after <6.5 hours ({no} days). Protecting sleep is the cheapest focus upgrade there is.",
+  "zh": "睡眠 ≥7 小时的日子（{yes} 天），你的训练表现比睡眠 <6.5 小时的日子（{no} 天）平均高约 {pts} 分。保护睡眠是提升专注最便宜的方法。"
+ },
+ "rw07i": {
+  "en": "Your mental workbench: holding and updating information in mind at the same time.",
+  "zh": "在脑中同时保持并不断更新信息的\"心智工作台\"，决定你能同时处理多少东西。"
+ },
+ "ry4lva": {
+  "en": "{n} days",
+  "zh": "{n} 天"
+ },
+ "s0ay7m": {
+  "en": "10 min extra meditation",
+  "zh": "额外冥想 10 分钟"
+ },
+ "s2jf1b": {
+  "en": "start",
+  "zh": "开始"
+ },
+ "s7436b": {
+  "en": "Click them in ascending order starting from 1.",
+  "zh": "从 1 开始按顺序依次点击。"
+ },
+ "s96udw": {
+  "en": "false start",
+  "zh": "抢跑"
+ },
+ "saj2z5": {
+  "en": "Distractions / hour",
+  "zh": "分心 / 小时"
+ },
+ "sjvar3": {
+  "en": "{n} timeouts. If this keeps happening, difficulty will drop automatically.",
+  "zh": "有 {n} 次超时。如果持续发生，系统会自动降低难度。"
+ },
+ "smkc16": {
+  "en": "FocusLab is not a medical tool. If attention problems persistently affect your life (e.g. you suspect ADHD), please consult a professional.",
+  "zh": "FocusLab 不是医疗工具。如果你长期受注意力问题困扰（例如怀疑 ADHD），请咨询专业人士。"
+ },
+ "spdxv": {
+  "en": "Outcome",
+  "zh": "指标"
+ },
+ "squwi9": {
+  "en": "Clearly worse",
+  "zh": "明显更差"
+ },
+ "su6cn8": {
+  "en": "Attention profile",
+  "zh": "专注力画像"
+ },
+ "sufj57": {
+  "en": "Perfect rounds",
+  "zh": "全对轮数"
+ },
+ "sviiks": {
+  "en": "Letter errors",
+  "zh": "字母错误"
+ },
+ "t56rln": {
+  "en": "Comparing {on} days with and {off} without “{tag}”, your {outcome} is better (effect size d={d}, {strength}). Run a personal experiment to test cause and effect.",
+  "zh": "对比 {on} 个有和 {off} 个没有「{tag}」的日子，你的{outcome}更好（效应量 d={d}，{strength}）。想确认因果关系，可以做一次个人实验。"
+ },
+ "t8q4p7": {
+  "en": "Your attention is warmed up. This is the perfect moment for a deep focus session — put that focus to work on something that matters.",
+  "zh": "训练让注意力\"热身\"完毕。现在是开始一段深度专注的最佳时机——把练出来的专注用到真正重要的事情上。"
+ },
+ "t95bu4": {
+  "en": "Do a short practice round first (not scored)",
+  "zh": "先做一段短练习（不计分）"
+ },
+ "ta4jd6": {
+  "en": "During focus sessions, leave the phone in another room or a bag, with Do Not Disturb on.",
+  "zh": "专注时段里把手机放进另一个房间或包里，开启勿扰模式。"
+ },
+ "td03uo": {
+  "en": "Guess-corrected number of objects tracked",
+  "zh": "经猜测校正的平均追踪目标数"
+ },
+ "tenbv": {
+  "en": "Habit of the day",
+  "zh": "今日习惯"
+ },
+ "tg14cm": {
+  "en": "Self-caught resets",
+  "zh": "觉察重置"
+ },
+ "th7s2d": {
+  "en": "If I feel the urge to switch, I will…",
+  "zh": "如果想分心，我会……"
+ },
+ "thpxg": {
+  "en": "Notification permission denied",
+  "zh": "通知权限未开启"
+ },
+ "tkd2ga": {
+  "en": "end",
+  "zh": "结束"
+ },
+ "tmr7u7": {
+  "en": "e.g. \"press D to note it, then return to the current sentence\"",
+  "zh": "例如：\"按 D 记下来，然后回到当前这一句\""
+ },
+ "tw2vvr": {
+  "en": "{k} targets · speed {sp}",
+  "zh": "{k} 个目标 · 速度 {sp}"
+ },
+ "twedv2": {
+  "en": "Sleep last night",
+  "zh": "昨晚睡眠"
+ },
+ "txdi3k": {
+  "en": "Conflict cost",
+  "zh": "冲突代价"
+ },
+ "txft7v": {
+  "en": "Reading is deeply automatic. Stroop makes you override the urge to read and report only the ink color — the same inhibitory control you need to resist habits like reflexively reaching for your phone.",
+  "zh": "阅读是高度自动化的习惯。Stroop 任务要求你压制\"读字\"的冲动，只报告墨水颜色——这正是抵抗习惯性冲动（比如下意识拿起手机）所需的抑制控制。"
+ },
+ "u1sz5": {
+  "en": "Most common distraction: ",
+  "zh": "最常见的分心："
+ },
+ "u4cbb0": {
+  "en": "Most targets",
+  "zh": "最多目标"
+ },
+ "u6nl8q": {
+  "en": "{n} presses/min is far above natural breathing (~6–20/min), so this score was reduced. Each press should match a real out-breath.",
+  "zh": "按键频率 {n} 次/分远超正常呼吸（约 6–20 次/分），本次分数已相应降低。每次按键应对应一次真实的呼气。"
+ },
+ "u7ru84": {
+  "en": "Accuracy",
+  "zh": "正确率"
+ },
+ "u7yhom": {
+  "en": "White",
+  "zh": "白噪音"
+ },
+ "ubbem8": {
+  "en": "Last taken {d} ({n} days ago). {s}",
+  "zh": "上次评估：{d}（{n} 天前）。{s}"
+ },
+ "ufckfe": {
+  "en": "Your experiment is complete — see the results in Progress",
+  "zh": "个人实验已完成，去「进展」查看结果"
+ },
+ "ufnzh3": {
+  "en": "Train focus like endurance: start with a duration you can reliably complete, then extend slightly after successes — more sustainable than forcing 2-hour marathons.",
+  "zh": "像练耐力一样练专注：从能稳定完成的时长开始，成功后再小幅延长，比一开始就硬撑 2 小时更可持续。"
+ },
+ "uh6vwj": {
+  "en": "Start deep focus",
+  "zh": "开始深度专注"
+ },
+ "uhe253": {
+  "en": "You are fast but error-prone — a speed–accuracy trade-off. Slowing down slightly usually cuts errors sharply.",
+  "zh": "你按得很快，但错误也多：这是速度换准确。稍微放慢节奏，错误通常会明显减少。"
+ },
+ "ui6b8s": {
+  "en": "Noticing that your mind has wandered and gently bringing it back — the core of mindfulness and the most transferable focus skill.",
+  "zh": "察觉\"我走神了\"并温和地把注意力带回来的能力——正念训练的核心，也是日常专注最可迁移的技能。"
+ },
+ "ukzedx": {
+  "en": "Other",
+  "zh": "其他"
+ },
+ "um7ssh": {
+  "en": "Default break",
+  "zh": "默认休息时长"
+ },
+ "unz3je": {
+  "en": "Practice-based",
+  "zh": "实践经验"
+ },
+ "upe973": {
+  "en": "\"If–then\" implementation intentions have medium-to-large effects on goal attainment. A concrete, checkable goal tells your brain what is relevant and what is noise.",
+  "zh": "\"如果……就……\"式的执行意图对目标达成有中到大的效果。具体可检验的目标让大脑知道什么是\"相关\"、什么是\"干扰\"。"
+ },
+ "uporf1": {
+  "en": "Someone interrupted",
+  "zh": "被人打断"
+ },
+ "utz1kt": {
+  "en": "Tests whether fragmented morning input drags down your focus all day.",
+  "zh": "检验早上的碎片化输入是否拖累你一整天的专注。"
+ },
+ "uwwflc": {
+  "en": "Sit comfortably, eyes closed or softly gazing ahead.",
+  "zh": "坐好，闭上眼或目光柔和地落在前方。"
+ },
+ "uxoc2h": {
+  "en": "Custom habit tags",
+  "zh": "自定义习惯标签"
+ },
+ "uytdnz": {
+  "en": "A daily PVT and periodic assessments show your attention state and long-term change objectively, not by feel.",
+  "zh": "每日 PVT 和定期评估，客观看到你的专注状态和长期变化，而不是凭感觉。"
+ },
+ "uzgp5z": {
+  "en": "Achievement unlocked: ",
+  "zh": "解锁成就："
+ },
+ "v4w1qj": {
+  "en": "21-day streak",
+  "zh": "连续 21 天练习"
+ },
+ "v5ay9o": {
+  "en": "Save review",
+  "zh": "保存周回顾"
+ },
+ "v730iu": {
+  "en": "Daily training reminder",
+  "zh": "每日训练提醒"
+ },
+ "v7dp8j": {
+  "en": "Among the lengths you use, {m}-minute sessions get your highest focus ratings (avg {r}/5). Make it your default.",
+  "zh": "在你常用的时长里，{m} 分钟的专注自评最高（平均 {r}/5）。把它作为默认时长。"
+ },
+ "vcapd2": {
+  "en": "A {ms} ms interference cost is large: the urge to read is strong. Rest your gaze on the edge of the word and attend only to color.",
+  "zh": "干扰代价 {ms}ms 较大：读字的冲动很强。试着把视线落在字的边缘，只关注颜色。"
+ },
+ "vcb7xs": {
+  "en": "First and second halves were steady — attention held up well.",
+  "zh": "前后半程基本稳定，注意力保持得很好。"
+ },
+ "vcn00h": {
+  "en": "Ignoring distracting information and overriding impulsive responses (selective attention + inhibition).",
+  "zh": "忽略干扰信息、压制冲动反应，只对重要的东西作出反应（选择性注意 + 抑制控制）。"
+ },
+ "ve2sg8": {
+  "en": "Track them…",
+  "zh": "追踪它们……"
+ },
+ "vgo1mj": {
+  "en": "End early? Time focused so far is still recorded.",
+  "zh": "提前结束？已专注的时间仍会被记录。"
+ },
+ "vi5hm5": {
+  "en": "A position · L sound",
+  "zh": "A 位置 · L 声音"
+ },
+ "vjjlq9": {
+  "en": "Check-in",
+  "zh": "状态打卡"
+ },
+ "vl0d0y": {
+  "en": "Start today’s session",
+  "zh": "开始今日训练"
+ },
+ "vo73k1": {
+  "en": "ODD · EVEN",
+  "zh": "奇 · 偶"
+ },
+ "vpbjnp": {
+  "en": "Distraction sources",
+  "zh": "分心来源"
+ },
+ "vqsuy": {
+  "en": "Breaths 1–8 · tap here",
+  "zh": "第 1–8 次呼气 · 点这里"
+ },
+ "vrax25": {
+  "en": "Do hard things in your peak window",
+  "zh": "在你的黄金时段做最难的事"
+ },
+ "vuco": {
+  "en": "Standard",
+  "zh": "标准"
+ },
+ "vxplc": {
+  "en": "Recommended protocol",
+  "zh": "推荐方案"
+ },
+ "vzsdom": {
+  "en": "The Psychomotor Vigilance Task is the gold-standard alertness measure in sleep research and at NASA. It has almost no practice effect, so it works like a thermometer for your state: slower responses and more lapses (≥500 ms) usually mean sleep debt or fatigue. Do it daily and you will see exactly how sleep, caffeine and time of day shape your focus.",
+  "zh": "精神运动警觉任务（PVT）是 NASA 与睡眠研究中衡量警觉度的金标准。它几乎没有学习效应，所以更像一个\"状态体温计\"：反应变慢、\"走神失误\"（反应 ≥500ms）增多，往往意味着睡眠不足或疲劳。每天做一次，你会清楚看到睡眠、咖啡因、时段如何影响你的专注。"
+ },
+ "w1vbrl": {
+  "en": "Answer the ink colour · {map}",
+  "zh": "按墨水颜色作答 · {map}"
+ },
+ "w73swy": {
+  "en": "Attention probes: on task {pb}% of the time",
+  "zh": "专注抽查：{pb}% 的时间在任务上"
+ },
+ "w7qwps": {
+  "en": "Nap",
+  "zh": "午睡"
+ },
+ "w8uxep": {
+  "en": "Cannot be undone — export a backup first",
+  "zh": "不可撤销，建议先导出备份"
+ },
+ "wcfw4f": {
+  "en": "High stress",
+  "zh": "压力大"
+ },
+ "wg9oz3": {
+  "en": "Volume",
+  "zh": "音量"
+ },
+ "wnj7u9": {
+  "en": "Exercise days are better focus days",
+  "zh": "运动过的日子表现更好"
+ },
+ "wsiv50": {
+  "en": "Add an item…",
+  "zh": "添加一条……"
+ },
+ "wtoc4p": {
+  "en": "Count accuracy",
+  "zh": "计数准确率"
+ },
+ "wwq3up": {
+  "en": "Blue frame: odd/even · Orange frame: low/high · tap left or right",
+  "zh": "蓝框判奇偶，橙框判大小 · 点击左右按钮"
+ },
+ "x0ig66": {
+  "en": "Something went wrong",
+  "zh": "出了点问题"
+ },
+ "x223ov": {
+  "en": "Very small switch cost — smooth rule switching.",
+  "zh": "切换代价很小，规则切换流畅。"
+ },
+ "x9a7le": {
+  "en": "Not enough data",
+  "zh": "数据不足"
+ },
+ "x9tsfp": {
+  "en": "Score",
+  "zh": "训练分"
+ },
+ "xafwvy": {
+  "en": "② Train",
+  "zh": "② 训练"
+ },
+ "xjv7ac": {
+  "en": "Focus Index over time",
+  "zh": "专注指数趋势"
+ },
+ "xlu8ka": {
+  "en": "Breath 9 · tap here",
+  "zh": "第 9 次呼气 · 点这里"
+ },
+ "xnni34": {
+  "en": "Deep-focus timer, distraction parking and breath counting bring focus into real work.",
+  "zh": "深度专注计时、分心停车场和正念数息，把专注带进真实工作。"
+ },
+ "xslv1t": {
+  "en": "Switching between task rules quickly and accurately. A smaller switch cost means faster recovery after interruptions.",
+  "zh": "在不同任务规则之间快速、准确切换的能力。切换代价越小，被打断后越快回到状态。"
+ },
+ "xsnxdf": {
+  "en": "Your peak focus window: {best}",
+  "zh": "你的黄金专注时段：{best}"
+ },
+ "xtipvh": {
+  "en": "A focused life",
+  "zh": "专注生活方式"
+ },
+ "xv28jn": {
+  "en": "Erased",
+  "zh": "已清除"
+ },
+ "xy0wl5": {
+  "en": "30 days",
+  "zh": "30 天"
+ },
+ "y70lgb": {
+  "en": "Intelligible speech is the most disruptive sound. Steady background noise (e.g. brown noise) can mask it and helps some people while distracting others.",
+  "zh": "可理解的人声最容易打断思考。稳定的背景噪音（如棕噪音）可以掩盖人声，对部分人有帮助，对另一些人则是干扰。"
+ },
+ "yeyo8v": {
+  "en": "Focus Index",
+  "zh": "专注指数"
+ },
+ "yh2ur3": {
+  "en": "morning",
+  "zh": "上午"
+ },
+ "yj7tyh": {
+  "en": "3-day streak",
+  "zh": "连续 3 天练习"
+ },
+ "yqcemb": {
+  "en": "Mind-wandering",
+  "zh": "走神"
+ },
+ "ywpgxu": {
+  "en": "Practice done! If the rules are clear, start the real round now — this one is recorded.",
+  "zh": "练习完成！规则清楚了的话，现在开始正式一轮——这一轮会被记录。"
+ },
+ "z07787": {
+  "en": "Breath counting is a validated, objective mindfulness measure (University of Wisconsin): miscounts reveal mind-wandering, and resets show you caught it. Two weeks of mindfulness training has been shown to reduce mind-wandering and improve working memory and reading scores. This is the exercise in the app most likely to transfer to everyday focus.",
+  "zh": "数息是威斯康星大学验证过的客观正念测量：数错代表走神，主动重置代表你\"抓住\"了走神。研究发现，短短两周的正念训练就能减少走神、提升工作记忆与阅读理解成绩。这是本应用里对日常专注最可能产生真实迁移的练习。"
+ },
+ "z3j9tm": {
+  "en": "Follow the middle arrow, ignore the rest",
+  "zh": "只看中间的箭头，忽略两边的"
+ },
+ "z4u2rg": {
+  "en": "Into deep water",
+  "zh": "进入深水区"
+ },
+ "z9a4y9": {
+  "en": "Feedback tones, countdown and bells",
+  "zh": "反馈音、倒计时和钟声"
+ },
+ "zaf5ne": {
+  "en": "Research suggests people mind-wander about half their waking hours. The goal isn’t never drifting — it’s noticing and returning faster.",
+  "zh": "研究估计人们清醒时约有一半时间在走神。重要的不是从不走神，而是更快地发现并回来。"
+ },
+ "zbb6tr": {
+  "en": "Assessment",
+  "zh": "评估"
+ },
+ "ze0ic2": {
+  "en": "Keep a fixed wake time, weekends included. Use the daily PVT to see what sleep actually does to you.",
+  "zh": "固定起床时间（包括周末）。用每日 PVT 观察睡眠对你的真实影响。"
+ },
+ "zkouah": {
+  "en": "Retry",
+  "zh": "再做一次"
+ },
+ "zms9e5": {
+  "en": "ODD/EVEN: odd → left, even → right.",
+  "zh": "奇偶：奇数按左，偶数按右。"
+ },
+ "zs2l1a": {
+  "en": "Write it down, then return",
+  "zh": "写下来，再回来"
+ },
+ "zt70sl": {
+  "en": "Assessment benchmarks",
+  "zh": "评估基准"
+ },
+ "zupedb": {
+  "en": "Schulte tables train visual search and steady attention: keep your gaze near the center and use peripheral vision to widen your attentional field. Short, measurable and a great warm-up.",
+  "zh": "舒尔特方格训练视觉搜索效率与注意稳定：目光保持在中心，用余光扩大\"注意视野\"。它短小、可量化，适合作为专注热身。"
+ },
+ "zv2jlk": {
+  "en": "Start a focus session",
+  "zh": "开始一段专注"
+ }
+}

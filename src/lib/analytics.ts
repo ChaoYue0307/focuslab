@@ -1,6 +1,7 @@
 import { DOMAINS, TASKS, taskMeta } from '../tasks/registry';
 import { addDays, dayKey, daysBetween } from './date';
 import { hashString, mean, sd, seeded } from './stats';
+import type { Bi, Vars } from './i18n';
 import type { AppData, Domain, FocusSession, TaskId, TaskResult } from './types';
 
 const WINDOW_DAYS = 45;
@@ -143,8 +144,9 @@ export interface Insight {
   id: string;
   icon: string;
   tone: 'good' | 'warn' | 'info';
-  title: { zh: string; en: string };
-  body: { zh: string; en: string };
+  title: Bi;
+  body: Bi;
+  vars?: Vars; // values for {placeholders} in title/body
 }
 
 /** Each result as a z-score within its own task, so different tasks can be pooled. */
@@ -161,10 +163,10 @@ export function zScores(results: TaskResult[]): Map<string, number> {
 }
 
 export const BUCKETS = [
-  { id: 'morning', from: 5, to: 11, zh: '上午', en: 'Morning' },
-  { id: 'afternoon', from: 12, to: 16, zh: '下午', en: 'Afternoon' },
-  { id: 'evening', from: 17, to: 21, zh: '傍晚', en: 'Evening' },
-  { id: 'night', from: 22, to: 28, zh: '深夜', en: 'Late night' },
+  { id: 'morning', from: 5, to: 11, zh: '上午', en: 'morning' },
+  { id: 'afternoon', from: 12, to: 16, zh: '下午', en: 'afternoon' },
+  { id: 'evening', from: 17, to: 21, zh: '傍晚', en: 'evening' },
+  { id: 'night', from: 22, to: 28, zh: '深夜', en: 'late night' },
 ] as const;
 
 export const bucketOf = (hour: number) => BUCKETS.find((b) => (hour < 5 ? hour + 24 : hour) >= b.from && (hour < 5 ? hour + 24 : hour) <= b.to)!;
@@ -215,11 +217,11 @@ function zToPoints(data: AppData, dz: number) {
 
 export function insights(data: AppData, withPlaceholder = true): Insight[] {
   const out: Insight[] = [];
+  const bucketBi = (b: (typeof BUCKETS)[number]): Bi => ({ zh: b.zh, en: b.en });
 
   // Sleep
   const sleep = splitEffect(data, (c) => (c.sleep >= 7 ? true : c.sleep < 6.5 ? false : null));
   if (sleep && Math.abs(sleep.diff) > 0.15) {
-    const pts = zToPoints(data, sleep.diff);
     out.push(
       sleep.diff > 0
         ? {
@@ -228,9 +230,10 @@ export function insights(data: AppData, withPlaceholder = true): Insight[] {
             tone: 'good',
             title: { zh: '睡够 7 小时，你明显更专注', en: 'You focus better after 7+ hours of sleep' },
             body: {
-              zh: `睡眠 ≥7 小时的日子（${sleep.nYes} 天），你的训练表现比睡眠 <6.5 小时的日子（${sleep.nNo} 天）平均高约 ${pts} 分。保护睡眠是提升专注最便宜的方法。`,
-              en: `On days after 7+ hours of sleep (${sleep.nYes} days) you scored about ${pts} points higher than after <6.5 hours (${sleep.nNo} days). Protecting sleep is the cheapest focus upgrade there is.`,
+              zh: '睡眠 ≥7 小时的日子（{yes} 天），你的训练表现比睡眠 <6.5 小时的日子（{no} 天）平均高约 {pts} 分。保护睡眠是提升专注最便宜的方法。',
+              en: 'On days after 7+ hours of sleep ({yes} days) you scored about {pts} points higher than after <6.5 hours ({no} days). Protecting sleep is the cheapest focus upgrade there is.',
             },
+            vars: { yes: sleep.nYes, no: sleep.nNo, pts: zToPoints(data, sleep.diff) },
           }
         : {
             id: 'sleep',
@@ -251,16 +254,16 @@ export function insights(data: AppData, withPlaceholder = true): Insight[] {
     const best = tod.reduce((a, b) => (b.z > a.z ? b : a));
     const worst = tod.reduce((a, b) => (b.z < a.z ? b : a));
     if (best.z - worst.z > 0.25) {
-      const pts = zToPoints(data, best.z - worst.z);
       out.push({
         id: 'tod',
         icon: 'sun',
         tone: 'info',
-        title: { zh: `你的黄金专注时段：${best.bucket.zh}`, en: `Your peak focus window: ${best.bucket.en.toLowerCase()}` },
+        title: { zh: '你的黄金专注时段：{best}', en: 'Your peak focus window: {best}' },
         body: {
-          zh: `你在${best.bucket.zh}的表现比${worst.bucket.zh}平均高约 ${pts} 分。把最需要深度思考的工作安排在${best.bucket.zh}。`,
-          en: `You score about ${pts} points higher in the ${best.bucket.en.toLowerCase()} than in the ${worst.bucket.en.toLowerCase()}. Schedule your deepest work there.`,
+          zh: '你在这个时段的表现，比最弱的时段（{worst}）平均高约 {pts} 分。把最需要深度思考的工作安排在这里。',
+          en: 'You score about {pts} points higher in this window than in your weakest one ({worst}). Schedule your deepest work here.',
         },
+        vars: { best: bucketBi(best.bucket), worst: bucketBi(worst.bucket), pts: zToPoints(data, best.z - worst.z) },
       });
     }
   }
@@ -274,9 +277,10 @@ export function insights(data: AppData, withPlaceholder = true): Insight[] {
       tone: 'good',
       title: { zh: '运动过的日子表现更好', en: 'Exercise days are better focus days' },
       body: {
-        zh: `过去 24 小时内运动过的日子，你的表现平均高约 ${zToPoints(data, ex.diff)} 分。哪怕 10–20 分钟的快走也有帮助。`,
-        en: `When you exercised in the previous 24 h you scored about ${zToPoints(data, ex.diff)} points higher. Even a 10–20 minute brisk walk helps.`,
+        zh: '过去 24 小时内运动过的日子，你的表现平均高约 {pts} 分。哪怕 10–20 分钟的快走也有帮助。',
+        en: 'When you exercised in the previous 24 h you scored about {pts} points higher. Even a 10–20 minute brisk walk helps.',
       },
+      vars: { pts: zToPoints(data, ex.diff) },
     });
   }
 
@@ -289,9 +293,10 @@ export function insights(data: AppData, withPlaceholder = true): Insight[] {
       tone: 'warn',
       title: { zh: '高压力正在拖累你的专注', en: 'High stress is costing you focus' },
       body: {
-        zh: `高压力日子的表现平均低约 ${zToPoints(data, st.diff)} 分。在开始深度工作前做 3 分钟数息或慢呼吸，可以帮助调节唤醒水平。`,
-        en: `High-stress days score about ${zToPoints(data, st.diff)} points lower. Try 3 minutes of breath counting or slow breathing before deep work to regulate arousal.`,
+        zh: '高压力日子的表现平均低约 {pts} 分。在开始深度工作前做 3 分钟数息或慢呼吸，可以帮助调节唤醒水平。',
+        en: 'High-stress days score about {pts} points lower. Try 3 minutes of breath counting or slow breathing before deep work to regulate arousal.',
       },
+      vars: { pts: zToPoints(data, st.diff) },
     });
   }
 
@@ -306,13 +311,14 @@ export function insights(data: AppData, withPlaceholder = true): Insight[] {
       body:
         caf.diff > 0
           ? {
-              zh: `摄入咖啡因的日子表现高约 ${zToPoints(data, caf.diff)} 分。注意睡前 6 小时内避免，以免影响睡眠——睡眠的影响更大。`,
-              en: `Caffeine days score about ${zToPoints(data, caf.diff)} points higher. Avoid it within 6 hours of bedtime — sleep matters more.`,
+              zh: '摄入咖啡因的日子表现高约 {pts} 分。注意睡前 6 小时内避免，以免影响睡眠——睡眠的影响更大。',
+              en: 'Caffeine days score about {pts} points higher. Avoid it within 6 hours of bedtime — sleep matters more.',
             }
           : {
               zh: '喝了咖啡的日子表现反而略低——可能是用咖啡弥补了睡眠不足。试着先解决睡眠。',
               en: 'Caffeine days actually score slightly lower — possibly because coffee is compensating for poor sleep. Fix sleep first.',
             },
+      vars: { pts: zToPoints(data, caf.diff) },
     });
   }
 
@@ -343,6 +349,7 @@ export function insights(data: AppData, withPlaceholder = true): Insight[] {
     const half = Math.floor(ss.length / 2);
     const a = rate(ss.slice(0, half));
     const b = rate(ss.slice(half));
+    const vars = { a: a.toFixed(1), b: b.toFixed(1) };
     if (a > 0 && b < a * 0.8) {
       out.push({
         id: 'distractions',
@@ -350,9 +357,10 @@ export function insights(data: AppData, withPlaceholder = true): Insight[] {
         tone: 'good',
         title: { zh: '你被打断的次数在减少', en: 'You’re getting interrupted less' },
         body: {
-          zh: `专注时段中的分心从每小时 ${a.toFixed(1)} 次降到 ${b.toFixed(1)} 次。这就是真实世界的专注力提升。`,
-          en: `Distractions during focus sessions fell from ${a.toFixed(1)} to ${b.toFixed(1)} per hour. That is real-world focus improving.`,
+          zh: '专注时段中的分心从每小时 {a} 次降到 {b} 次。这就是真实世界的专注力提升。',
+          en: 'Distractions during focus sessions fell from {a} to {b} per hour. That is real-world focus improving.',
         },
+        vars,
       });
     } else if (b > a * 1.3 && b > 2) {
       out.push({
@@ -361,9 +369,10 @@ export function insights(data: AppData, withPlaceholder = true): Insight[] {
         tone: 'warn',
         title: { zh: '最近分心变多了', en: 'Distractions have crept up' },
         body: {
-          zh: `专注时段中的分心从每小时 ${a.toFixed(1)} 次升到 ${b.toFixed(1)} 次。试试把手机放到另一个房间，并在开始前关闭通知。`,
-          en: `Distractions rose from ${a.toFixed(1)} to ${b.toFixed(1)} per hour. Try leaving your phone in another room and silencing notifications before you start.`,
+          zh: '专注时段中的分心从每小时 {a} 次升到 {b} 次。试试把手机放到另一个房间，并在开始前关闭通知。',
+          en: 'Distractions rose from {a} to {b} per hour. Try leaving your phone in another room and silencing notifications before you start.',
         },
+        vars,
       });
     }
   }
@@ -373,18 +382,15 @@ export function insights(data: AppData, withPlaceholder = true): Insight[] {
 }
 
 export function placeholderInsight(data: AppData): Insight {
-  const n = data.results.length;
-  const checkins = data.checkins.length;
-  {
-    return {
-      id: 'unlock',
-      icon: 'sparkles',
-      tone: 'info',
-      title: { zh: '个人洞察正在积累中', en: 'Personal insights are on their way' },
-      body: {
-        zh: `再完成一些训练和每日状态打卡（目前 ${n} 次训练、${checkins} 次打卡），FocusLab 就能告诉你睡眠、运动、时段和压力如何影响你自己的专注。`,
-        en: `Keep training and checking in (so far ${n} sessions and ${checkins} check-ins). FocusLab will then show how sleep, exercise, time of day and stress affect your own focus.`,
-      },
-    };
-  }
+  return {
+    id: 'unlock',
+    icon: 'sparkles',
+    tone: 'info',
+    title: { zh: '个人洞察正在积累中', en: 'Personal insights are on their way' },
+    body: {
+      zh: '再完成一些训练和每日状态打卡（目前 {n} 次训练、{c} 次打卡），FocusLab 就能告诉你睡眠、运动、时段和压力如何影响你自己的专注。',
+      en: 'Keep training and checking in (so far {n} sessions and {c} check-ins). FocusLab will then show how sleep, exercise, time of day and stress affect your own focus.',
+    },
+    vars: { n: data.results.length, c: data.checkins.length },
+  };
 }

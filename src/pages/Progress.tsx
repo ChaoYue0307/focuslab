@@ -8,7 +8,7 @@ import { ACHIEVEMENTS } from '../lib/achievements';
 import { baselineScores, domainScores, focusIndex, indexHistory, streak, timeOfDayProfile } from '../lib/analytics';
 import { allInsights, distractionRate, onTaskRate } from '../lib/personal';
 import { addDays, dayKey, dayRange, fmtMinutes, shortDate } from '../lib/date';
-import { bi, useT } from '../lib/i18n';
+import { bi, capFirst, useT } from '../lib/i18n';
 import { mean } from '../lib/stats';
 import { update, useData } from '../lib/store';
 import type { TaskId } from '../lib/types';
@@ -180,8 +180,8 @@ export default function Progress() {
           <div key={i.id} className={`callout ${i.tone === 'info' ? '' : i.tone}`} style={{ padding: 18 }}>
             <Icon name={i.icon} size={20} />
             <div>
-              <div style={{ fontWeight: 650, marginBottom: 4 }}>{bi(i.title, lang)}</div>
-              <div className="small text-2">{bi(i.body, lang)}</div>
+              <div style={{ fontWeight: 650, marginBottom: 4 }}>{bi(i.title, lang, i.vars)}</div>
+              <div className="small text-2">{bi(i.body, lang, i.vars)}</div>
             </div>
           </div>
         ))}
@@ -342,7 +342,7 @@ function Achievements() {
         {ACHIEVEMENTS.map((a) => {
           const at = achievements[a.id];
           return (
-            <div key={a.id} className={`badge ${at ? 'on' : ''}`} title={at ? new Date(at).toLocaleDateString(lang === 'zh' ? 'zh-CN' : 'en-US') : ''}>
+            <div key={a.id} className={`badge ${at ? 'on' : ''}`} title={at ? new Date(at).toLocaleDateString(t.locale) : ''}>
               <span className="badge-icon">
                 <Icon name={a.icon} size={18} />
               </span>
@@ -493,7 +493,7 @@ function TimeOfDay() {
             return (
               <div key={p.bucket.id} className="row" style={{ gap: 10 }}>
                 <span className="small" style={{ width: 64, fontWeight: 600 }}>
-                  {lang === 'zh' ? p.bucket.zh : p.bucket.en}
+                  {capFirst(bi(p.bucket, lang), t.locale)}
                 </span>
                 <div style={{ position: 'relative', flex: 1, height: 14, background: 'var(--surface-2)', borderRadius: 4 }}>
                   <div style={{ position: 'absolute', left: '50%', top: -3, bottom: -3, width: 1, background: 'var(--axis)' }} />

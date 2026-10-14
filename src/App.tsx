@@ -1,11 +1,11 @@
 import { lazy, Suspense, useEffect, useState } from 'react';
 import { Icon } from './components/Icon';
-import { toast, ToastHost } from './components/ui';
+import { LanguagePicker, toast, ToastHost } from './components/ui';
 import { achievementMeta, newlyUnlocked } from './lib/achievements';
 import { sfx } from './lib/audio';
 import { dayKey, fmtDuration } from './lib/date';
 import { elapsedOf, loadActive } from './lib/focusActive';
-import { bi, useT } from './lib/i18n';
+import { bi, localeOf, useLangReady, useT } from './lib/i18n';
 import { experimentDay } from './lib/personal';
 import { navigate, useRoute } from './lib/router';
 import { setSaveErrorHandler, update, useData } from './lib/store';
@@ -80,7 +80,7 @@ function useTheme() {
     return () => mq.removeEventListener('change', apply);
   }, [settings.theme]);
   useEffect(() => {
-    document.documentElement.lang = settings.lang === 'zh' ? 'zh-CN' : 'en';
+    document.documentElement.lang = localeOf(settings.lang);
   }, [settings.lang]);
 }
 
@@ -119,6 +119,7 @@ export default function App() {
   const data = useData();
   const t = useT();
   const { path, parts, query } = useRoute();
+  const langReady = useLangReady(data.settings.lang);
 
   // Each page starts at the top, however it was reached (links, back button, navigate()).
   useEffect(() => {
@@ -131,6 +132,9 @@ export default function App() {
     const name = NAV.find((n) => n.path === path);
     document.title = name ? `${t(name.zh, name.en)} · FocusLab` : 'FocusLab';
   }, [path, t]);
+
+  // Wait for the dictionary of a non-source language so the UI never flashes English first.
+  if (!langReady) return <div className="app-loading" aria-busy="true" />;
 
   const immersive = (node: React.ReactNode) => (
     <Suspense fallback={<div className="stage" />}>
@@ -195,6 +199,7 @@ export default function App() {
           </a>
         ))}
         {active !== '/focus' && <ActivePill />}
+        <LanguagePicker className="sidebar-lang" />
         <div className="sidebar-foot">
           <div style={{ fontWeight: 650, color: 'var(--text)', marginBottom: 4 }}>{t('今天也来练 15 分钟', '15 minutes today')}</div>
           {t('稳定的小量练习，胜过偶尔的大量练习。', 'Small, consistent practice beats occasional marathons.')}

@@ -1832,3 +1832,51 @@ table.data th.num {
   background: color-mix(in srgb, var(--warn) 22%, transparent);
   color: var(--warn-ink);
 }
+.lang-picker {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 36px;
+  padding: 0 10px;
+  border-radius: 10px;
+  border: 1px solid var(--border-strong);
+  background: var(--surface);
+  color: var(--text-2);
+  font-size: 13.5px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.lang-picker:hover {
+  background: var(--surface-2);
+  color: var(--text);
+}
+.lang-picker:focus-within {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+.lang-picker select {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+  font-size: 16px; /* avoids iOS zoom on focus */
+}
+.lang-picker.compact {
+  width: 36px;
+  padding: 0;
+  justify-content: center;
+  border-color: transparent;
+  background: transparent;
+}
+.sidebar-lang {
+  margin: 8px 4px 10px;
+  justify-content: flex-start;
+}
+.sidebar-lang .lang-name {
+  flex: 1;
+}
+.app-loading {
+  min-height: 100dvh;
+  background: var(--page);
+}

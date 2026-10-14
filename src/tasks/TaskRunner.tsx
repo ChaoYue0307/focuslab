@@ -3,11 +3,11 @@ import { Icon } from '../components/Icon';
 import { Delta, ScoreRing, Segmented, Switch as Toggle } from '../components/ui';
 import { sessionDrift, Sparkline, TrialChart } from '../components/Charts';
 import { sfx, speechAvailable, unlockAudio } from '../lib/audio';
-import { dayKey, uid } from '../lib/date';
+import { dayKey, fmtSeconds, uid } from '../lib/date';
 import { bi, useT } from '../lib/i18n';
 import { mean } from '../lib/stats';
 import { update, updateSettings, useData } from '../lib/store';
-import type { Mode, TaskId, TaskOutcome, TaskProps, TaskResult, TrialPoint } from '../lib/types';
+import type { Lang, Mode, TaskId, TaskOutcome, TaskProps, TaskResult, TrialPoint } from '../lib/types';
 import Breath from './Breath';
 import { Flanker, Stroop, Switch } from './ChoiceTask';
 import { useKeys, useWakeLock } from './common';
@@ -35,7 +35,7 @@ const COMPONENTS: Record<TaskId, ComponentType<TaskProps>> = {
   breath: Breath,
 };
 
-const metricDelta = (def: MetricDef, d: number, lang: 'zh' | 'en') => {
+const metricDelta = (def: MetricDef, d: number, lang: Lang) => {
   switch (def.fmt) {
     case 'ms':
       return `${Math.round(d)} ms`;
@@ -46,7 +46,7 @@ const metricDelta = (def: MetricDef, d: number, lang: 'zh' | 'en') => {
     case 'num2':
       return d.toFixed(2);
     case 's':
-      return lang === 'zh' ? `${d.toFixed(1)} 秒` : `${d.toFixed(1)} s`;
+      return fmtSeconds(d, lang);
     default:
       return String(Math.round(d));
   }
@@ -314,8 +314,8 @@ function Intro({
         <div className="card flat" style={{ marginTop: 18 }}>
           <h3 style={{ marginBottom: 10 }}>{t('怎么做', 'How it works')}</h3>
           <ol style={{ margin: 0, paddingLeft: 20, display: 'grid', gap: 6 }} className="text-2">
-            {meta.how[lang].map((s, i) => (
-              <li key={i}>{s}</li>
+            {meta.how.map((s, i) => (
+              <li key={i}>{bi(s, lang)}</li>
             ))}
           </ol>
           <div className="row small" style={{ marginTop: 12, gap: 8 }}>
@@ -507,7 +507,7 @@ function ResultView({ result, series, flow, onAgain, onExit, onNext }: { result:
             {tips.map((tip, i) => (
               <div key={i} className={`callout ${tip.tone === 'info' ? '' : tip.tone}`}>
                 <Icon name={tip.tone === 'good' ? 'sparkles' : tip.tone === 'warn' ? 'info' : 'brain'} size={18} />
-                <div>{bi(tip.text, lang)}</div>
+                <div>{bi(tip.text, lang, tip.vars)}</div>
               </div>
             ))}
           </div>

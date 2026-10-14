@@ -97,7 +97,7 @@ export default function Review() {
               <div key={i.id} className="row top small">
                 <Icon name={i.icon} size={16} />
                 <span>
-                  <b>{bi(i.title, lang)}</b> — <span className="text-2">{bi(i.body, lang)}</span>
+                  <b>{bi(i.title, lang, i.vars)}</b> — <span className="text-2">{bi(i.body, lang, i.vars)}</span>
                 </span>
               </div>
             ))}

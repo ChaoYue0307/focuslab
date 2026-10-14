@@ -1,8 +1,9 @@
-import { DISTRACTION_KINDS, EXPERIMENTS, TAGS, tagLabel, templateOf } from '../content/habits';
+import { DISTRACTION_KINDS, EXPERIMENTS, TAGS, templateOf } from '../content/habits';
 import { dayPerformance, domainScores, firstActivityDay, focusIndex, insights, placeholderInsight, type Insight } from './analytics';
 import { addDays, dayKey, daysBetween } from './date';
 import { mean, sd, shuffle } from './stats';
-import type { AppData, CheckIn, Experiment, FocusSession } from './types';
+import { bi } from './i18n';
+import type { AppData, CheckIn, Experiment, FocusSession, Lang } from './types';
 
 // ---------------- Day-level outcome metrics ----------------
 export interface DayMetrics {
@@ -262,7 +263,7 @@ const OUTCOME_LABEL: Record<keyof DayMetrics, { zh: string; en: string }> = {
   distrPerHour: { zh: '分心频率', en: 'distraction rate' },
   onTask: { zh: '在任务上的比例', en: 'on-task rate' },
 };
-export const outcomeLabel = (k: keyof DayMetrics, lang: 'zh' | 'en') => OUTCOME_LABEL[k][lang];
+export const outcomeLabel = (k: keyof DayMetrics, lang: Lang) => bi(OUTCOME_LABEL[k], lang);
 
 export function extraInsights(data: AppData): Insight[] {
   const out: Insight[] = [];
@@ -272,17 +273,29 @@ export function extraInsights(data: AppData): Insight[] {
   for (const { tag, effect } of tagEffects(data)) {
     if (seen.has(tag) || seen.size >= 2) continue;
     seen.add(tag);
-    const zh = tagLabel(tag, 'zh');
-    const en = tagLabel(tag, 'en');
+    const def = TAGS.find((x) => x.id === tag);
     const good = effect.helps;
     out.push({
       id: `tag-${tag}`,
       icon: 'sparkles',
       tone: good ? 'good' : 'warn',
-      title: good ? { zh: `「${zh}」的日子更专注`, en: `Better focus on “${en}” days` } : { zh: `「${zh}」的日子专注更差`, en: `Worse focus on “${en}” days` },
-      body: {
-        zh: `对比 ${effect.on.length} 个有和 ${effect.off.length} 个没有「${zh}」的日子，你的${outcomeLabel(effect.key, 'zh')}${good ? '更好' : '更差'}（效应量 d=${Math.abs(effect.d).toFixed(1)}${effect.verdict === 'clear' ? '，差异明显' : '，初步迹象'}）。想确认因果关系，可以做一次个人实验。`,
-        en: `Comparing ${effect.on.length} days with and ${effect.off.length} without “${en}”, your ${outcomeLabel(effect.key, 'en')} is ${good ? 'better' : 'worse'} (effect size d=${Math.abs(effect.d).toFixed(1)}${effect.verdict === 'clear' ? ', a clear difference' : ', an early signal'}). Run a personal experiment to test cause and effect.`,
+      title: good ? { zh: '「{tag}」的日子更专注', en: 'Better focus on “{tag}” days' } : { zh: '「{tag}」的日子专注更差', en: 'Worse focus on “{tag}” days' },
+      body: good
+        ? {
+            zh: '对比 {on} 个有和 {off} 个没有「{tag}」的日子，你的{outcome}更好（效应量 d={d}，{strength}）。想确认因果关系，可以做一次个人实验。',
+            en: 'Comparing {on} days with and {off} without “{tag}”, your {outcome} is better (effect size d={d}, {strength}). Run a personal experiment to test cause and effect.',
+          }
+        : {
+            zh: '对比 {on} 个有和 {off} 个没有「{tag}」的日子，你的{outcome}更差（效应量 d={d}，{strength}）。想确认因果关系，可以做一次个人实验。',
+            en: 'Comparing {on} days with and {off} without “{tag}”, your {outcome} is worse (effect size d={d}, {strength}). Run a personal experiment to test cause and effect.',
+          },
+      vars: {
+        tag: def ? def.label : tag.slice(2),
+        on: effect.on.length,
+        off: effect.off.length,
+        outcome: OUTCOME_LABEL[effect.key],
+        d: Math.abs(effect.d).toFixed(1),
+        strength: effect.verdict === 'clear' ? { zh: '差异明显', en: 'a clear difference' } : { zh: '初步迹象', en: 'an early signal' },
       },
     });
   }
@@ -298,11 +311,14 @@ export function extraInsights(data: AppData): Insight[] {
       id: 'ontask',
       icon: 'eye',
       tone: pb >= pa ? 'good' : 'info',
-      title: { zh: `专注抽查：${pb}% 的时间在任务上`, en: `Attention probes: on task ${pb}% of the time` },
-      body: {
-        zh: pb > pa + 4 ? `比之前的 ${pa}% 提高了。研究估计人们清醒时近一半时间在走神——你正在把注意力拉回来。` : pb < pa - 4 ? `比之前的 ${pa}% 有所下降。留意最近的睡眠、压力和手机使用。` : `和之前（${pa}%）基本持平。每次"抓到"自己走神，都是在锻炼元觉察。`,
-        en: pb > pa + 4 ? `Up from ${pa}%. Research suggests people mind-wander nearly half their waking hours — you are pulling attention back.` : pb < pa - 4 ? `Down from ${pa}%. Check recent sleep, stress and phone use.` : `Roughly the same as before (${pa}%). Every time you catch yourself drifting, you train meta-awareness.`,
-      },
+      title: { zh: '专注抽查：{pb}% 的时间在任务上', en: 'Attention probes: on task {pb}% of the time' },
+      body:
+        pb > pa + 4
+          ? { zh: '比之前的 {pa}% 提高了。研究估计人们清醒时近一半时间在走神——你正在把注意力拉回来。', en: 'Up from {pa}%. Research suggests people mind-wander nearly half their waking hours — you are pulling attention back.' }
+          : pb < pa - 4
+            ? { zh: '比之前的 {pa}% 有所下降。留意最近的睡眠、压力和手机使用。', en: 'Down from {pa}%. Check recent sleep, stress and phone use.' }
+            : { zh: '和之前（{pa}%）基本持平。每次"抓到"自己走神，都是在锻炼元觉察。', en: 'Roughly the same as before ({pa}%). Every time you catch yourself drifting, you train meta-awareness.' },
+      vars: { pa, pb },
     });
   }
 
@@ -316,11 +332,12 @@ export function extraInsights(data: AppData): Insight[] {
       id: 'duration',
       icon: 'timer',
       tone: 'info',
-      title: { zh: `你最适合 ${best[0]} 分钟的专注时段`, en: `${best[0]}-minute blocks suit you best` },
+      title: { zh: '你最适合 {m} 分钟的专注时段', en: '{m}-minute blocks suit you best' },
       body: {
-        zh: `在你常用的时长里，${best[0]} 分钟的专注自评最高（平均 ${mean(best[1]).toFixed(1)}/5）。把它作为默认时长。`,
-        en: `Among the lengths you use, ${best[0]}-minute sessions get your highest focus ratings (avg ${mean(best[1]).toFixed(1)}/5). Make it your default.`,
+        zh: '在你常用的时长里，{m} 分钟的专注自评最高（平均 {r}/5）。把它作为默认时长。',
+        en: 'Among the lengths you use, {m}-minute sessions get your highest focus ratings (avg {r}/5). Make it your default.',
       },
+      vars: { m: best[0], r: mean(best[1]).toFixed(1) },
     });
   }
 
@@ -335,8 +352,9 @@ export function extraInsights(data: AppData): Insight[] {
       id: 'kinds',
       icon: k.icon,
       tone: 'info',
-      title: { zh: `${Math.round((top[1] / total) * 100)}% 的分心是「${k.label.zh}」`, en: `${Math.round((top[1] / total) * 100)}% of distractions: “${k.label.en}”` },
+      title: { zh: '{p}% 的分心是「{kind}」', en: '{p}% of distractions: “{kind}”' },
       body: k.advice,
+      vars: { p: Math.round((top[1] / total) * 100), kind: k.label },
     });
   }
   return out;

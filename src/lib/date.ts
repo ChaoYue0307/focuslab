@@ -1,3 +1,6 @@
+import { localeOf } from './langs';
+import type { Lang } from './types';
+
 const pad = (n: number) => String(n).padStart(2, '0');
 
 /** Local calendar date as YYYY-MM-DD. */
@@ -36,19 +39,37 @@ export function fmtDuration(ms: number): string {
   return h ? `${h}:${pad(m)}:${pad(sec)}` : `${m}:${pad(sec)}`;
 }
 
-export function fmtMinutes(ms: number, lang: 'zh' | 'en'): string {
-  const min = Math.round(ms / 60000);
-  if (min < 60) return lang === 'zh' ? `${min} 分钟` : `${min} min`;
-  const h = Math.floor(min / 60);
-  const m = min % 60;
-  if (lang === 'zh') return m ? `${h} 小时 ${m} 分` : `${h} 小时`;
-  return m ? `${h}h ${m}m` : `${h}h`;
+// Locale-aware formatting via Intl, so every language gets native units and date order.
+const nf = new Map<string, Intl.NumberFormat>();
+function unitFormat(locale: string, unit: 'minute' | 'hour' | 'second', digits = 0) {
+  const k = `${locale}|${unit}|${digits}`;
+  let f = nf.get(k);
+  if (!f) {
+    f = new Intl.NumberFormat(locale, { style: 'unit', unit, unitDisplay: 'short', minimumFractionDigits: digits, maximumFractionDigits: digits });
+    nf.set(k, f);
+  }
+  return f;
 }
 
-export function shortDate(key: string, lang: 'zh' | 'en'): string {
-  const d = parseDay(key);
-  if (lang === 'zh') return `${d.getMonth() + 1}月${d.getDate()}日`;
-  return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+export function fmtMinutes(ms: number, lang: Lang): string {
+  const locale = localeOf(lang);
+  const min = Math.round(ms / 60000);
+  if (min < 60) return unitFormat(locale, 'minute').format(min);
+  const h = Math.floor(min / 60);
+  const m = min % 60;
+  return m ? `${unitFormat(locale, 'hour').format(h)} ${unitFormat(locale, 'minute').format(m)}` : unitFormat(locale, 'hour').format(h);
+}
+
+export const fmtSeconds = (s: number, lang: Lang, digits = 1) => unitFormat(localeOf(lang), 'second', digits).format(s);
+
+export function shortDate(key: string, lang: Lang): string {
+  return parseDay(key).toLocaleDateString(localeOf(lang), { month: 'short', day: 'numeric' });
+}
+
+/** Short weekday name for a Monday-first index (0 = Monday). */
+export function weekdayShort(i: number, lang: Lang): string {
+  const d = new Date(2024, 0, 1 + i); // 2024-01-01 was a Monday
+  return d.toLocaleDateString(localeOf(lang), { weekday: 'short' });
 }
 
 export const uid = () => Math.random().toString(36).slice(2, 10) + Date.now().toString(36).slice(-4);

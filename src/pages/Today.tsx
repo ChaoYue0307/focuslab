@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react';
 import { CheckInModal } from '../components/CheckIn';
 import { ExperimentToday } from '../components/Experiment';
 import { Icon } from '../components/Icon';
-import { ScoreRing } from '../components/ui';
+import { LanguagePicker, ScoreRing } from '../components/ui';
 import { HABITS, EVIDENCE_LABEL } from '../content/learn';
 import { baselineScores, dailyPlan, domainScores, firstActivityDay, focusIndex, focusMsOn, planMinutes, streak } from '../lib/analytics';
 import { downloadBackup } from '../lib/backup';
@@ -49,7 +49,7 @@ export default function Today() {
       <div className="page-head">
         <div>
           <h1>{greet}</h1>
-          <p>{new Date().toLocaleDateString(lang === 'zh' ? 'zh-CN' : 'en-US', { weekday: 'long', month: 'long', day: 'numeric' })}</p>
+          <p>{new Date().toLocaleDateString(t.locale, { weekday: 'long', month: 'long', day: 'numeric' })}</p>
         </div>
         <div className="row">
           {week !== null && week <= 8 && (
@@ -61,6 +61,7 @@ export default function Today() {
             <Icon name="flame" size={14} style={{ color: 'var(--d2)' }} />
             {t('连续 {n} 天', '{n}-day streak', { n: st.current })}
           </span>
+          <LanguagePicker compact className="mobile-only" />
           <a className="icon-btn" href="#/settings" aria-label={t('设置', 'Settings')}>
             <Icon name="settings" />
           </a>
@@ -220,8 +221,8 @@ export default function Today() {
           </div>
           {insight && (
             <>
-              <div style={{ fontWeight: 650, marginBottom: 4 }}>{bi(insight.title, lang)}</div>
-              <p className="small text-2">{bi(insight.body, lang)}</p>
+              <div style={{ fontWeight: 650, marginBottom: 4 }}>{bi(insight.title, lang, insight.vars)}</div>
+              <p className="small text-2">{bi(insight.body, lang, insight.vars)}</p>
             </>
           )}
         </div>

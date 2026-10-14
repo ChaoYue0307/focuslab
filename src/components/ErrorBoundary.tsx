@@ -1,4 +1,6 @@
 import { Component, type ErrorInfo, type ReactNode } from 'react';
+import { makeT } from '../lib/i18n';
+import { getData } from '../lib/store';
 
 /** Last-resort fallback: never leave the user on a blank page, and always let them rescue their data. */
 export class ErrorBoundary extends Component<{ children: ReactNode }, { error: Error | null }> {
@@ -26,20 +28,20 @@ export class ErrorBoundary extends Component<{ children: ReactNode }, { error: E
 
   render() {
     if (!this.state.error) return this.props.children;
-    const zh = document.documentElement.lang.startsWith('zh');
+    const t = makeT(getData().settings.lang);
     return (
       <div className="onboard">
         <div className="onboard-card card pad-lg stack">
-          <h1>{zh ? '出了点问题' : 'Something went wrong'}</h1>
+          <h1>{t('出了点问题', 'Something went wrong')}</h1>
           <p className="text-2">
-            {zh ? '页面遇到了意外错误。你的数据仍然保存在浏览器中——可以先下载一份备份，再重新加载。' : 'The page hit an unexpected error. Your data is still stored in this browser — download a backup, then reload.'}
+            {t('页面遇到了意外错误。你的数据仍然保存在浏览器中——可以先下载一份备份，再重新加载。', 'The page hit an unexpected error. Your data is still stored in this browser — download a backup, then reload.')}
           </p>
           <pre className="small" style={{ whiteSpace: 'pre-wrap', background: 'var(--surface-2)', padding: 12, borderRadius: 10, maxHeight: 160, overflow: 'auto' }}>
             {String(this.state.error?.message || this.state.error)}
           </pre>
           <div className="row">
             <button className="btn" onClick={this.backup} type="button">
-              {zh ? '下载数据备份' : 'Download data backup'}
+              {t('下载数据备份', 'Download data backup')}
             </button>
             <button
               className="btn primary"
@@ -49,7 +51,7 @@ export class ErrorBoundary extends Component<{ children: ReactNode }, { error: E
               }}
               type="button"
             >
-              {zh ? '重新加载' : 'Reload'}
+              {t('重新加载', 'Reload')}
             </button>
           </div>
         </div>

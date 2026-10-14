@@ -1,5 +1,5 @@
-import type { Bi } from '../lib/i18n';
-import type { DistractionKind } from '../lib/types';
+import { bi, type Bi } from '../lib/i18n';
+import type { DistractionKind, Lang } from '../lib/types';
 
 /** Daily habit tags logged in the check-in. Insights estimate each one's effect on your focus. */
 export interface TagDef {
@@ -19,9 +19,10 @@ export const TAGS: TagDef[] = [
   { id: 'late_screen', icon: 'monitor', label: { zh: '睡前 1 小时看屏幕', en: 'Screens in the hour before bed' } },
 ];
 
-export const tagLabel = (id: string, lang: 'zh' | 'en') => {
+export const tagLabel = (id: string, lang: Lang) => {
   if (id.startsWith('c:')) return id.slice(2);
-  return TAGS.find((t) => t.id === id)?.label[lang] ?? id;
+  const t = TAGS.find((x) => x.id === id);
+  return t ? bi(t.label, lang) : id;
 };
 
 /** Templates for 14-day personal experiments with randomized ON/OFF days. */

@@ -1,6 +1,6 @@
 import { useEffect, useLayoutEffect, useMemo, useRef, useState, type ReactNode } from 'react';
 import { sfx } from '../lib/audio';
-import { makeT } from '../lib/i18n';
+import { capFirst, localeOf, makeT, tr } from '../lib/i18n';
 import { adaptLevel, choiceDeadline, levelFactor, NORMS, scoreConflict, type ChoiceTrialRec } from '../lib/scoring';
 import { clamp100, randInt, shuffle } from '../lib/stats';
 import type { Lang, TaskProps } from '../lib/types';
@@ -178,13 +178,13 @@ export const flankerConfig: ChoiceConfig = {
       const flank = cond === 'congruent' ? dir : dir === 'L' ? 'R' : 'L';
       return { cond, correct: dir === 'L' ? 0 : 1, dir, flank };
     }),
-  buttons: (lang) => [
-    { label: <Arrow dir="L" size={0.5} />, kbd: lang === 'zh' ? '← / F' : '← / F', keys: ['ArrowLeft', 'f', 'F', 'KeyF'] },
+  buttons: () => [
+    { label: <Arrow dir="L" size={0.5} />, kbd: '← / F', keys: ['ArrowLeft', 'f', 'F', 'KeyF'] },
     { label: <Arrow dir="R" size={0.5} />, kbd: '→ / J', keys: ['ArrowRight', 'j', 'J', 'KeyJ'] },
   ],
-  render: (tr) => {
-    const f = tr.flank as 'L' | 'R';
-    const d = tr.dir as 'L' | 'R';
+  render: (trial) => {
+    const f = trial.flank as 'L' | 'R';
+    const d = trial.dir as 'L' | 'R';
     return (
       <div className="flanker" style={{ display: 'flex', alignItems: 'center' }}>
         <Arrow dir={f} />
@@ -195,7 +195,7 @@ export const flankerConfig: ChoiceConfig = {
       </div>
     );
   },
-  hint: (lang, touch) => (touch ? (lang === 'zh' ? '只看中间的箭头 · 点击左右按钮' : 'Center arrow only · tap left or right') : lang === 'zh' ? '只看中间的箭头 · ← / → 或 F / J' : 'Center arrow only · ← / → or F / J'),
+  hint: (lang, touch) => (touch ? tr(lang, '只看中间的箭头 · 点击左右按钮', 'Center arrow only · tap left or right') : tr(lang, '只看中间的箭头 · ← / → 或 F / J', 'Center arrow only · ← / → or F / J')),
 };
 
 // ---------------- Stroop ----------------
@@ -218,6 +218,13 @@ const STROOP_KEYS = [
   ['k', 'K', 'KeyK', '4'],
 ];
 
+/** Colour words are shown in the user's language — Stroop interference depends on reading being automatic. */
+const stroopWord = (c: { zh: string; en: string }, lang: Lang) => tr(lang, c.zh, c.en);
+const stroopLabel = (c: { zh: string; en: string }, lang: Lang) => {
+  const w = stroopWord(c, lang);
+  return capFirst(w.toLocaleLowerCase(localeOf(lang)), localeOf(lang));
+};
+
 export function makeStroopConfig(cvd: boolean): ChoiceConfig {
   const colors = cvd ? STROOP_COLORS_CVD : STROOP_COLORS;
   const n = colors.length;
@@ -236,24 +243,21 @@ export function makeStroopConfig(cvd: boolean): ChoiceConfig {
         label: (
           <span className="row" style={{ gap: 7 }}>
             <span className="dot" style={{ background: c.css, width: 12, height: 12 }} />
-            {lang === 'zh' ? c.zh : c.en.charAt(0) + c.en.slice(1).toLowerCase()}
+            {stroopLabel(c, lang)}
           </span>
         ),
         kbd: `${keyNames[k]} · ${k + 1}`,
         keys: STROOP_KEYS[k],
       })),
-    render: (tr, lang) => {
-      const w = colors[tr.word as number];
-      return (
-        <div className="stroop-word" style={{ color: colors[tr.ink as number].css }}>
-          {lang === 'zh' ? w.zh : w.en}
-        </div>
-      );
-    },
+    render: (trial, lang) => (
+      <div className="stroop-word" style={{ color: colors[trial.ink as number].css }} lang={localeOf(lang)}>
+        {stroopWord(colors[trial.word as number], lang)}
+      </div>
+    ),
     hint: (lang, touch) => {
-      if (touch) return lang === 'zh' ? '按墨水的颜色点击按钮，忽略字义' : 'Tap the ink colour, ignore the word';
-      const map = colors.map((c, k) => `${keyNames[k]} ${lang === 'zh' ? c.zh : c.en.toLowerCase()}`).join(' ');
-      return lang === 'zh' ? `按墨水颜色作答 · ${map}` : `Answer the ink colour · ${map}`;
+      if (touch) return tr(lang, '按墨水的颜色点击按钮，忽略字义', 'Tap the ink colour, ignore the word');
+      const map = colors.map((c, k) => `${keyNames[k]} ${stroopLabel(c, lang)}`).join(' ');
+      return tr(lang, '按墨水颜色作答 · {map}', 'Answer the ink colour · {map}', { map });
     },
   };
 }
@@ -284,29 +288,31 @@ export const switchConfig: ChoiceConfig = {
   },
   cue: {
     ms: (level) => Math.max(150, 700 - (level - 1) * 60),
-    render: (tr, lang) => {
-      const c = CUES[tr.task as 'parity' | 'magnitude'];
+    render: (trial, lang) => {
+      const c = CUES[trial.task as 'parity' | 'magnitude'];
       return (
         <div className="switch-cue" style={{ ['--cue' as string]: c.color }}>
-          {lang === 'zh' ? c.zh : c.en}
+          {tr(lang, c.zh, c.en)}
         </div>
       );
     },
   },
   buttons: (lang) => [
-    { label: <span>{lang === 'zh' ? '奇数 · 小于 5' : 'Odd · Low'}</span>, kbd: '← / F', keys: ['ArrowLeft', 'f', 'F', 'KeyF'] },
-    { label: <span>{lang === 'zh' ? '偶数 · 大于 5' : 'Even · High'}</span>, kbd: '→ / J', keys: ['ArrowRight', 'j', 'J', 'KeyJ'] },
+    { label: <span>{tr(lang, '奇数 · 小于 5', 'Odd · Low')}</span>, kbd: '← / F', keys: ['ArrowLeft', 'f', 'F', 'KeyF'] },
+    { label: <span>{tr(lang, '偶数 · 大于 5', 'Even · High')}</span>, kbd: '→ / J', keys: ['ArrowRight', 'j', 'J', 'KeyJ'] },
   ],
-  render: (tr) => {
-    const c = CUES[tr.task as 'parity' | 'magnitude'];
+  render: (trial) => {
+    const c = CUES[trial.task as 'parity' | 'magnitude'];
     return (
       <div className="switch-card" style={{ ['--cue' as string]: c.color }}>
-        {tr.hidden ? '' : (tr.digit as number)}
+        {trial.hidden ? '' : (trial.digit as number)}
       </div>
     );
   },
   hint: (lang, touch) =>
-    lang === 'zh' ? `蓝框判奇偶，橙框判大小 · ${touch ? '点击左右按钮' : '← / → 或 F / J'}` : `Blue frame: odd/even · Orange frame: low/high · ${touch ? 'tap left or right' : '← / → or F / J'}`,
+    touch
+      ? tr(lang, '蓝框判奇偶，橙框判大小 · 点击左右按钮', 'Blue frame: odd/even · Orange frame: low/high · tap left or right')
+      : tr(lang, '蓝框判奇偶，橙框判大小 · ← / → 或 F / J', 'Blue frame: odd/even · Orange frame: low/high · ← / → or F / J'),
 };
 
 export const Flanker = (p: TaskProps) => <ChoiceTask {...p} config={flankerConfig} />;

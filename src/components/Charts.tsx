@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
-import { parseDay, shortDate } from '../lib/date';
+import { parseDay, shortDate, weekdayShort } from '../lib/date';
+import { localeOf, tr } from '../lib/i18n';
 import type { Lang, TrialPoint } from '../lib/types';
 
 function useWidth<T extends HTMLElement>(): [React.RefObject<T | null>, number] {
@@ -192,7 +193,7 @@ export function ColumnChart({
               {path && <path d={path} fill={color} opacity={hover === null || hover === i ? 1 : 0.55} />}
               {i % every === 0 && (
                 <text x={cx} y={height - 6} textAnchor="middle">
-                  {shortDate(d.x, lang).replace(/^\d+月/, (m) => (data.length > 10 ? '' : m))}
+                  {data.length > 10 ? parseDay(d.x).toLocaleDateString(localeOf(lang), { day: 'numeric' }) : shortDate(d.x, lang)}
                 </text>
               )}
             </g>
@@ -252,7 +253,13 @@ export function TrialChart({ series, lang, height = 160 }: { series: TrialPoint[
   const ticks = [yMin, Math.round((yMin + yMax) / 2 / 50) * 50, yMax];
   const h = hover !== null ? series[hover] : null;
   const kindLabel = (k?: TrialPoint['kind']) =>
-    ({ lapse: lang === 'zh' ? '走神失误' : 'lapse', commission: lang === 'zh' ? '错按' : 'commission', omission: lang === 'zh' ? '漏按' : 'omission', timeout: lang === 'zh' ? '超时' : 'timeout', false: lang === 'zh' ? '抢跑' : 'false start' })[k as string] ?? '';
+    ({
+      lapse: tr(lang, '走神失误', 'lapse'),
+      commission: tr(lang, '错按', 'commission'),
+      omission: tr(lang, '漏按', 'omission'),
+      timeout: tr(lang, '超时', 'timeout'),
+      false: tr(lang, '抢跑', 'false start'),
+    })[k as string] ?? '';
   return (
     <div className="chart" ref={ref}>
       <svg
@@ -274,10 +281,10 @@ export function TrialChart({ series, lang, height = 160 }: { series: TrialPoint[
           </g>
         ))}
         <text x={pad.l} y={height - 5}>
-          {lang === 'zh' ? '开始' : 'start'}
+          {tr(lang, '开始', 'start')}
         </text>
         <text x={width - pad.r} y={height - 5} textAnchor="end">
-          {lang === 'zh' ? '结束' : 'end'}
+          {tr(lang, '结束', 'end')}
         </text>
         {series.map((p, i) =>
           p.rt === null ? (
@@ -291,29 +298,29 @@ export function TrialChart({ series, lang, height = 160 }: { series: TrialPoint[
       </svg>
       {h && hover !== null && (
         <div className="tooltip" style={{ left: Math.min(Math.max(0, X(hover) + 10), width - 140), top: 0 }}>
-          <div className="tt-head">{lang === 'zh' ? `第 ${hover + 1} 次` : `Trial ${hover + 1}`}</div>
+          <div className="tt-head">{tr(lang, '第 {n} 次', 'Trial {n}', { n: hover + 1 })}</div>
           <div className="tt-row">
             <b>{h.rt === null ? '—' : `${Math.round(h.rt)} ms`}</b>
-            <span>{h.ok ? (lang === 'zh' ? '正确' : 'correct') : kindLabel(h.kind) || (lang === 'zh' ? '错误' : 'error')}</span>
+            <span>{h.ok ? tr(lang, '正确', 'correct') : kindLabel(h.kind) || tr(lang, '错误', 'error')}</span>
           </div>
         </div>
       )}
       <div className="legend" style={{ marginTop: 6 }}>
         <span>
           <i className="box" style={{ background: 'var(--tile, var(--accent))', opacity: 0.6, borderRadius: '50%' }} />
-          {lang === 'zh' ? '正确' : 'Correct'}
+          {tr(lang, '正确', 'Correct')}
         </span>
         <span>
           <i className="box" style={{ background: 'var(--bad)', borderRadius: '50%' }} />
-          {lang === 'zh' ? '错误' : 'Error'}
+          {tr(lang, '错误', 'Error')}
         </span>
         <span>
           <span style={{ color: 'var(--bad)', fontWeight: 700 }}>×</span>
-          {lang === 'zh' ? '漏按 / 超时 / 抢跑' : 'Miss / timeout / false start'}
+          {tr(lang, '漏按 / 超时 / 抢跑', 'Miss / timeout / false start')}
         </span>
         <span>
           <i style={{ background: 'var(--text)', opacity: 0.75 }} />
-          {lang === 'zh' ? '滑动平均' : 'Rolling mean'}
+          {tr(lang, '滑动平均', 'Rolling mean')}
         </span>
       </div>
     </div>
@@ -368,7 +375,7 @@ export function Heatmap({ end, value, lang, fmt }: { end: string; value: (d: str
     cells.push(`${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`);
   }
   const level = (v: number) => (v <= 0 ? 0 : v < 15 ? 1 : v < 30 ? 2 : v < 60 ? 3 : 4);
-  const dayLabels = lang === 'zh' ? ['一', '', '三', '', '五', '', ''] : ['Mon', '', 'Wed', '', 'Fri', '', ''];
+  const dayLabels = [0, 1, 2, 3, 4, 5, 6].map((i) => (i % 2 === 0 && i < 6 ? weekdayShort(i, lang) : ''));
   return (
     <div className="chart" ref={ref}>
       <div style={{ display: 'flex', gap: 6 }}>
@@ -406,11 +413,11 @@ export function Heatmap({ end, value, lang, fmt }: { end: string; value: (d: str
         </div>
       )}
       <div className="row small muted" style={{ justifyContent: 'flex-end', marginTop: 8, gap: 4 }}>
-        {lang === 'zh' ? '少' : 'Less'}
+        {tr(lang, '少', 'Less')}
         {[0, 1, 2, 3, 4].map((l) => (
           <span key={l} style={{ width: 11, height: 11, borderRadius: 3, background: `var(--heat${l})`, display: 'inline-block' }} />
         ))}
-        {lang === 'zh' ? '多' : 'More'}
+        {tr(lang, '多', 'More')}
       </div>
     </div>
   );

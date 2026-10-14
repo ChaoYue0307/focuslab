@@ -1,13 +1,13 @@
 import { useRef, type ReactNode } from 'react';
 import { Icon } from '../components/Icon';
-import { Segmented, Switch, toast } from '../components/ui';
+import { LanguagePicker, Segmented, Switch, toast } from '../components/ui';
 import { sfx } from '../lib/audio';
 import { daysBetween, dayKey } from '../lib/date';
 import { downloadReminder } from '../lib/reminder';
 import { useT } from '../lib/i18n';
 import { downloadBackup } from '../lib/backup';
 import { emptyData, normalize, replaceData, updateSettings, useData } from '../lib/store';
-import type { Lang, ThemePref } from '../lib/types';
+import type { ThemePref } from '../lib/types';
 
 function Row({ title, sub, children }: { title: string; sub?: string; children: ReactNode }) {
   return (
@@ -62,7 +62,7 @@ export default function Settings() {
       </div>
       <div className="card" style={{ paddingTop: 6, paddingBottom: 6 }}>
         <Row title={t('语言', 'Language')}>
-          <Segmented<Lang> value={s.lang} onChange={(v) => updateSettings({ lang: v })} options={[{ value: 'zh', label: '中文' }, { value: 'en', label: 'English' }]} />
+          <LanguagePicker />
         </Row>
         <Row title={t('外观', 'Appearance')}>
           <Segmented<ThemePref>

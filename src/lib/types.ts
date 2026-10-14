@@ -1,4 +1,4 @@
-export type Lang = 'zh' | 'en';
+export type Lang = 'zh' | 'zh-Hant' | 'en' | 'ja' | 'ko' | 'es' | 'fr' | 'de' | 'pt' | 'ru';
 export type ThemePref = 'system' | 'light' | 'dark';
 export type NoiseType = 'off' | 'brown' | 'pink' | 'white' | 'rain';
 

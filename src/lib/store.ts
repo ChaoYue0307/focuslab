@@ -1,12 +1,12 @@
 import { useSyncExternalStore } from 'react';
+import { detectLang, isLang } from './langs';
 import type { AppData, Settings } from './types';
 
 const KEY = 'focuslab:v1';
 
 export function defaultSettings(): Settings {
-  const zh = typeof navigator !== 'undefined' && /^zh/i.test(navigator.language || '');
   return {
-    lang: zh ? 'zh' : 'en',
+    lang: detectLang(),
     theme: 'system',
     sound: true,
     volume: 0.6,
@@ -57,7 +57,7 @@ export function normalize(raw: unknown): AppData {
     ...base,
     ...r,
     version: 1,
-    settings: { ...base.settings, ...(r.settings || {}) },
+    settings: { ...base.settings, ...(r.settings || {}), ...(r.settings && !isLang(r.settings.lang) ? { lang: base.settings.lang } : {}) },
     results: Array.isArray(r.results) ? r.results : [],
     checkins: Array.isArray(r.checkins) ? r.checkins : [],
     sessions: Array.isArray(r.sessions) ? r.sessions : [],

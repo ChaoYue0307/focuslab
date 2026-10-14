@@ -1,10 +1,10 @@
 import { EXPERIMENTS, templateOf } from '../content/habits';
 import { addDays, dayKey, shortDate } from '../lib/date';
-import { bi, useT } from '../lib/i18n';
+import { bi, tr, useT } from '../lib/i18n';
 import { activeExperiment, analyzeExperiment, conditionOn, experimentDay, newExperiment, outcomeLabel, type Effect } from '../lib/personal';
 import { mean } from '../lib/stats';
 import { update, useData } from '../lib/store';
-import type { Experiment } from '../lib/types';
+import type { Experiment, Lang } from '../lib/types';
 import { Icon } from './Icon';
 import { toast } from './ui';
 
@@ -83,7 +83,7 @@ export function ExperimentToday() {
   );
 }
 
-const fmtOutcome = (e: Effect, v: number, lang: 'zh' | 'en') => {
+const fmtOutcome = (e: Effect, v: number, lang: Lang) => {
   if (!Number.isFinite(v)) return '—';
   switch (e.key) {
     case 'perf':
@@ -91,7 +91,7 @@ const fmtOutcome = (e: Effect, v: number, lang: 'zh' | 'en') => {
     case 'rating':
       return `${v.toFixed(1)}/5`;
     case 'distrPerHour':
-      return lang === 'zh' ? `${v.toFixed(1)} 次/时` : `${v.toFixed(1)}/h`;
+      return tr(lang, '{v} 次/时', '{v}/h', { v: v.toFixed(1) });
     case 'onTask':
       return `${Math.round(v * 100)}%`;
   }

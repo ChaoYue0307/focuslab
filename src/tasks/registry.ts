@@ -1,5 +1,5 @@
-import type { Bi } from '../lib/i18n';
-import type { Domain, TaskId } from '../lib/types';
+import { tr, type Bi } from '../lib/i18n';
+import type { Domain, Lang, TaskId } from '../lib/types';
 
 export interface DomainMeta {
   id: Domain;
@@ -102,17 +102,15 @@ export interface TaskMeta {
   name: Bi;
   tagline: Bi;
   why: Bi;
-  how: { zh: string[]; en: string[] };
+  how: Bi[];
   keys: Bi;
   minutes: number;
   assessMinutes?: number;
   maxLevel: number;
-  levelLabel: (level: number, lang: 'zh' | 'en') => string;
+  levelLabel: (level: number, lang: Lang) => string;
   metrics: MetricDef[];
   basedOn: string;
 }
-
-const lv = (zh: string, en: string) => (_l: number, lang: 'zh' | 'en') => (lang === 'zh' ? zh : en);
 
 export const TASKS: TaskMeta[] = [
   {
@@ -125,15 +123,17 @@ export const TASKS: TaskMeta[] = [
       zh: '精神运动警觉任务（PVT）是 NASA 与睡眠研究中衡量警觉度的金标准。它几乎没有学习效应，所以更像一个"状态体温计"：反应变慢、"走神失误"（反应 ≥500ms）增多，往往意味着睡眠不足或疲劳。每天做一次，你会清楚看到睡眠、咖啡因、时段如何影响你的专注。',
       en: 'The Psychomotor Vigilance Task is the gold-standard alertness measure in sleep research and at NASA. It has almost no practice effect, so it works like a thermometer for your state: slower responses and more lapses (≥500 ms) usually mean sleep debt or fatigue. Do it daily and you will see exactly how sleep, caffeine and time of day shape your focus.',
     },
-    how: {
-      zh: ['盯住屏幕中央的方框。', '红色毫秒计数器一出现，立刻按空格键（或点击屏幕）。', '别提前按——抢跑会被记录。', '每次出现的间隔是随机的，保持准备状态。'],
-      en: ['Watch the box in the center.', 'As soon as the red millisecond counter appears, press Space (or tap).', 'Don’t anticipate — false starts are recorded.', 'The delay is random, so stay ready.'],
-    },
+    how: [
+      { zh: '盯住屏幕中央的方框。', en: 'Watch the box in the center.' },
+      { zh: '红色毫秒计数器一出现，立刻按空格键（或点击屏幕）。', en: 'As soon as the red millisecond counter appears, press Space (or tap).' },
+      { zh: '别提前按——抢跑会被记录。', en: 'Don’t anticipate — false starts are recorded.' },
+      { zh: '每次出现的间隔是随机的，保持准备状态。', en: 'The delay is random, so stay ready.' },
+    ],
     keys: { zh: '空格 / 点击', en: 'Space / tap' },
     minutes: 2,
     assessMinutes: 3,
     maxLevel: 1,
-    levelLabel: lv('标准', 'Standard'),
+    levelLabel: (_l, lang) => tr(lang, '标准', 'Standard'),
     basedOn: 'PVT (Dinges & Powell, 1985); PVT-B (Basner et al., 2011)',
     metrics: [
       { key: 'medianRT', label: { zh: '反应时中位数', en: 'Median RT' }, fmt: 'ms', better: 'low', primary: true },
@@ -154,15 +154,17 @@ export const TASKS: TaskMeta[] = [
       zh: 'SART 专门捕捉"自动驾驶"式走神：节奏单调，你会不知不觉进入惯性按键，在 3 出现时来不及刹车。错按 3 的比例和反应时的波动（变异系数）是走神最灵敏的行为指标。训练目标不是更快，而是更稳——保持每一次都"在场"。',
       en: 'SART is designed to catch autopilot. The rhythm is monotonous, so you slide into habitual pressing and fail to stop when a 3 appears. Commission errors and reaction-time variability are among the most sensitive behavioral markers of mind-wandering. The goal is not speed but steadiness — being present on every trial.',
     },
-    how: {
-      zh: ['数字 1–9 会快速依次出现。', '看到除 3 以外的任何数字，按空格（或点击）。', '看到 3 时，什么都不要按。', '准确与速度同等重要；保持稳定节奏。'],
-      en: ['Digits 1–9 flash one after another.', 'Press Space (or tap) for every digit except 3.', 'When you see a 3, do nothing.', 'Accuracy matters as much as speed; keep a steady rhythm.'],
-    },
+    how: [
+      { zh: '数字 1–9 会快速依次出现。', en: 'Digits 1–9 flash one after another.' },
+      { zh: '看到除 3 以外的任何数字，按空格（或点击）。', en: 'Press Space (or tap) for every digit except 3.' },
+      { zh: '看到 3 时，什么都不要按。', en: 'When you see a 3, do nothing.' },
+      { zh: '准确与速度同等重要；保持稳定节奏。', en: 'Accuracy matters as much as speed; keep a steady rhythm.' },
+    ],
     keys: { zh: '空格 / 点击', en: 'Space / tap' },
     minutes: 3,
     assessMinutes: 4.5,
     maxLevel: 8,
-    levelLabel: (l, lang) => (lang === 'zh' ? `节奏 ${l}` : `Pace ${l}`),
+    levelLabel: (l, lang) => tr(lang, '节奏 {l}', 'Pace {l}', { l }),
     basedOn: 'SART (Robertson et al., 1997)',
     metrics: [
       { key: 'commissionRate', label: { zh: '错按 3', en: 'Commission errors' }, fmt: 'pct', better: 'low', primary: true, hint: { zh: '在 3 上按键的比例（走神指标）', en: 'Share of 3s you pressed on (autopilot marker)' } },
@@ -181,15 +183,17 @@ export const TASKS: TaskMeta[] = [
       zh: 'Flanker 任务训练"聚光灯"式的选择性注意：两侧箭头方向相反时（冲突），大脑必须压制干扰才能正确反应。冲突代价（不一致 − 一致的反应时）越小，你越能在嘈杂环境、多窗口下守住焦点。',
       en: 'The flanker task trains your attentional spotlight: when the side arrows point the other way, your brain must suppress them. The smaller your conflict cost (incongruent − congruent RT), the better you hold focus amid noise and open tabs.',
     },
-    how: {
-      zh: ['屏幕会出现一排 5 个箭头。', '只判断正中间那个箭头的方向。', '向左按 ← 或 F，向右按 → 或 J（手机点击左右按钮）。', '又快又准；等级越高反应窗口越短。'],
-      en: ['A row of five arrows appears.', 'Judge only the direction of the center arrow.', 'Left: ← or F. Right: → or J (or tap the buttons).', 'Be fast and accurate; higher levels shorten the response window.'],
-    },
+    how: [
+      { zh: '屏幕会出现一排 5 个箭头。', en: 'A row of five arrows appears.' },
+      { zh: '只判断正中间那个箭头的方向。', en: 'Judge only the direction of the center arrow.' },
+      { zh: '向左按 ← 或 F，向右按 → 或 J（手机点击左右按钮）。', en: 'Left: ← or F. Right: → or J (or tap the buttons).' },
+      { zh: '又快又准；等级越高反应窗口越短。', en: 'Be fast and accurate; higher levels shorten the response window.' },
+    ],
     keys: { zh: '← → 或 F J', en: '← → or F J' },
     minutes: 2,
     assessMinutes: 2.5,
     maxLevel: 10,
-    levelLabel: (l, lang) => (lang === 'zh' ? `等级 ${l}` : `Level ${l}`),
+    levelLabel: (l, lang) => tr(lang, '等级 {l}', 'Level {l}', { l }),
     basedOn: 'Eriksen & Eriksen (1974)',
     metrics: [
       { key: 'interference', label: { zh: '冲突代价', en: 'Conflict cost' }, fmt: 'ms', better: 'low', primary: true, hint: { zh: '不一致比一致慢多少', en: 'How much slower incongruent trials are' } },
@@ -208,15 +212,16 @@ export const TASKS: TaskMeta[] = [
       zh: '阅读是高度自动化的习惯。Stroop 任务要求你压制"读字"的冲动，只报告墨水颜色——这正是抵抗习惯性冲动（比如下意识拿起手机）所需的抑制控制。',
       en: 'Reading is deeply automatic. Stroop makes you override the urge to read and report only the ink color — the same inhibitory control you need to resist habits like reflexively reaching for your phone.',
     },
-    how: {
-      zh: ['屏幕会出现一个颜色词，例如用蓝色写的"红"。', '按墨水的颜色作答，忽略字义。', '按键：D 红 · F 绿 · J 蓝 · K 黄（或 1–4，或点击按钮）。'],
-      en: ['A color word appears, e.g. "RED" printed in blue.', 'Respond to the ink color and ignore the word.', 'Keys: D red · F green · J blue · K yellow (or 1–4, or tap).'],
-    },
+    how: [
+      { zh: '屏幕会出现一个颜色词，例如用蓝色写的"红"。', en: 'A color word appears, e.g. "RED" printed in blue.' },
+      { zh: '按墨水的颜色作答，忽略字义。', en: 'Respond to the ink color and ignore the word.' },
+      { zh: '按键：D 红 · F 绿 · J 蓝 · K 黄（或 1–4，或点击按钮）。', en: 'Keys: D red · F green · J blue · K yellow (or 1–4, or tap).' },
+    ],
     keys: { zh: 'D F J K / 1–4', en: 'D F J K / 1–4' },
     minutes: 2,
     assessMinutes: 2.5,
     maxLevel: 10,
-    levelLabel: (l, lang) => (lang === 'zh' ? `等级 ${l}` : `Level ${l}`),
+    levelLabel: (l, lang) => tr(lang, '等级 {l}', 'Level {l}', { l }),
     basedOn: 'Stroop (1935)',
     metrics: [
       { key: 'interference', label: { zh: '干扰代价', en: 'Interference cost' }, fmt: 'ms', better: 'low', primary: true },
@@ -235,15 +240,17 @@ export const TASKS: TaskMeta[] = [
       zh: '每次从一件事切到另一件事，大脑都要"重新加载规则"，这就是切换代价。它解释了为什么频繁看消息让你效率骤降。练习可以缩小切换代价，同时让你亲身感受多任务的真实成本。',
       en: 'Every switch forces your brain to reload task rules — the switch cost. It is why checking messages wrecks productivity. Practice shrinks the cost, and lets you feel the true price of multitasking.',
     },
-    how: {
-      zh: ['先出现提示（奇偶 或 大小），然后出现一个数字。', '奇偶：奇数按左，偶数按右。', '大小：小于 5 按左，大于 5 按右。', '左：← 或 F；右：→ 或 J。'],
-      en: ['A cue (ODD/EVEN or HIGH/LOW) appears, then a digit.', 'ODD/EVEN: odd → left, even → right.', 'HIGH/LOW: below 5 → left, above 5 → right.', 'Left: ← or F. Right: → or J.'],
-    },
+    how: [
+      { zh: '先出现提示（奇偶 或 大小），然后出现一个数字。', en: 'A cue (ODD/EVEN or HIGH/LOW) appears, then a digit.' },
+      { zh: '奇偶：奇数按左，偶数按右。', en: 'ODD/EVEN: odd → left, even → right.' },
+      { zh: '大小：小于 5 按左，大于 5 按右。', en: 'HIGH/LOW: below 5 → left, above 5 → right.' },
+      { zh: '左：← 或 F；右：→ 或 J。', en: 'Left: ← or F. Right: → or J.' },
+    ],
     keys: { zh: '← → 或 F J', en: '← → or F J' },
     minutes: 2.5,
     assessMinutes: 3,
     maxLevel: 10,
-    levelLabel: (l, lang) => (lang === 'zh' ? `等级 ${l}` : `Level ${l}`),
+    levelLabel: (l, lang) => tr(lang, '等级 {l}', 'Level {l}', { l }),
     basedOn: 'Monsell (2003); Rogers & Monsell (1995)',
     metrics: [
       { key: 'switchCost', label: { zh: '切换代价', en: 'Switch cost' }, fmt: 'ms', better: 'low', primary: true, hint: { zh: '切换试次比重复试次慢多少', en: 'How much slower switch trials are than repeats' } },
@@ -262,10 +269,12 @@ export const TASKS: TaskMeta[] = [
       zh: 'N-back 让工作记忆持续满载：不断记住新的、丢掉旧的、比对 N 步之前。难度会自动调整到你的极限边缘（约 80% 正确率），这是训练最有效的区间。诚实地说：它对"更聪明"的远迁移证据有限，但对需要在脑中操作信息的任务直接有效，也是极好的专注"负重训练"。',
       en: 'N-back keeps working memory at full load: hold the new, drop the old, compare with N steps back. Difficulty adapts to the edge of your ability (~80% correct), the most effective training zone. Honestly: far transfer to general intelligence is weak, but it directly exercises holding information in mind and is a great "weighted vest" for focus.',
     },
-    how: {
-      zh: ['方块会在 3×3 网格的某个位置出现，同时会读出一个字母（双任务）。', '如果位置与 N 步之前相同，按 A（或点"位置"）。', '如果字母与 N 步之前相同，按 L（或点"声音"）。', '每轮结束后自动调整 N：错误少则升级，错误多则降级。'],
-      en: ['A square appears in a 3×3 grid while a letter is spoken (dual mode).', 'If the position matches N steps back, press A (or tap Position).', 'If the letter matches N steps back, press L (or tap Sound).', 'N adapts after every block: few errors → up, many errors → down.'],
-    },
+    how: [
+      { zh: '方块会在 3×3 网格的某个位置出现，同时会读出一个字母（双任务）。', en: 'A square appears in a 3×3 grid while a letter is spoken (dual mode).' },
+      { zh: '如果位置与 N 步之前相同，按 A（或点"位置"）。', en: 'If the position matches N steps back, press A (or tap Position).' },
+      { zh: '如果字母与 N 步之前相同，按 L（或点"声音"）。', en: 'If the letter matches N steps back, press L (or tap Sound).' },
+      { zh: '每轮结束后自动调整 N：错误少则升级，错误多则降级。', en: 'N adapts after every block: few errors → up, many errors → down.' },
+    ],
     keys: { zh: 'A 位置 · L 声音', en: 'A position · L sound' },
     minutes: 3.5,
     assessMinutes: 3.5,
@@ -289,17 +298,19 @@ export const TASKS: TaskMeta[] = [
       zh: '多目标追踪测量注意力能同时"抓住"多少个移动物体。它被用于训练运动员和飞行员的态势感知。追踪时，你必须持续分配注意力，一走神目标就丢——非常直观的专注反馈。',
       en: 'Multiple object tracking measures how many moving things attention can hold at once. It is used to train situational awareness in athletes and pilots. Drift for a second and you lose a target — immediate, honest feedback on focus.',
     },
-    how: {
-      zh: ['几个小球会先闪烁标记为目标。', '随后所有小球外观一致并开始移动。', '一直用注意力追踪目标（眼睛可以看中间）。', '停止后，点出所有目标。全部正确会增加难度。'],
-      en: ['Some balls flash to mark them as targets.', 'Then all balls look identical and start moving.', 'Keep tracking the targets (you can fix your eyes at the center).', 'When they stop, click every target. Perfect rounds raise the difficulty.'],
-    },
+    how: [
+      { zh: '几个小球会先闪烁标记为目标。', en: 'Some balls flash to mark them as targets.' },
+      { zh: '随后所有小球外观一致并开始移动。', en: 'Then all balls look identical and start moving.' },
+      { zh: '一直用注意力追踪目标（眼睛可以看中间）。', en: 'Keep tracking the targets (you can fix your eyes at the center).' },
+      { zh: '停止后，点出所有目标。全部正确会增加难度。', en: 'When they stop, click every target. Perfect rounds raise the difficulty.' },
+    ],
     keys: { zh: '鼠标 / 触摸', en: 'Mouse / touch' },
     minutes: 2.5,
     maxLevel: 15,
     levelLabel: (l, lang) => {
       const k = 2 + Math.floor((l - 1) / 3);
       const sp = ((l - 1) % 3) + 1;
-      return lang === 'zh' ? `${k} 个目标 · 速度 ${sp}` : `${k} targets · speed ${sp}`;
+      return tr(lang, '{k} 个目标 · 速度 {sp}', '{k} targets · speed {sp}', { k, sp });
     },
     basedOn: 'Pylyshyn & Storm (1988)',
     metrics: [
@@ -319,10 +330,12 @@ export const TASKS: TaskMeta[] = [
       zh: '舒尔特方格训练视觉搜索效率与注意稳定：目光保持在中心，用余光扩大"注意视野"。它短小、可量化，适合作为专注热身。',
       en: 'Schulte tables train visual search and steady attention: keep your gaze near the center and use peripheral vision to widen your attentional field. Short, measurable and a great warm-up.',
     },
-    how: {
-      zh: ['方格中打乱排列着数字。', '从 1 开始按顺序依次点击。', '尽量把视线固定在中心，用余光寻找。', '一共 3 张表，取平均用时。'],
-      en: ['Numbers are scattered in a grid.', 'Click them in ascending order starting from 1.', 'Try to keep your gaze at the center and find numbers peripherally.', 'Three tables; your average time counts.'],
-    },
+    how: [
+      { zh: '方格中打乱排列着数字。', en: 'Numbers are scattered in a grid.' },
+      { zh: '从 1 开始按顺序依次点击。', en: 'Click them in ascending order starting from 1.' },
+      { zh: '尽量把视线固定在中心，用余光寻找。', en: 'Try to keep your gaze at the center and find numbers peripherally.' },
+      { zh: '一共 3 张表，取平均用时。', en: 'Three tables; your average time counts.' },
+    ],
     keys: { zh: '鼠标 / 触摸', en: 'Mouse / touch' },
     minutes: 2,
     maxLevel: 7,
@@ -345,14 +358,16 @@ export const TASKS: TaskMeta[] = [
       zh: '数息是威斯康星大学验证过的客观正念测量：数错代表走神，主动重置代表你"抓住"了走神。研究发现，短短两周的正念训练就能减少走神、提升工作记忆与阅读理解成绩。这是本应用里对日常专注最可能产生真实迁移的练习。',
       en: 'Breath counting is a validated, objective mindfulness measure (University of Wisconsin): miscounts reveal mind-wandering, and resets show you caught it. Two weeks of mindfulness training has been shown to reduce mind-wandering and improve working memory and reading scores. This is the exercise in the app most likely to transfer to everyday focus.',
     },
-    how: {
-      zh: ['坐好，闭上眼或目光柔和地落在前方。', '自然呼吸。每次呼气时，在心里数一个数。', '第 1–8 次呼气按空格（或点左侧大区域）；第 9 次按回车（或点右侧）。然后从 1 重新开始。', '如果发现自己数丢了，按 R（或点"重置"），从 1 重新开始——这不是失败，而是一次成功的觉察。'],
-      en: ['Sit comfortably, eyes closed or softly gazing ahead.', 'Breathe naturally. Count each out-breath silently.', 'On breaths 1–8 press Space (or tap the left area); on breath 9 press Enter (or tap the right). Then start again at 1.', 'If you notice you lost count, press R (or tap Reset) and start again at 1 — that is not a failure, it is a moment of awareness.'],
-    },
+    how: [
+      { zh: '坐好，闭上眼或目光柔和地落在前方。', en: 'Sit comfortably, eyes closed or softly gazing ahead.' },
+      { zh: '自然呼吸。每次呼气时，在心里数一个数。', en: 'Breathe naturally. Count each out-breath silently.' },
+      { zh: '第 1–8 次呼气按空格（或点左侧大区域）；第 9 次按回车（或点右侧）。然后从 1 重新开始。', en: 'On breaths 1–8 press Space (or tap the left area); on breath 9 press Enter (or tap the right). Then start again at 1.' },
+      { zh: '如果发现自己数丢了，按 R（或点"重置"），从 1 重新开始——这不是失败，而是一次成功的觉察。', en: 'If you notice you lost count, press R (or tap Reset) and start again at 1 — that is not a failure, it is a moment of awareness.' },
+    ],
     keys: { zh: '空格 1–8 · 回车 9 · R 重置', en: 'Space 1–8 · Enter 9 · R reset' },
     minutes: 5,
     maxLevel: 1,
-    levelLabel: lv('标准', 'Standard'),
+    levelLabel: (_l, lang) => tr(lang, '标准', 'Standard'),
     basedOn: 'Levinson et al. (2014)',
     metrics: [
       { key: 'accuracy', label: { zh: '计数准确率', en: 'Count accuracy' }, fmt: 'pct', better: 'high', primary: true },
