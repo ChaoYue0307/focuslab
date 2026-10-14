@@ -225,14 +225,17 @@ export function scoreSchulte(tables: { timeMs: number; errors: number }[], size:
 export function scoreBreath(correct: number, miscounts: number, resets: number, presses: number, minutes: number) {
   const cycles = correct + miscounts;
   const accuracy = cycles ? correct / cycles : 0;
+  const bpm = minutes > 0 ? presses / minutes : 0;
+  // Resting breathing is ~6–20 per minute; pressing much faster means the presses aren't tracking breaths.
+  const plausibility = bpm <= 30 ? 1 : Math.max(0, 1 - (bpm - 30) / 20);
   const metrics = {
     accuracy,
     correct,
     miscounts,
     resets,
-    bpm: minutes > 0 ? presses / minutes : 0,
+    bpm,
     minutes,
   };
-  const perf = clamp100(accuracy * 100);
+  const perf = clamp100(accuracy * 100 * plausibility);
   return { metrics, perf };
 }

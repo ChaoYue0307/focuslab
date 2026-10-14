@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
 import { parseDay, shortDate } from '../lib/date';
-import type { Lang } from '../lib/types';
+import type { Lang, TrialPoint } from '../lib/types';
 
 function useWidth<T extends HTMLElement>(): [React.RefObject<T | null>, number] {
   const ref = useRef<T>(null);
@@ -224,6 +224,112 @@ function niceStep(max: number) {
   const p = Math.pow(10, Math.floor(Math.log10(raw)));
   const m = raw / p;
   return (m <= 1 ? 1 : m <= 2 ? 2 : m <= 5 ? 5 : 10) * p;
+}
+
+/** Trial-by-trial reaction times for one session: dots per trial, errors in red, misses as ×, plus a rolling mean. */
+export function TrialChart({ series, lang, height = 160 }: { series: TrialPoint[]; lang: Lang; height?: number }) {
+  const [ref, width] = useWidth<HTMLDivElement>();
+  const [hover, setHover] = useState<number | null>(null);
+  const pad = { l: 40, r: 10, t: 14, b: 22 };
+  const rts = series.filter((p) => p.rt !== null).map((p) => p.rt as number);
+  if (rts.length < 4) return null;
+  const sorted = [...rts].sort((a, b) => a - b);
+  const p95 = sorted[Math.floor(sorted.length * 0.95)] ?? sorted[sorted.length - 1];
+  const yMax = Math.ceil(Math.min(2000, Math.max(500, p95 * 1.15)) / 100) * 100;
+  const yMin = Math.max(0, Math.floor((sorted[0] * 0.8) / 100) * 100);
+  const iw = width - pad.l - pad.r;
+  const ih = height - pad.t - pad.b;
+  const X = (i: number) => pad.l + (series.length > 1 ? (i / (series.length - 1)) * iw : iw / 2);
+  const Y = (v: number) => pad.t + ih - ((Math.min(yMax, Math.max(yMin, v)) - yMin) / (yMax - yMin)) * ih;
+  // rolling mean over correct trials (window 7)
+  const line: string[] = [];
+  for (let i = 0; i < series.length; i++) {
+    const win = series.slice(Math.max(0, i - 3), i + 4).filter((p) => p.ok && p.rt !== null);
+    if (win.length < 3) continue;
+    const m = win.reduce((a, p) => a + (p.rt as number), 0) / win.length;
+    line.push(`${line.length ? 'L' : 'M'}${X(i).toFixed(1)},${Y(m).toFixed(1)}`);
+  }
+  const ticks = [yMin, Math.round((yMin + yMax) / 2 / 50) * 50, yMax];
+  const h = hover !== null ? series[hover] : null;
+  const kindLabel = (k?: TrialPoint['kind']) =>
+    ({ lapse: lang === 'zh' ? '走神失误' : 'lapse', commission: lang === 'zh' ? '错按' : 'commission', omission: lang === 'zh' ? '漏按' : 'omission', timeout: lang === 'zh' ? '超时' : 'timeout', false: lang === 'zh' ? '抢跑' : 'false start' })[k as string] ?? '';
+  return (
+    <div className="chart" ref={ref}>
+      <svg
+        height={height}
+        role="img"
+        onPointerMove={(e) => {
+          const r = e.currentTarget.getBoundingClientRect();
+          const i = Math.round(((e.clientX - r.left - pad.l) / iw) * (series.length - 1));
+          setHover(i >= 0 && i < series.length ? i : null);
+        }}
+        onPointerLeave={() => setHover(null)}
+      >
+        {ticks.map((v, i) => (
+          <g key={i}>
+            <line className={i === 0 ? 'baseline' : 'gridline'} x1={pad.l} x2={width - pad.r} y1={Y(v)} y2={Y(v)} />
+            <text x={pad.l - 6} y={Y(v) + 4} textAnchor="end">
+              {v}
+            </text>
+          </g>
+        ))}
+        <text x={pad.l} y={height - 5}>
+          {lang === 'zh' ? '开始' : 'start'}
+        </text>
+        <text x={width - pad.r} y={height - 5} textAnchor="end">
+          {lang === 'zh' ? '结束' : 'end'}
+        </text>
+        {series.map((p, i) =>
+          p.rt === null ? (
+            <path key={i} d={`M${X(i) - 3.5},${pad.t - 3.5}l7,7m0,-7l-7,7`} stroke="var(--bad)" strokeWidth={1.8} strokeLinecap="round" />
+          ) : (
+            <circle key={i} cx={X(i)} cy={Y(p.rt)} r={p.ok ? 2.6 : 3.6} fill={p.ok ? 'var(--tile, var(--accent))' : 'var(--bad)'} opacity={p.ok ? 0.55 : 0.95} />
+          ),
+        )}
+        {line.length > 1 && <path d={line.join('')} fill="none" stroke="var(--text)" strokeWidth={2} strokeLinejoin="round" strokeLinecap="round" opacity={0.75} />}
+        {hover !== null && <line className="crosshair" x1={X(hover)} x2={X(hover)} y1={pad.t} y2={pad.t + ih} />}
+      </svg>
+      {h && hover !== null && (
+        <div className="tooltip" style={{ left: Math.min(Math.max(0, X(hover) + 10), width - 140), top: 0 }}>
+          <div className="tt-head">{lang === 'zh' ? `第 ${hover + 1} 次` : `Trial ${hover + 1}`}</div>
+          <div className="tt-row">
+            <b>{h.rt === null ? '—' : `${Math.round(h.rt)} ms`}</b>
+            <span>{h.ok ? (lang === 'zh' ? '正确' : 'correct') : kindLabel(h.kind) || (lang === 'zh' ? '错误' : 'error')}</span>
+          </div>
+        </div>
+      )}
+      <div className="legend" style={{ marginTop: 6 }}>
+        <span>
+          <i className="box" style={{ background: 'var(--tile, var(--accent))', opacity: 0.6, borderRadius: '50%' }} />
+          {lang === 'zh' ? '正确' : 'Correct'}
+        </span>
+        <span>
+          <i className="box" style={{ background: 'var(--bad)', borderRadius: '50%' }} />
+          {lang === 'zh' ? '错误' : 'Error'}
+        </span>
+        <span>
+          <span style={{ color: 'var(--bad)', fontWeight: 700 }}>×</span>
+          {lang === 'zh' ? '漏按 / 超时 / 抢跑' : 'Miss / timeout / false start'}
+        </span>
+        <span>
+          <i style={{ background: 'var(--text)', opacity: 0.75 }} />
+          {lang === 'zh' ? '滑动平均' : 'Rolling mean'}
+        </span>
+      </div>
+    </div>
+  );
+}
+
+/** First half vs second half of a session: vigilance decrement in ms and extra errors. */
+export function sessionDrift(series: TrialPoint[]) {
+  const half = Math.floor(series.length / 2);
+  const a = series.slice(0, half);
+  const b = series.slice(half);
+  const rt = (xs: TrialPoint[]) => {
+    const v = xs.filter((p) => p.ok && p.rt !== null).map((p) => p.rt as number);
+    return v.length ? v.reduce((s, x) => s + x, 0) / v.length : NaN;
+  };
+  return { rtDelta: rt(b) - rt(a), errDelta: b.filter((p) => !p.ok).length - a.filter((p) => !p.ok).length };
 }
 
 /** Tiny trend line for cards. */

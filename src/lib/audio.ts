@@ -68,6 +68,11 @@ export const sfx = {
     const base = 432;
     [1, 2.0, 2.76, 5.4].forEach((m, i) => tone(base * m, 3.5 - i * 0.6, { gain: 0.16 / (i + 1), attack: 0.02 }));
   },
+  /** Gentle two-note chime for attention probes — noticeable without being jarring. */
+  probe: () => {
+    tone(784, 0.5, { gain: 0.09, attack: 0.03 });
+    tone(1175, 0.7, { gain: 0.07, delay: 0.18, attack: 0.03 });
+  },
   done: () => {
     [523, 659, 784, 1047].forEach((f, i) => tone(f, 0.35, { gain: 0.1, delay: i * 0.09 }));
   },

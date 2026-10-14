@@ -1,8 +1,21 @@
-// FocusLab service worker: network-first for pages, cache-first for hashed assets.
-const CACHE = 'focuslab-v1';
+// FocusLab service worker: precache the whole app on install, network-first for pages, cache-first for hashed assets.
+const CACHE = 'focuslab-v2';
+const SHELL = ['./', './index.html', './favicon.svg', './manifest.webmanifest', './icon-192.png', './icon-512.png'];
 
 self.addEventListener('install', (e) => {
-  e.waitUntil(caches.open(CACHE).then((c) => c.addAll(['./', './index.html', './favicon.svg', './manifest.webmanifest'])).then(() => self.skipWaiting()));
+  e.waitUntil(
+    (async () => {
+      const cache = await caches.open(CACHE);
+      let assets = [];
+      try {
+        assets = await (await fetch('./precache.json', { cache: 'no-store' })).json();
+      } catch {
+        /* dev or missing manifest: runtime caching still works */
+      }
+      await cache.addAll([...SHELL, ...assets.map((f) => './' + f)]);
+      await self.skipWaiting();
+    })(),
+  );
 });
 
 self.addEventListener('activate', (e) => {

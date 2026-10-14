@@ -70,7 +70,8 @@ export function interpret(task: TaskId, m: Record<string, number>): Tip[] {
       else if (m.accuracy >= 0.85) add('good', `计数准确率 ${pct(m.accuracy)}：注意力非常稳定地停留在呼吸上。`, `${pct(m.accuracy)} count accuracy: your attention stayed with the breath very steadily.`);
       else add('info', `准确率 ${pct(m.accuracy)}。数错并不是失败——每次你发现并回到呼吸，都是在锻炼"觉察肌肉"。`, `${pct(m.accuracy)} accuracy. Miscounts aren’t failure — each time you notice and return, you train the awareness muscle.`);
       if (m.resets >= 1) add('good', `你主动发现了 ${m.resets} 次走神并重置。这正是日常专注最需要的能力。`, `You caught yourself drifting ${m.resets} time(s) and reset. That is exactly the skill everyday focus needs.`);
-      if (m.bpm > 20) add('info', `按键频率 ${m.bpm.toFixed(0)} 次/分偏快。确保每次按键对应一次真实、自然的呼气。`, `${m.bpm.toFixed(0)} presses/min is fast. Make sure each press matches a real, natural out-breath.`);
+      if (m.bpm > 30) add('warn', `按键频率 ${m.bpm.toFixed(0)} 次/分远超正常呼吸（约 6–20 次/分），本次分数已相应降低。每次按键应对应一次真实的呼气。`, `${m.bpm.toFixed(0)} presses/min is far above natural breathing (~6–20/min), so this score was reduced. Each press should match a real out-breath.`);
+      else if (m.bpm > 20) add('info', `按键频率 ${m.bpm.toFixed(0)} 次/分偏快。确保每次按键对应一次真实、自然的呼气。`, `${m.bpm.toFixed(0)} presses/min is fast. Make sure each press matches a real, natural out-breath.`);
       break;
   }
   return out;

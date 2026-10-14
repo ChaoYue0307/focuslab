@@ -49,6 +49,14 @@ export function baselineScores(results: TaskResult[]): Partial<Record<Domain, nu
   return out;
 }
 
+/** Earliest day with any training or focus session (order-independent). */
+export function firstActivityDay(data: AppData): string | undefined {
+  let first: string | undefined;
+  for (const r of data.results) if (!first || r.date < first) first = r.date;
+  for (const s of data.sessions) if (!first || s.date < first) first = s.date;
+  return first;
+}
+
 export function trainedDays(data: AppData): Set<string> {
   const s = new Set<string>();
   data.results.forEach((r) => s.add(r.date));
@@ -169,7 +177,7 @@ export function timeOfDayProfile(results: TaskResult[]) {
   });
 }
 
-function dayPerformance(results: TaskResult[]): Map<string, number> {
+export function dayPerformance(results: TaskResult[]): Map<string, number> {
   const z = zScores(results);
   const byDay = new Map<string, number[]>();
   for (const r of results) {
@@ -205,9 +213,8 @@ function zToPoints(data: AppData, dz: number) {
   return Math.round(Math.abs(dz) * (sds.length ? mean(sds) : 10));
 }
 
-export function insights(data: AppData): Insight[] {
+export function insights(data: AppData, withPlaceholder = true): Insight[] {
   const out: Insight[] = [];
-  const n = data.results.length;
 
   // Sleep
   const sleep = splitEffect(data, (c) => (c.sleep >= 7 ? true : c.sleep < 6.5 ? false : null));
@@ -361,9 +368,15 @@ export function insights(data: AppData): Insight[] {
     }
   }
 
-  if (out.length === 0) {
-    const checkins = data.checkins.length;
-    out.push({
+  if (out.length === 0 && withPlaceholder) out.push(placeholderInsight(data));
+  return out;
+}
+
+export function placeholderInsight(data: AppData): Insight {
+  const n = data.results.length;
+  const checkins = data.checkins.length;
+  {
+    return {
       id: 'unlock',
       icon: 'sparkles',
       tone: 'info',
@@ -372,7 +385,6 @@ export function insights(data: AppData): Insight[] {
         zh: `再完成一些训练和每日状态打卡（目前 ${n} 次训练、${checkins} 次打卡），FocusLab 就能告诉你睡眠、运动、时段和压力如何影响你自己的专注。`,
         en: `Keep training and checking in (so far ${n} sessions and ${checkins} check-ins). FocusLab will then show how sleep, exercise, time of day and stress affect your own focus.`,
       },
-    });
+    };
   }
-  return out;
 }

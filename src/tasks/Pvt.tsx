@@ -1,22 +1,23 @@
 import { useEffect, useRef } from 'react';
 import { makeT } from '../lib/i18n';
-import { scorePvt } from '../lib/scoring';
+import { PVT_LAPSE_MS, scorePvt } from '../lib/scoring';
 import { uniform } from '../lib/stats';
-import type { TaskProps } from '../lib/types';
-import { evTime, isSpace } from './common';
+import type { TaskProps, TrialPoint } from '../lib/types';
+import { evTime, isSpace, isTouch } from './common';
 
 const TIMEOUT_MS = 30000;
 
-export default function Pvt({ mode, lang, onComplete, onProgress }: TaskProps) {
+export default function Pvt({ mode, lang, onComplete, onProgress, practice }: TaskProps) {
   const boxRef = useRef<HTMLDivElement>(null);
   const t = makeT(lang);
   const cb = useRef({ onComplete, onProgress });
   cb.current = { onComplete, onProgress };
 
   useEffect(() => {
-    const total = (mode === 'assessment' ? 180 : 120) * 1000;
+    const total = (practice ? 25 : mode === 'assessment' ? 180 : 120) * 1000;
     const box = boxRef.current!;
     const rts: number[] = [];
+    const series: TrialPoint[] = [];
     let falseStarts = 0;
     let state: 'wait' | 'live' | 'feedback' | 'done' = 'wait';
     let onset = 0;
@@ -30,7 +31,7 @@ export default function Pvt({ mode, lang, onComplete, onProgress }: TaskProps) {
     const finish = () => {
       state = 'done';
       const { metrics, perf } = scorePvt(rts, falseStarts);
-      cb.current.onComplete({ metrics, perf, score: perf, level: 1, nextLevel: 1, durationMs: performance.now() - t0 });
+      cb.current.onComplete({ metrics, perf, score: perf, level: 1, nextLevel: 1, durationMs: performance.now() - t0, series });
     };
 
     const schedule = () => {
@@ -65,10 +66,12 @@ export default function Pvt({ mode, lang, onComplete, onProgress }: TaskProps) {
         state = 'feedback';
         cancelAnimationFrame(raf);
         rts.push(rt);
+        series.push({ rt, ok: rt < PVT_LAPSE_MS, kind: rt >= PVT_LAPSE_MS ? 'lapse' : undefined });
         box.textContent = String(Math.round(rt));
         timer = window.setTimeout(schedule, 1000);
       } else if (state === 'wait') {
         falseStarts++;
+        series.push({ rt: null, ok: false, kind: 'false' });
         clearTimeout(timer);
         state = 'feedback';
         box.classList.remove('live');
@@ -109,7 +112,7 @@ export default function Pvt({ mode, lang, onComplete, onProgress }: TaskProps) {
   return (
     <>
       <div ref={boxRef} className="pvt-box" aria-live="off" />
-      <div className="stage-hint">{t('计数器出现就按 空格 或点击屏幕', 'Press Space or tap as soon as the counter appears')}</div>
+      <div className="stage-hint">{isTouch() ? t('计数器一出现就点击屏幕', 'Tap the screen as soon as the counter appears') : t('计数器出现就按 空格 或点击屏幕', 'Press Space or tap as soon as the counter appears')}</div>
     </>
   );
 }

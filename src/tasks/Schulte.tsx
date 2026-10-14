@@ -5,11 +5,10 @@ import { scoreSchulte } from '../lib/scoring';
 import { shuffle } from '../lib/stats';
 import type { TaskProps } from '../lib/types';
 
-const TABLES = 3;
-
-export default function Schulte({ level, mode, lang, onComplete, onProgress }: TaskProps) {
+export default function Schulte({ level, mode, lang, onComplete, onProgress, practice }: TaskProps) {
   const t = makeT(lang);
-  const size = Math.max(4, Math.min(7, level || 5));
+  const TABLES = practice ? 1 : 3;
+  const size = practice ? 4 : Math.max(4, Math.min(7, level || 5));
   const n = size * size;
   const [table, setTable] = useState(0);
   const [nextNum, setNextNum] = useState(1);

@@ -1,3 +1,4 @@
+import { ExperimentPicker } from '../components/Experiment';
 import { Icon } from '../components/Icon';
 import { EVIDENCE_LABEL, HABITS, REFERENCES, TOOLKIT, scholar } from '../content/learn';
 import { bi, useT } from '../lib/i18n';
@@ -145,6 +146,15 @@ export default function Learn() {
           </div>
         ))}
       </div>
+
+      <div className="section-title">{t('别只听建议——亲自验证', 'Don’t just take advice — test it')}</div>
+      <p className="small text-2" style={{ marginBottom: 12, maxWidth: 760 }}>
+        {t(
+          '研究给出的是平均效果，而你不是平均人。选一个习惯做 14 天个人实验：系统随机安排 ON / OFF 日，最后比较两组日子的专注数据，告诉你它对你是否真的有效。',
+          'Research reports average effects, and you are not average. Pick a habit for a 14-day personal experiment: randomized ON / OFF days, then a comparison of your focus data between the two tells you whether it really works for you.',
+        )}
+      </p>
+      <ExperimentPicker />
 
       <div className="section-title">{t('走神时的急救包', 'In-the-moment toolkit')}</div>
       <div className="grid grid-3">

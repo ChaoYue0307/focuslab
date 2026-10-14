@@ -20,6 +20,11 @@ export function defaultSettings(): Settings {
     breathMin: 5,
     notify: false,
     schulteSize: 5,
+    probes: true,
+    probeMin: 10,
+    stroopCvd: false,
+    customTags: [],
+    reminderTime: '08:30',
   };
 }
 
@@ -34,6 +39,12 @@ export function emptyData(): AppData {
     sessions: [],
     parking: [],
     levels: {},
+    practiced: [],
+    experiments: [],
+    reviews: [],
+    achievements: {},
+    lastExportAt: null,
+    dismissed: {},
   };
 }
 
@@ -52,6 +63,12 @@ export function normalize(raw: unknown): AppData {
     sessions: Array.isArray(r.sessions) ? r.sessions : [],
     parking: Array.isArray(r.parking) ? r.parking : [],
     levels: r.levels && typeof r.levels === 'object' ? r.levels : {},
+    practiced: Array.isArray(r.practiced) ? r.practiced : [],
+    experiments: Array.isArray(r.experiments) ? r.experiments : [],
+    reviews: Array.isArray(r.reviews) ? r.reviews : [],
+    achievements: r.achievements && typeof r.achievements === 'object' ? r.achievements : {},
+    lastExportAt: typeof r.lastExportAt === 'number' ? r.lastExportAt : null,
+    dismissed: r.dismissed && typeof r.dismissed === 'object' ? r.dismissed : {},
   };
 }
 
@@ -67,12 +84,19 @@ function load(): AppData {
 let data: AppData = typeof localStorage !== 'undefined' ? load() : emptyData();
 const listeners = new Set<() => void>();
 let saveError = false;
+let onSaveError: (() => void) | null = null;
+
+/** Called once each time saving starts failing (e.g. storage full or blocked). */
+export function setSaveErrorHandler(fn: (() => void) | null) {
+  onSaveError = fn;
+}
 
 function persist() {
   try {
     localStorage.setItem(KEY, JSON.stringify(data));
     saveError = false;
   } catch {
+    if (!saveError) onSaveError?.();
     saveError = true;
   }
 }

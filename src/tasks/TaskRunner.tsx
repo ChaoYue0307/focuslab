@@ -1,13 +1,13 @@
 import { useCallback, useEffect, useMemo, useState, type ComponentType } from 'react';
 import { Icon } from '../components/Icon';
 import { Delta, ScoreRing, Segmented, Switch as Toggle } from '../components/ui';
-import { Sparkline } from '../components/Charts';
+import { sessionDrift, Sparkline, TrialChart } from '../components/Charts';
 import { sfx, speechAvailable, unlockAudio } from '../lib/audio';
 import { dayKey, uid } from '../lib/date';
 import { bi, useT } from '../lib/i18n';
 import { mean } from '../lib/stats';
 import { update, updateSettings, useData } from '../lib/store';
-import type { Mode, TaskId, TaskOutcome, TaskProps, TaskResult } from '../lib/types';
+import type { Mode, TaskId, TaskOutcome, TaskProps, TaskResult, TrialPoint } from '../lib/types';
 import Breath from './Breath';
 import { Flanker, Stroop, Switch } from './ChoiceTask';
 import { useKeys, useWakeLock } from './common';
@@ -17,7 +17,11 @@ import NBack from './NBack';
 import Pvt from './Pvt';
 import Sart from './Sart';
 import Schulte from './Schulte';
+import { fmtMetric } from './format';
 import { ASSESS_LEVEL, DEFAULT_LEVEL, domainMeta, taskMeta, type MetricDef } from './registry';
+
+/** Tasks that offer a short, unscored practice round the first time. */
+const PRACTICE_TASKS: TaskId[] = ['pvt', 'sart', 'flanker', 'stroop', 'switch', 'nback', 'mot'];
 
 const COMPONENTS: Record<TaskId, ComponentType<TaskProps>> = {
   pvt: Pvt,
@@ -30,24 +34,6 @@ const COMPONENTS: Record<TaskId, ComponentType<TaskProps>> = {
   schulte: Schulte,
   breath: Breath,
 };
-
-export function fmtMetric(def: MetricDef, v: number, lang: 'zh' | 'en'): string {
-  if (!Number.isFinite(v)) return '—';
-  switch (def.fmt) {
-    case 'ms':
-      return `${Math.round(v)} ms`;
-    case 'pct':
-      return `${Math.round(v * 100)}%`;
-    case 'num1':
-      return v.toFixed(1);
-    case 'num2':
-      return v.toFixed(2);
-    case 's':
-      return lang === 'zh' ? `${v.toFixed(1)} 秒` : `${v.toFixed(1)} s`;
-    default:
-      return String(Math.round(v));
-  }
-}
 
 const metricDelta = (def: MetricDef, d: number, lang: 'zh' | 'en') => {
   switch (def.fmt) {
@@ -89,16 +75,26 @@ export function TaskRunner({ task, mode, flow, onExit, onNext, autoStart }: { ta
   const [result, setResult] = useState<TaskResult | null>(null);
   const [showWhy, setShowWhy] = useState(false);
   const [startedAt, setStartedAt] = useState(Date.now());
+  const [series, setSeries] = useState<TrialPoint[] | null>(null);
+  const practiceable = PRACTICE_TASKS.includes(task);
+  const [practice, setPractice] = useState(() => practiceable && !data.practiced.includes(task));
+  const [practiceDone, setPracticeDone] = useState(false);
+  const [running, setRunning] = useState<'real' | 'practice'>('real');
   const Comp = COMPONENTS[task];
 
   useWakeLock(phase === 'run' || phase === 'countdown');
+  useEffect(() => {
+    document.title = `${bi(meta.name, lang)} · FocusLab`;
+  }, [meta, lang]);
 
-  const start = () => {
+  const start = (asPractice = false) => {
     unlockAudio();
+    setRunning(asPractice ? 'practice' : 'real');
     setProgress(0);
     setCount(3);
     setPhase('countdown');
   };
+  const startFromIntro = () => start(practice && practiceable);
 
   // countdown
   useEffect(() => {
@@ -128,7 +124,7 @@ export function TaskRunner({ task, mode, flow, onExit, onNext, autoStart }: { ta
       else if (phase === 'intro' || phase === 'result') onExit();
     } else if (e.key === 'Enter' && phase === 'intro') {
       e.preventDefault();
-      start();
+      startFromIntro();
     }
   });
 
@@ -136,6 +132,21 @@ export function TaskRunner({ task, mode, flow, onExit, onNext, autoStart }: { ta
 
   const onComplete = useCallback(
     (o: TaskOutcome) => {
+      if (running === 'practice') {
+        update((d) => {
+          if (!d.practiced.includes(task)) d.practiced.push(task);
+        });
+        sfx.good();
+        setPractice(false);
+        setPracticeDone(true);
+        setPhase('intro');
+        return;
+      }
+      const metrics = { ...o.metrics };
+      if (o.series && o.series.length >= 8) {
+        const drift = sessionDrift(o.series).rtDelta;
+        if (Number.isFinite(drift)) metrics.drift = Math.round(drift);
+      }
       const r: TaskResult = {
         id: uid(),
         task,
@@ -148,17 +159,18 @@ export function TaskRunner({ task, mode, flow, onExit, onNext, autoStart }: { ta
         nextLevel: o.nextLevel,
         perf: Math.round(o.perf),
         score: Math.round(o.score),
-        metrics: o.metrics,
+        metrics,
       };
       update((d) => {
         d.results.push(r);
         if (mode === 'training') d.levels[task] = o.nextLevel;
       });
       sfx.done();
+      setSeries(o.series || null);
       setResult(r);
       setPhase('result');
     },
-    [task, mode, startedAt],
+    [task, mode, startedAt, running],
   );
 
   const title = bi(meta.name, lang);
@@ -179,10 +191,25 @@ export function TaskRunner({ task, mode, flow, onExit, onNext, autoStart }: { ta
           </div>
         )}
         {phase !== 'run' && phase !== 'countdown' && <div className="grow" />}
+        {running === 'practice' && (phase === 'run' || phase === 'countdown') && <span className="chip accent">{t('练习', 'Practice')}</span>}
         {mode === 'assessment' && <span className="chip warn">{t('评估模式', 'Assessment')}</span>}
       </div>
 
-      {phase === 'intro' && <Intro task={task} level={level} mode={mode} flow={flow} showWhy={showWhy} setShowWhy={setShowWhy} onStart={start} onSkip={onNext} />}
+      {phase === 'intro' && (
+        <Intro
+          task={task}
+          level={level}
+          mode={mode}
+          flow={flow}
+          showWhy={showWhy}
+          setShowWhy={setShowWhy}
+          onStart={startFromIntro}
+          onSkip={onNext}
+          practice={practiceable ? practice : null}
+          setPractice={setPractice}
+          practiceDone={practiceDone}
+        />
+      )}
 
       {phase === 'countdown' && (
         <div className="stage-body">
@@ -195,7 +222,7 @@ export function TaskRunner({ task, mode, flow, onExit, onNext, autoStart }: { ta
 
       {phase === 'run' && (
         <div className="stage-body" key={runKey}>
-          <Comp level={level} mode={mode} settings={settings} lang={lang} onComplete={onComplete} onProgress={onProgress} />
+          <Comp level={level} mode={running === 'practice' ? 'training' : mode} settings={settings} lang={lang} onComplete={onComplete} onProgress={onProgress} practice={running === 'practice'} />
         </div>
       )}
 
@@ -215,7 +242,7 @@ export function TaskRunner({ task, mode, flow, onExit, onNext, autoStart }: { ta
               <button className="btn" onClick={onExit} type="button">
                 {t('退出', 'Exit')}
               </button>
-              <button className="btn primary" onClick={start} type="button" autoFocus>
+              <button className="btn primary" onClick={() => start(running === 'practice')} type="button" autoFocus>
                 <Icon name="refresh" size={18} /> {t('重新开始', 'Restart')}
               </button>
             </div>
@@ -223,12 +250,36 @@ export function TaskRunner({ task, mode, flow, onExit, onNext, autoStart }: { ta
         </div>
       )}
 
-      {phase === 'result' && result && <ResultView result={result} flow={flow} onAgain={start} onExit={onExit} onNext={onNext} />}
+      {phase === 'result' && result && <ResultView result={result} series={series} flow={flow} onAgain={() => start(false)} onExit={onExit} onNext={onNext} />}
     </div>
   );
 }
 
-function Intro({ task, level, mode, flow, showWhy, setShowWhy, onStart, onSkip }: { task: TaskId; level: number; mode: Mode; flow?: FlowInfo; showWhy: boolean; setShowWhy: (v: boolean) => void; onStart: () => void; onSkip?: () => void }) {
+function Intro({
+  task,
+  level,
+  mode,
+  flow,
+  showWhy,
+  setShowWhy,
+  onStart,
+  onSkip,
+  practice,
+  setPractice,
+  practiceDone,
+}: {
+  task: TaskId;
+  level: number;
+  mode: Mode;
+  flow?: FlowInfo;
+  showWhy: boolean;
+  setShowWhy: (v: boolean) => void;
+  onStart: () => void;
+  onSkip?: () => void;
+  practice: boolean | null;
+  setPractice: (v: boolean) => void;
+  practiceDone: boolean;
+}) {
   const t = useT();
   const lang = t.lang;
   const { settings } = useData();
@@ -314,6 +365,29 @@ function Intro({ task, level, mode, flow, showWhy, setShowWhy, onStart, onSkip }
           </div>
         )}
 
+        {task === 'stroop' && settings.stroopCvd && (
+          <p className="small muted" style={{ marginTop: 10 }}>
+            {t('已启用色觉友好配色：蓝 / 黄 / 灰（D F J 或 1–3）。', 'Colour-vision-friendly palette on: blue / yellow / grey (D F J or 1–3).')}
+          </p>
+        )}
+
+        {practiceDone && (
+          <div className="callout good" style={{ marginTop: 14 }}>
+            <Icon name="check" size={18} />
+            <div>{t('练习完成！规则清楚了的话，现在开始正式一轮——这一轮会被记录。', 'Practice done! If the rules are clear, start the real round now — this one is recorded.')}</div>
+          </div>
+        )}
+
+        {practice !== null && (
+          <div className="card flat row between" style={{ marginTop: 12 }}>
+            <div>
+              <div style={{ fontWeight: 600 }}>{t('先做一段短练习（不计分）', 'Do a short practice round first (not scored)')}</div>
+              <div className="small muted">{t('约 30 秒，带即时反馈。第一次做这个练习时推荐。', '~30 seconds with instant feedback. Recommended the first time.')}</div>
+            </div>
+            <Toggle on={practice} onChange={setPractice} label="practice" />
+          </div>
+        )}
+
         {mode === 'assessment' && (
           <p className="small muted" style={{ marginTop: 12 }}>
             {t('评估使用固定难度，以便和以后的评估直接比较。', 'Assessments use fixed difficulty so you can compare them directly over time.')}
@@ -322,7 +396,7 @@ function Intro({ task, level, mode, flow, showWhy, setShowWhy, onStart, onSkip }
 
         <div className="row" style={{ marginTop: 22, gap: 10 }}>
           <button className="btn primary lg grow" onClick={onStart} type="button" autoFocus>
-            <Icon name="play" size={16} /> {t('开始', 'Start')}
+            <Icon name="play" size={16} /> {practice ? t('开始练习', 'Start practice') : t('开始', 'Start')}
             <span className="kbd" style={{ background: 'transparent', color: 'inherit', borderColor: 'rgba(255,255,255,.4)' }}>
               Enter
             </span>
@@ -338,7 +412,7 @@ function Intro({ task, level, mode, flow, showWhy, setShowWhy, onStart, onSkip }
   );
 }
 
-function ResultView({ result, flow, onAgain, onExit, onNext }: { result: TaskResult; flow?: FlowInfo; onAgain: () => void; onExit: () => void; onNext?: () => void }) {
+function ResultView({ result, series, flow, onAgain, onExit, onNext }: { result: TaskResult; series: TrialPoint[] | null; flow?: FlowInfo; onAgain: () => void; onExit: () => void; onNext?: () => void }) {
   const t = useT();
   const lang = t.lang;
   const data = useData();
@@ -426,6 +500,8 @@ function ResultView({ result, flow, onAgain, onExit, onNext }: { result: TaskRes
           })}
         </div>
 
+        {series && series.length >= 8 && <SessionTimeline series={series} />}
+
         {tips.length > 0 && (
           <div className="stack sm" style={{ marginTop: 16 }}>
             {tips.map((tip, i) => (
@@ -459,6 +535,30 @@ function ResultView({ result, flow, onAgain, onExit, onNext }: { result: TaskRes
           )}
         </div>
       </div>
+    </div>
+  );
+}
+
+function SessionTimeline({ series }: { series: TrialPoint[] }) {
+  const t = useT();
+  const { rtDelta, errDelta } = sessionDrift(series);
+  let verdict: string;
+  if (Number.isFinite(rtDelta) && (rtDelta > 25 || errDelta >= 3))
+    verdict = t('后半程比前半程慢 {ms} ms{e}——注意力随时间衰减了。这正是持续注意要练的：最后几分钟也要"在场"。', 'The second half was {ms} ms slower{e} — attention faded over time. That is exactly what sustained-attention practice targets: stay present to the very end.', {
+      ms: Math.max(0, Math.round(rtDelta)),
+      e: errDelta >= 2 ? t('，错误多了 {n} 次', ', with {n} more errors', { n: errDelta }) : '',
+    });
+  else if (Number.isFinite(rtDelta) && rtDelta < -25) verdict = t('后半程反而更快了 {ms} ms：你在逐渐进入状态。', 'You got {ms} ms faster in the second half: you warmed into it.', { ms: Math.round(-rtDelta) });
+  else verdict = t('前后半程基本稳定，注意力保持得很好。', 'First and second halves were steady — attention held up well.');
+  return (
+    <div className="card flat" style={{ marginTop: 16 }}>
+      <div className="card-head" style={{ marginBottom: 6 }}>
+        <h3>{t('注意力随时间的变化', 'Attention across the session')}</h3>
+      </div>
+      <p className="small text-2" style={{ marginBottom: 8 }}>
+        {verdict}
+      </p>
+      <TrialChart series={series} lang={t.lang} />
     </div>
   );
 }

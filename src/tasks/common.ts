@@ -23,6 +23,9 @@ export function useKeys(handler: (e: KeyboardEvent) => void) {
 
 export const isSpace = (e: KeyboardEvent) => e.code === 'Space' || e.key === ' ';
 
+/** Touch-first device (phone/tablet): hints talk about tapping instead of keys. */
+export const isTouch = () => typeof matchMedia !== 'undefined' && matchMedia('(hover: none) and (pointer: coarse)').matches;
+
 /** Keep the screen awake while a task or focus session runs. */
 export function useWakeLock(active: boolean) {
   useEffect(() => {

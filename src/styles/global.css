@@ -1753,3 +1753,82 @@ table.data th.num {
     gap: 10px;
   }
 }
+.probe-card {
+  width: min(560px, 100%);
+  padding: 16px;
+  border-radius: 16px;
+  text-align: center;
+  background: var(--surface);
+  border: 1.5px solid var(--accent);
+  box-shadow: 0 0 0 6px color-mix(in srgb, var(--accent) 12%, transparent), var(--shadow-lg);
+  animation: pop 0.25s var(--ease);
+}
+.exp-strip {
+  display: grid;
+  grid-template-columns: repeat(14, 1fr);
+  gap: 4px;
+}
+.exp-day {
+  height: 26px;
+  border-radius: 6px;
+  display: grid;
+  place-items: center;
+  font-size: 10px;
+  font-weight: 700;
+  background: var(--surface-2);
+  color: var(--muted);
+}
+.exp-day.on {
+  background: var(--accent-soft-2);
+  color: var(--accent-ink);
+}
+.exp-day.future {
+  opacity: 0.45;
+}
+.exp-day.today {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+.stackbar {
+  display: flex;
+  gap: 2px;
+  height: 18px;
+  border-radius: 5px;
+  overflow: hidden;
+}
+.stackbar > div {
+  min-width: 4px;
+}
+.badges {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(220px, calc(50% - 5px)), 1fr));
+  gap: 10px;
+}
+.badge {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding: 12px;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  opacity: 0.55;
+}
+.badge .badge-icon {
+  width: 38px;
+  height: 38px;
+  flex: none;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--surface-2);
+  color: var(--muted);
+}
+.badge.on {
+  opacity: 1;
+  box-shadow: var(--shadow);
+}
+.badge.on .badge-icon {
+  background: color-mix(in srgb, var(--warn) 22%, transparent);
+  color: var(--warn-ink);
+}

@@ -4,47 +4,12 @@ import { Segmented, Switch, toast } from '../components/ui';
 import { setNoiseVolume, sfx, startNoise, stopNoise, unlockAudio } from '../lib/audio';
 import { focusMsOn } from '../lib/analytics';
 import { dayKey, fmtDuration, fmtMinutes, shortDate, uid } from '../lib/date';
-import { useT } from '../lib/i18n';
+import { DISTRACTION_KINDS } from '../content/habits';
+import { elapsedOf, loadActive, nextProbe, PROBE_TIMEOUT_MS, probeAllowed, saveActive, type Active } from '../lib/focusActive';
+import { bi, useT } from '../lib/i18n';
 import { update, updateSettings, useData } from '../lib/store';
-import type { Distraction, FocusSession, NoiseType } from '../lib/types';
+import type { DistractionKind, FocusSession, NoiseType, ProbeState } from '../lib/types';
 import { useWakeLock } from '../tasks/common';
-
-export const ACTIVE_KEY = 'focuslab:active';
-
-export interface Active {
-  id: string;
-  startedAt: number;
-  plannedMin: number;
-  intention: string;
-  ifThen: string;
-  pausedTotal: number;
-  pausedAt: number | null;
-  pauses: number;
-  distractions: Distraction[];
-  trackAway: boolean;
-  awayCount: number;
-  awayMs: number;
-  awayAt: number | null;
-}
-
-export const loadActive = (): Active | null => {
-  try {
-    const s = localStorage.getItem(ACTIVE_KEY);
-    return s ? (JSON.parse(s) as Active) : null;
-  } catch {
-    return null;
-  }
-};
-const saveActive = (a: Active | null) => {
-  try {
-    if (a) localStorage.setItem(ACTIVE_KEY, JSON.stringify(a));
-    else localStorage.removeItem(ACTIVE_KEY);
-  } catch {
-    /* ignore */
-  }
-};
-
-export const elapsedOf = (a: Active, now = Date.now()) => now - a.startedAt - a.pausedTotal - (a.pausedAt ? now - a.pausedAt : 0);
 
 type Phase = 'setup' | 'primer' | 'running' | 'review' | 'break';
 
@@ -88,6 +53,11 @@ export default function Focus() {
       awayCount: 0,
       awayMs: 0,
       awayAt: null,
+      noise: settings.noise,
+      probes: [],
+      probeEvery: settings.probes ? settings.probeMin : 0,
+      nextProbeAt: nextProbe(0, settings.probes ? settings.probeMin : 0),
+      probeOpenAt: null,
     };
     persist(a);
     updateSettings({ focusMin: minutes });
@@ -120,6 +90,8 @@ export default function Focus() {
       awayMs: a.awayMs + (a.awayAt ? now - a.awayAt : 0),
       pauses: a.pauses,
       completed,
+      probes: a.probes,
+      noise: a.noise,
     };
     update((d) => {
       d.sessions.push(s);
@@ -269,6 +241,24 @@ function Setup(p: {
               />
             </div>
           </div>
+          <div className="field">
+            <span className="label">{t('专注抽查（随机轻提示：此刻注意力在哪？）', 'Attention probes (random gentle chime: where is your attention?)')}</span>
+            <div className="row wrap">
+              <Segmented
+                value={settings.probes ? settings.probeMin : 0}
+                onChange={(v) => updateSettings(v ? { probes: true, probeMin: v } : { probes: false })}
+                options={[
+                  { value: 0, label: t('关', 'Off') },
+                  { value: 5, label: t('约 5 分钟', '~5 min') },
+                  { value: 10, label: t('约 10 分钟', '~10 min') },
+                  { value: 15, label: t('约 15 分钟', '~15 min') },
+                ]}
+              />
+            </div>
+            <span className="tiny muted">
+              {t('经验取样是研究走神的标准方法。每次如实回答，都是在训练"发现自己走神"的能力。', 'Experience sampling is how researchers measure mind-wandering. Each honest answer trains the skill of noticing that you drifted.')}
+            </span>
+          </div>
           <div className="stack sm">
             <div className="row between">
               <div>
@@ -366,6 +356,8 @@ function Running({ active, persist, onFinish }: { active: Active; persist: (a: A
   const [now, setNow] = useState(Date.now());
   const [noting, setNoting] = useState(false);
   const [note, setNote] = useState('');
+  const [kind, setKind] = useState<DistractionKind>('thought');
+  const [probeFb, setProbeFb] = useState<ProbeState | null>(null);
   const [immersive, setImmersive] = useState(false);
   const [awayBanner, setAwayBanner] = useState<number | null>(null);
   const [confirmEnd, setConfirmEnd] = useState(false);
@@ -381,6 +373,39 @@ function Running({ active, persist, onFinish }: { active: Active; persist: (a: A
     const id = setInterval(() => setNow(Date.now()), 250);
     return () => clearInterval(id);
   }, []);
+
+  // Attention probes (experience sampling)
+  const probeOpen = active.probeOpenAt !== null;
+  useEffect(() => {
+    const a = ref.current;
+    if (paused || !a.probeEvery) return;
+    const el = elapsedOf(a, now);
+    if (a.probeOpenAt === null) {
+      if (el >= a.nextProbeAt && probeAllowed(el, total)) {
+        persist({ ...a, probeOpenAt: el });
+        sfx.probe();
+        if (settings.notify && document.visibilityState === 'hidden' && 'Notification' in window && Notification.permission === 'granted') {
+          try {
+            new Notification('FocusLab', { body: t('专注抽查：此刻你的注意力在哪里？', 'Attention probe: where is your attention right now?'), silent: true });
+          } catch {
+            /* ignore */
+          }
+        }
+      }
+    } else if (el - a.probeOpenAt > PROBE_TIMEOUT_MS) {
+      persist({ ...a, probes: [...a.probes, { t: a.probeOpenAt, state: 'missed' }], probeOpenAt: null, nextProbeAt: nextProbe(el, a.probeEvery) });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [now, paused]);
+
+  const answerProbe = (state: ProbeState) => {
+    const a = ref.current;
+    if (a.probeOpenAt === null) return;
+    const el = elapsedOf(a);
+    persist({ ...a, probes: [...a.probes, { t: a.probeOpenAt, state }], probeOpenAt: null, nextProbeAt: nextProbe(el, a.probeEvery) });
+    setProbeFb(state);
+    window.setTimeout(() => setProbeFb((f) => (f === state ? null : f)), 4500);
+  };
 
   // background noise
   useEffect(() => {
@@ -437,13 +462,14 @@ function Running({ active, persist, onFinish }: { active: Active; persist: (a: A
   const saveNote = () => {
     const text = note.trim() || t('（未命名的分心）', '(unnamed distraction)');
     const a = ref.current;
-    persist({ ...a, distractions: [...a.distractions, { t: elapsedOf(a), text }] });
+    persist({ ...a, distractions: [...a.distractions, { t: elapsedOf(a), text, kind }] });
     if (note.trim()) {
       update((d) => {
         d.parking.push({ id: uid(), text: note.trim(), createdAt: Date.now(), done: false });
       });
     }
     setNote('');
+    setKind('thought');
     setNoting(false);
   };
 
@@ -454,6 +480,11 @@ function Running({ active, persist, onFinish }: { active: Active; persist: (a: A
         return;
       }
       if ((e.target as HTMLElement).tagName === 'INPUT') return;
+      if (ref.current.probeOpenAt !== null && ['1', '2', '3'].includes(e.key)) {
+        e.preventDefault();
+        answerProbe((['on', 'mw', 'ext'] as const)[Number(e.key) - 1]);
+        return;
+      }
       if (e.key === 'd' || e.key === 'D') {
         e.preventDefault();
         setNoting(true);
@@ -502,6 +533,35 @@ function Running({ active, persist, onFinish }: { active: Active; persist: (a: A
           <div className="small muted">{paused ? t('已暂停', 'Paused') : t('专注中', 'Focusing')}</div>
         </div>
       </div>
+      {probeOpen && (
+        <div className="probe-card" role="alertdialog" aria-label={t('专注抽查', 'Attention probe')}>
+          <div style={{ fontWeight: 650, marginBottom: 10 }}>{t('此刻，你的注意力在哪里？', 'Right now, where is your attention?')}</div>
+          <div className="row wrap" style={{ justifyContent: 'center' }}>
+            <button className="btn" onClick={() => answerProbe('on')} type="button">
+              <span className="kbd">1</span> {t('在任务上', 'On task')}
+            </button>
+            <button className="btn" onClick={() => answerProbe('mw')} type="button">
+              <span className="kbd">2</span> {t('走神了', 'Mind wandered')}
+            </button>
+            <button className="btn" onClick={() => answerProbe('ext')} type="button">
+              <span className="kbd">3</span> {t('被外界打断', 'Interrupted')}
+            </button>
+          </div>
+        </div>
+      )}
+      {probeFb && !probeOpen && (
+        <div className={`callout ${probeFb === 'on' ? 'good' : ''}`} style={{ maxWidth: 520 }}>
+          <Icon name={probeFb === 'on' ? 'check' : probeFb === 'mw' ? 'sparkles' : 'info'} size={18} />
+          <div>
+            {probeFb === 'on'
+              ? t('很好，继续保持。', 'Nice — keep going.')
+              : probeFb === 'mw'
+                ? t('很好，你发现了它——这正是在训练元觉察。温和地回到：', 'Good catch — that is meta-awareness in action. Gently return to: ')
+                : t('处理完就回来，需要的话按 D 记一笔。回到：', 'Deal with it, then come back — press D to park it if needed. Return to: ')}
+            {probeFb !== 'on' && <b>{active.intention || t('当前任务', 'your task')}</b>}
+          </div>
+        </div>
+      )}
       {active.intention && <div className="intention">{active.intention}</div>}
       {active.ifThen && (
         <div className="small muted" style={{ marginTop: -10 }}>
@@ -510,7 +570,15 @@ function Running({ active, persist, onFinish }: { active: Active; persist: (a: A
         </div>
       )}
       {noting ? (
-        <div className="row" style={{ width: 'min(520px, 100%)' }}>
+        <div className="stack sm" style={{ width: 'min(560px, 100%)', alignItems: 'stretch' }}>
+          <div className="row wrap" style={{ justifyContent: 'center', gap: 6 }}>
+            {DISTRACTION_KINDS.map((k) => (
+              <button key={k.id} type="button" className={`chip ${kind === k.id ? 'accent' : ''}`} style={{ cursor: 'pointer' }} onClick={() => setKind(k.id)}>
+                <Icon name={k.icon} size={13} /> {bi(k.label, t.lang)}
+              </button>
+            ))}
+          </div>
+        <div className="row">
           <input
             className="input"
             autoFocus
@@ -524,6 +592,7 @@ function Running({ active, persist, onFinish }: { active: Active; persist: (a: A
           <button className="btn primary" onClick={saveNote} type="button">
             {t('停车', 'Park')}
           </button>
+        </div>
         </div>
       ) : (
         <div className="row wrap" style={{ justifyContent: 'center' }}>
@@ -585,6 +654,7 @@ function Review({ session, onSave }: { session: FocusSession; onSave: (patch: Pa
   const lang = t.lang;
   const [rating, setRating] = useState(0);
   const [outcome, setOutcome] = useState<FocusSession['outcome']>(undefined);
+  const answered = (session.probes || []).filter((p) => p.state !== 'missed');
   const labels = [t('很散', 'Scattered'), t('经常走神', 'Drifty'), t('一般', 'Okay'), t('专注', 'Focused'), t('心流', 'Flow')];
   return (
     <div className="focus-stage fade-in" style={{ maxWidth: 560, margin: '0 auto' }}>
@@ -596,6 +666,16 @@ function Review({ session, onSave }: { session: FocusSession; onSave: (patch: Pa
         <p className="text-2" style={{ marginTop: 6 }}>
           {t('专注 {m} · 记录分心 {d} 次', '{m} focused · {d} distractions logged', { m: fmtMinutes(session.focusMs, lang), d: session.distractions.length })}
         </p>
+        {answered.length > 0 && (
+          <p className="small text-2" style={{ marginTop: 4 }}>
+            {t('专注抽查 {n} 次：{on} 次在任务上 · {mw} 次走神 · {ext} 次被打断', 'Probes {n}: {on} on task · {mw} mind-wandering · {ext} interrupted', {
+              n: answered.length,
+              on: answered.filter((p) => p.state === 'on').length,
+              mw: answered.filter((p) => p.state === 'mw').length,
+              ext: answered.filter((p) => p.state === 'ext').length,
+            })}
+          </p>
+        )}
       </div>
       <div className="card" style={{ width: '100%' }}>
         <div className="stack lg">

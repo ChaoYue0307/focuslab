@@ -1,22 +1,28 @@
-import { useEffect, useState } from 'react';
+import { lazy, Suspense, useEffect, useState } from 'react';
 import { Icon } from './components/Icon';
-import { ToastHost } from './components/ui';
-import { useT } from './lib/i18n';
-import { navigate, useRoute } from './lib/router';
-import { useData } from './lib/store';
-import { fmtDuration } from './lib/date';
+import { toast, ToastHost } from './components/ui';
+import { achievementMeta, newlyUnlocked } from './lib/achievements';
 import { sfx } from './lib/audio';
+import { dayKey, fmtDuration } from './lib/date';
+import { elapsedOf, loadActive } from './lib/focusActive';
+import { bi, useT } from './lib/i18n';
+import { experimentDay } from './lib/personal';
+import { navigate, useRoute } from './lib/router';
+import { setSaveErrorHandler, update, useData } from './lib/store';
 import type { Mode, TaskId } from './lib/types';
-import Flow from './pages/Flow';
-import Focus, { elapsedOf, loadActive } from './pages/Focus';
-import Learn from './pages/Learn';
-import Onboarding from './pages/Onboarding';
-import Progress from './pages/Progress';
-import Settings from './pages/Settings';
 import Today from './pages/Today';
 import Train from './pages/Train';
-import { TaskRunner } from './tasks/TaskRunner';
 import { TASKS } from './tasks/registry';
+
+// Heavier screens load on demand so the first paint stays fast.
+const Flow = lazy(() => import('./pages/Flow'));
+const Focus = lazy(() => import('./pages/Focus'));
+const Learn = lazy(() => import('./pages/Learn'));
+const Onboarding = lazy(() => import('./pages/Onboarding'));
+const Progress = lazy(() => import('./pages/Progress'));
+const Review = lazy(() => import('./pages/Review'));
+const Settings = lazy(() => import('./pages/Settings'));
+const TaskRunner = lazy(() => import('./tasks/TaskRunner').then((m) => ({ default: m.TaskRunner })));
 
 const NAV = [
   { path: '/', icon: 'home', zh: '今日', en: 'Today' },
@@ -26,6 +32,39 @@ const NAV = [
   { path: '/learn', icon: 'book', zh: '方法', en: 'Learn' },
   { path: '/settings', icon: 'settings', zh: '设置', en: 'Settings' },
 ];
+
+/** Background upkeep: finish experiments that ran their course, unlock achievements, warn on storage failure. */
+function useUpkeep() {
+  const data = useData();
+  const t = useT();
+  useEffect(() => {
+    setSaveErrorHandler(() => toast(t('无法保存数据：浏览器存储已满或被禁用。请在设置中导出备份。', 'Can’t save: browser storage is full or blocked. Export a backup from Settings.')));
+    return () => setSaveErrorHandler(null);
+  }, [t]);
+  useEffect(() => {
+    if (!data.onboarded) return;
+    const today = dayKey();
+    const finished = data.experiments.filter((e) => e.status === 'active' && experimentDay(e, today) >= e.schedule.length).map((e) => e.id);
+    const fresh = newlyUnlocked(data);
+    if (!finished.length && !fresh.length) return;
+    update((d) => {
+      d.experiments.forEach((e) => {
+        if (finished.includes(e.id)) {
+          e.status = 'done';
+          e.endedAt = Date.now();
+        }
+      });
+      fresh.forEach((id) => (d.achievements[id] = Date.now()));
+    });
+    if (finished.length) toast(t('个人实验已完成，去「进展」查看结果', 'Your experiment is complete — see the results in Progress'));
+    else if (fresh.length === 1) {
+      const a = achievementMeta(fresh[0]);
+      if (a) toast(`🏆 ${t('解锁成就：', 'Achievement unlocked: ')}${bi(a.title, t.lang)}`);
+    } else if (fresh.length > 1) toast(`🏆 ${t('解锁了 {n} 个成就，去「进展」查看', '{n} achievements unlocked — see Progress', { n: fresh.length })}`);
+  }, [data, t]);
+}
+
+const Loading = () => <div className="empty" style={{ padding: 60 }} aria-busy="true" />;
 
 function useTheme() {
   const { settings } = useData();
@@ -76,9 +115,15 @@ function ActivePill({ floating }: { floating?: boolean }) {
 
 export default function App() {
   useTheme();
+  useUpkeep();
   const data = useData();
   const t = useT();
   const { path, parts, query } = useRoute();
+
+  // Each page starts at the top, however it was reached (links, back button, navigate()).
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [path]);
 
   useEffect(() => {
     if (path.startsWith('/run') || path === '/plan' || path === '/assess') return;
@@ -87,16 +132,24 @@ export default function App() {
     document.title = name ? `${t(name.zh, name.en)} · FocusLab` : 'FocusLab';
   }, [path, t]);
 
-  if (!data.onboarded) return <Onboarding />;
+  const immersive = (node: React.ReactNode) => (
+    <Suspense fallback={<div className="stage" />}>
+      {node}
+      <ToastHost />
+    </Suspense>
+  );
+
+  if (!data.onboarded) return immersive(<Onboarding />);
+
 
   // Immersive routes
   if (parts[0] === 'run' && TASKS.some((x) => x.id === parts[1])) {
     const mode = (query.get('mode') as Mode) || 'training';
     const back = query.get('back') || '/train';
-    return <TaskRunner key={parts[1] + mode} task={parts[1] as TaskId} mode={mode} onExit={() => navigate(back)} />;
+    return immersive(<TaskRunner key={parts[1] + mode} task={parts[1] as TaskId} mode={mode} onExit={() => navigate(back)} />);
   }
-  if (parts[0] === 'plan') return <Flow kind="plan" />;
-  if (parts[0] === 'assess') return <Flow kind="assess" />;
+  if (parts[0] === 'plan') return immersive(<Flow kind="plan" />);
+  if (parts[0] === 'assess') return immersive(<Flow kind="assess" />);
 
   let page;
   switch (parts[0]) {
@@ -114,6 +167,9 @@ export default function App() {
       break;
     case 'settings':
       page = <Settings />;
+      break;
+    case 'review':
+      page = <Review />;
       break;
     default:
       page = <Today />;
@@ -146,7 +202,7 @@ export default function App() {
       </aside>
       <main className="main">
         <div className="page fade-in" key={parts[0] || 'home'}>
-          {page}
+          <Suspense fallback={<Loading />}>{page}</Suspense>
         </div>
       </main>
       <nav className="bottom-nav" aria-label="Main">

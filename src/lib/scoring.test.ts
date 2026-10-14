@@ -140,6 +140,9 @@ describe('MOT, Schulte, breath', () => {
     expect(r.metrics.accuracy).toBeCloseTo(0.8);
     expect(r.perf).toBe(80);
     expect(scoreBreath(0, 0, 0, 0, 5).perf).toBe(0);
+    // presses far faster than breathing can't earn a good score
+    expect(scoreBreath(38, 2, 1, 363, 3).perf).toBe(0);
+    expect(scoreBreath(38, 2, 1, 105, 3).perf).toBeLessThan(95);
   });
 });
 

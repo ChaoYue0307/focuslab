@@ -4,7 +4,7 @@ import { fmtDuration } from '../lib/date';
 import { makeT } from '../lib/i18n';
 import { scoreBreath } from '../lib/scoring';
 import type { TaskProps } from '../lib/types';
-import { useKeys } from './common';
+import { isTouch, useKeys } from './common';
 
 export default function Breath({ settings, lang, onComplete, onProgress }: TaskProps) {
   const t = makeT(lang);
@@ -95,7 +95,9 @@ export default function Breath({ settings, lang, onComplete, onProgress }: TaskP
       >
         {t('数丢了，重置', 'Lost count — reset')} <span className="kbd">R</span>
       </button>
-      <div className="stage-hint">{t('空格 = 1–8 · 回车 = 9 · 可以闭上眼睛', 'Space = 1–8 · Enter = 9 · feel free to close your eyes')}</div>
+      <div className="stage-hint">
+        {isTouch() ? t('左侧 = 第 1–8 次 · 右侧 = 第 9 次 · 可以闭上眼睛', 'Left = breaths 1–8 · right = breath 9 · feel free to close your eyes') : t('空格 = 1–8 · 回车 = 9 · 可以闭上眼睛', 'Space = 1–8 · Enter = 9 · feel free to close your eyes')}
+      </div>
     </>
   );
 }

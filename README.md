@@ -22,12 +22,17 @@ Most "brain games" promise that playing makes you smarter. The research says gai
 | Area | What you get |
 | --- | --- |
 | **Daily plan** | ~15 min: PVT state check → 3 core drills picked by weakness & recency → breath counting cool-down |
-| **9 exercises** | PVT · SART · Flanker · Stroop · Task switching · Dual N-Back · Multiple Object Tracking · Schulte table · Breath counting |
+| **Readiness** | Today's focus state from your check-in and PVT vs. your own baseline, with a concrete plan-your-day recommendation |
+| **9 exercises** | PVT · SART · Flanker · Stroop · Task switching · Dual N-Back · Multiple Object Tracking · Schulte table · Breath counting — adaptive difficulty, unscored practice round on first use, colour-vision-friendly Stroop |
+| **Session timeline** | Every reaction-time task shows trial-by-trial RTs, errors and misses, plus first-half vs second-half drift (vigilance decrement) |
 | **Assessment** | 15-min standardized battery with fixed difficulty — retest every 2 weeks and compare benchmarks |
-| **Deep focus** | Intention + if-then plan, pre-flight checklist, 1-min slow-breathing primer, distraction logging (`D`), brown/pink/white/rain noise, breaks, endurance suggestions, survives reloads |
-| **Progress** | Focus Index, attention profile vs. baseline, per-exercise trends, deep-focus chart, practice calendar, time-of-day profile, assessment benchmarks |
-| **Personal insights** | Sleep, exercise, stress, caffeine and time-of-day effects computed from *your* data |
+| **Deep focus** | Intention + if-then plan, pre-flight checklist, slow-breathing primer, **attention probes** (experience sampling: "where is your attention right now?"), distraction logging by type, brown/pink/white/rain noise, breaks, endurance suggestions, survives reloads |
+| **Personal experiments** | 14-day n-of-1 experiments with randomized ON/OFF days (phone out of the room, outdoor breaks, extra meditation, exercise first, social-media-free mornings) and an ON-vs-OFF comparison of performance, focus ratings, distraction rate and on-task rate |
+| **Habit tags** | Tag each day (built-in or your own); insights estimate each habit's effect on *your* focus |
+| **Weekly review** | Week-over-week stats, top distraction source, insights, achievements, and a 3-question reflection |
+| **Progress** | Focus Index, attention profile vs. baseline, per-exercise trends, deep-focus chart, probe results, distraction sources, practice calendar, time-of-day profile, benchmarks, 21 achievements |
 | **Learn** | 7 dimensions of attention, 12 evidence-rated habits, an in-the-moment toolkit, references |
+| **Reliability** | Offline-first PWA (all chunks precached), error boundary with data rescue, storage-failure warnings, backup reminders, daily calendar reminder (.ics) |
 
 ### The exercises
 
@@ -43,14 +48,18 @@ Most "brain games" promise that playing makes you smarter. The research says gai
 | Attentional breadth | Schulte table | Seconds per cell | — |
 | Meta-awareness | Breath counting | Count accuracy, self-caught resets | Levinson et al. 2014 |
 
-Timing-critical tasks (PVT, SART) update the DOM directly on animation frames and use event timestamps, so reaction times aren't distorted by rendering. Leaving the page mid-task invalidates and restarts that task.
+Timing-critical tasks (PVT, SART) update the DOM directly on animation frames and use event timestamps, so reaction times aren't distorted by rendering. Leaving the page mid-task invalidates and restarts that task. Breath counting penalizes press rates far above natural breathing so it can't be gamed.
+
+### How the personal experiments work
+
+Each experiment randomizes 14 days into 7 ON and 7 OFF days (no runs longer than 3), so "I only did it on good days" can't bias the result. For each outcome FocusLab reports the ON and OFF means, Cohen's *d* and a Welch *t*: |t| ≥ 2 is labelled a clear difference, |d| ≥ 0.5 a possible one. Logged compliance overrides the schedule. Fourteen days is a small sample — results are personal guidance, not proof.
 
 ## Run locally
 
 ```bash
 npm install
 npm run dev      # http://localhost:5173
-npm test         # scoring & analytics unit tests
+npm test         # unit tests: scoring, analytics, experiments, readiness, probes, achievements
 npm run build    # static build in dist/
 ```
 
@@ -62,9 +71,10 @@ Stack: React 19 + TypeScript + Vite. No UI or chart libraries — charts are han
 src/
   tasks/       9 exercises, the shared runner (intro → countdown → task → results), metadata, feedback
   pages/       Today, Train, Focus, Progress, Learn, Settings, Onboarding, Flow (plan / assessment)
-  lib/         scoring, analytics (focus index, plan, insights), store, audio, i18n, stats
+  lib/         scoring, analytics (focus index, plan, insights), personal (experiments, readiness,
+               weekly review, habit effects), achievements, focus-session state, store, audio, i18n, stats
   components/  charts, icons, UI primitives
-  content/     habits, toolkit and references for the Learn page
+  content/     habits, toolkit and references; habit tags, experiment templates, distraction types
 ```
 
 ## Disclaimer

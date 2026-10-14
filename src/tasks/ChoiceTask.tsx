@@ -4,7 +4,7 @@ import { makeT } from '../lib/i18n';
 import { adaptLevel, choiceDeadline, levelFactor, NORMS, scoreConflict, type ChoiceTrialRec } from '../lib/scoring';
 import { clamp100, randInt, shuffle } from '../lib/stats';
 import type { Lang, TaskProps } from '../lib/types';
-import { evTime, useKeys, useTimers } from './common';
+import { evTime, isTouch, useKeys, useTimers } from './common';
 import { ASSESS_LEVEL } from './registry';
 
 interface Trial {
@@ -19,15 +19,15 @@ interface ChoiceConfig {
   buttons: (lang: Lang) => { label: ReactNode; kbd: string; keys: string[] }[];
   render: (tr: Trial, lang: Lang) => ReactNode;
   cue?: { ms: (level: number) => number; render: (tr: Trial, lang: Lang) => ReactNode };
-  hint: (lang: Lang) => string;
+  hint: (lang: Lang, touch: boolean) => string;
 }
 
 const MAX_LEVEL = 10;
 
-function ChoiceTask({ config, level, mode, lang, onComplete, onProgress }: TaskProps & { config: ChoiceConfig }) {
-  const lvl = mode === 'assessment' ? ASSESS_LEVEL[config.kind] ?? 3 : level;
+function ChoiceTask({ config, level, mode, lang, onComplete, onProgress, practice }: TaskProps & { config: ChoiceConfig }) {
+  const lvl = practice ? 1 : mode === 'assessment' ? ASSESS_LEVEL[config.kind] ?? 3 : level;
   const deadline = choiceDeadline(lvl);
-  const trials = useMemo(() => config.trials(mode), [config, mode]);
+  const trials = useMemo(() => (practice ? config.trials('training').slice(0, 12) : config.trials(mode)), [config, mode, practice]);
   const buttons = useMemo(() => config.buttons(lang), [config, lang]);
   const [i, setI] = useState(0);
   const [phase, setPhase] = useState<'fix' | 'cue' | 'stim' | 'fb' | 'done'>('fix');
@@ -44,7 +44,8 @@ function ChoiceTask({ config, level, mode, lang, onComplete, onProgress }: TaskP
     setPhase('done');
     const { metrics, perf } = scoreConflict(recs.current, NORMS[config.kind]);
     const nextLevel = mode === 'training' ? adaptLevel(perf, lvl, MAX_LEVEL, 75, 50) : level;
-    onComplete({ metrics, perf, score: clamp100(perf * levelFactor(lvl, MAX_LEVEL)), level: lvl, nextLevel, durationMs: performance.now() - t0.current });
+    const series = recs.current.filter((r) => r.cond !== 'first').map((r) => ({ rt: r.rt, ok: r.correct, kind: r.rt === null ? ('timeout' as const) : undefined }));
+    onComplete({ metrics, perf, score: clamp100(perf * levelFactor(lvl, MAX_LEVEL)), level: lvl, nextLevel, durationMs: performance.now() - t0.current, series });
   };
 
   // Phase machine
@@ -153,7 +154,7 @@ function ChoiceTask({ config, level, mode, lang, onComplete, onProgress }: TaskP
           </button>
         ))}
       </div>
-      <div className="stage-hint">{config.hint(lang)}</div>
+      <div className="stage-hint">{config.hint(lang, isTouch())}</div>
     </>
   );
 }
@@ -194,7 +195,7 @@ export const flankerConfig: ChoiceConfig = {
       </div>
     );
   },
-  hint: (lang) => (lang === 'zh' ? '只看中间的箭头 · ← / → 或 F / J' : 'Center arrow only · ← / → or F / J'),
+  hint: (lang, touch) => (touch ? (lang === 'zh' ? '只看中间的箭头 · 点击左右按钮' : 'Center arrow only · tap left or right') : lang === 'zh' ? '只看中间的箭头 · ← / → 或 F / J' : 'Center arrow only · ← / → or F / J'),
 };
 
 // ---------------- Stroop ----------------
@@ -204,37 +205,60 @@ export const STROOP_COLORS = [
   { zh: '蓝', en: 'BLUE', css: '#2f6fde' },
   { zh: '黄', en: 'YELLOW', css: '#e0a100' },
 ];
+/** Blue / yellow / grey stay distinct for red–green colour vision deficiency (hue and lightness differ). */
+export const STROOP_COLORS_CVD = [
+  { zh: '蓝', en: 'BLUE', css: '#2f6fde' },
+  { zh: '黄', en: 'YELLOW', css: '#e8b100' },
+  { zh: '灰', en: 'GREY', css: '#8c8c8c' },
+];
+const STROOP_KEYS = [
+  ['d', 'D', 'KeyD', '1'],
+  ['f', 'F', 'KeyF', '2'],
+  ['j', 'J', 'KeyJ', '3'],
+  ['k', 'K', 'KeyK', '4'],
+];
 
-export const stroopConfig: ChoiceConfig = {
-  kind: 'stroop',
-  trials: (mode) =>
-    balanced(mode === 'assessment' ? 64 : 48, ['congruent', 'incongruent']).map((cond) => {
-      const ink = randInt(0, 3);
-      let word = ink;
-      if (cond === 'incongruent') while (word === ink) word = randInt(0, 3);
-      return { cond, correct: ink, ink, word };
-    }),
-  buttons: (lang) =>
-    STROOP_COLORS.map((c, k) => ({
-      label: (
-        <span className="row" style={{ gap: 7 }}>
-          <span className="dot" style={{ background: c.css, width: 12, height: 12 }} />
-          {lang === 'zh' ? c.zh : c.en.charAt(0) + c.en.slice(1).toLowerCase()}
-        </span>
-      ),
-      kbd: `${'DFJK'[k]} · ${k + 1}`,
-      keys: [['d', 'D', 'KeyD', '1'], ['f', 'F', 'KeyF', '2'], ['j', 'J', 'KeyJ', '3'], ['k', 'K', 'KeyK', '4']][k],
-    })),
-  render: (tr, lang) => {
-    const w = STROOP_COLORS[tr.word as number];
-    return (
-      <div className="stroop-word" style={{ color: STROOP_COLORS[tr.ink as number].css }}>
-        {lang === 'zh' ? w.zh : w.en}
-      </div>
-    );
-  },
-  hint: (lang) => (lang === 'zh' ? '按墨水颜色作答 · D 红 F 绿 J 蓝 K 黄' : 'Answer the ink color · D red F green J blue K yellow'),
-};
+export function makeStroopConfig(cvd: boolean): ChoiceConfig {
+  const colors = cvd ? STROOP_COLORS_CVD : STROOP_COLORS;
+  const n = colors.length;
+  const keyNames = 'DFJK'.slice(0, n).split('');
+  return {
+    kind: 'stroop',
+    trials: (mode) =>
+      balanced(mode === 'assessment' ? 64 : 48, ['congruent', 'incongruent']).map((cond) => {
+        const ink = randInt(0, n - 1);
+        let word = ink;
+        if (cond === 'incongruent') while (word === ink) word = randInt(0, n - 1);
+        return { cond, correct: ink, ink, word };
+      }),
+    buttons: (lang) =>
+      colors.map((c, k) => ({
+        label: (
+          <span className="row" style={{ gap: 7 }}>
+            <span className="dot" style={{ background: c.css, width: 12, height: 12 }} />
+            {lang === 'zh' ? c.zh : c.en.charAt(0) + c.en.slice(1).toLowerCase()}
+          </span>
+        ),
+        kbd: `${keyNames[k]} · ${k + 1}`,
+        keys: STROOP_KEYS[k],
+      })),
+    render: (tr, lang) => {
+      const w = colors[tr.word as number];
+      return (
+        <div className="stroop-word" style={{ color: colors[tr.ink as number].css }}>
+          {lang === 'zh' ? w.zh : w.en}
+        </div>
+      );
+    },
+    hint: (lang, touch) => {
+      if (touch) return lang === 'zh' ? '按墨水的颜色点击按钮，忽略字义' : 'Tap the ink colour, ignore the word';
+      const map = colors.map((c, k) => `${keyNames[k]} ${lang === 'zh' ? c.zh : c.en.toLowerCase()}`).join(' ');
+      return lang === 'zh' ? `按墨水颜色作答 · ${map}` : `Answer the ink colour · ${map}`;
+    },
+  };
+}
+
+export const stroopConfig = makeStroopConfig(false);
 
 // ---------------- Task switching ----------------
 const SWITCH_DIGITS = [1, 2, 3, 4, 6, 7, 8, 9];
@@ -281,9 +305,13 @@ export const switchConfig: ChoiceConfig = {
       </div>
     );
   },
-  hint: (lang) => (lang === 'zh' ? '蓝框判奇偶，橙框判大小 · ← / → 或 F / J' : 'Blue frame: odd/even · Orange frame: low/high · ← / → or F / J'),
+  hint: (lang, touch) =>
+    lang === 'zh' ? `蓝框判奇偶，橙框判大小 · ${touch ? '点击左右按钮' : '← / → 或 F / J'}` : `Blue frame: odd/even · Orange frame: low/high · ${touch ? 'tap left or right' : '← / → or F / J'}`,
 };
 
 export const Flanker = (p: TaskProps) => <ChoiceTask {...p} config={flankerConfig} />;
-export const Stroop = (p: TaskProps) => <ChoiceTask {...p} config={stroopConfig} />;
+export const Stroop = (p: TaskProps) => {
+  const config = useMemo(() => makeStroopConfig(p.settings.stroopCvd), [p.settings.stroopCvd]);
+  return <ChoiceTask {...p} config={config} />;
+};
 export const Switch = (p: TaskProps) => <ChoiceTask {...p} config={switchConfig} />;

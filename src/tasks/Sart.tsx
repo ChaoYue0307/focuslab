@@ -2,8 +2,8 @@ import { useEffect, useRef } from 'react';
 import { makeT } from '../lib/i18n';
 import { adaptLevel, levelFactor, scoreSart, SART_NOGO, type SartTrial } from '../lib/scoring';
 import { clamp100, shuffle } from '../lib/stats';
-import type { TaskProps } from '../lib/types';
-import { evTime, isSpace } from './common';
+import type { TaskProps, TrialPoint } from '../lib/types';
+import { evTime, isSpace, isTouch } from './common';
 
 const SIZES = [56, 76, 96, 116, 136];
 const MAX_LEVEL = 8;
@@ -15,7 +15,7 @@ export const sartTiming = (level: number) => ({
 
 const MASK = `<svg class="sart-mask" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="5" opacity=".55"><circle cx="50" cy="50" r="44"/><path d="M19 19 81 81M81 19 19 81"/></svg>`;
 
-export default function Sart({ level, mode, lang, onComplete, onProgress }: TaskProps) {
+export default function Sart({ level, mode, lang, onComplete, onProgress, practice }: TaskProps) {
   const digitRef = useRef<HTMLDivElement>(null);
   const flashRef = useRef<HTMLDivElement>(null);
   const t = makeT(lang);
@@ -23,9 +23,9 @@ export default function Sart({ level, mode, lang, onComplete, onProgress }: Task
   cb.current = { onComplete, onProgress };
 
   useEffect(() => {
-    const lvl = mode === 'assessment' ? 1 : level;
+    const lvl = mode === 'assessment' || practice ? 1 : level;
     const { stimMs, soaMs } = sartTiming(lvl);
-    const cycles = mode === 'assessment' ? 25 : 15;
+    const cycles = practice ? 2 : mode === 'assessment' ? 25 : 15;
     const digits: number[] = [];
     for (let c = 0; c < cycles; c++) digits.push(...shuffle([1, 2, 3, 4, 5, 6, 7, 8, 9]));
     const trials: SartTrial[] = digits.map((d) => ({ digit: d, rt: null }));
@@ -69,7 +69,12 @@ export default function Sart({ level, mode, lang, onComplete, onProgress }: Task
       el.innerHTML = '';
       const { metrics, perf } = scoreSart(trials);
       const nextLevel = mode === 'training' ? adaptLevel(perf, lvl, MAX_LEVEL, 85, 60) : level;
-      cb.current.onComplete({ metrics, perf, score: clamp100(perf * levelFactor(lvl, MAX_LEVEL)), level: lvl, nextLevel, durationMs: performance.now() - t0 });
+      const series: TrialPoint[] = [];
+      for (const tr of trials) {
+        if (tr.digit !== SART_NOGO) series.push(tr.rt === null ? { rt: null, ok: false, kind: 'omission' } : { rt: tr.rt, ok: true });
+        else if (tr.rt !== null) series.push({ rt: tr.rt, ok: false, kind: 'commission' });
+      }
+      cb.current.onComplete({ metrics, perf, score: clamp100(perf * levelFactor(lvl, MAX_LEVEL)), level: lvl, nextLevel, durationMs: performance.now() - t0, series });
     };
 
     const respond = (time: number) => {
@@ -113,7 +118,7 @@ export default function Sart({ level, mode, lang, onComplete, onProgress }: Task
     <>
       <div ref={flashRef} className="sart-flash" />
       <div ref={digitRef} className="sart-digit" />
-      <div className="stage-hint">{t('除了 3 都按 空格 / 点击 · 看到 3 不要按', 'Space / tap for every digit · do nothing on 3')}</div>
+      <div className="stage-hint">{isTouch() ? t('除了 3 都点击屏幕 · 看到 3 不要点', 'Tap for every digit · do nothing on 3') : t('除了 3 都按 空格 / 点击 · 看到 3 不要按', 'Space / tap for every digit · do nothing on 3')}</div>
     </>
   );
 }

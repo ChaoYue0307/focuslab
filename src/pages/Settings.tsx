@@ -2,9 +2,11 @@ import { useRef, type ReactNode } from 'react';
 import { Icon } from '../components/Icon';
 import { Segmented, Switch, toast } from '../components/ui';
 import { sfx } from '../lib/audio';
-import { dayKey } from '../lib/date';
+import { daysBetween, dayKey } from '../lib/date';
+import { downloadReminder } from '../lib/reminder';
 import { useT } from '../lib/i18n';
-import { emptyData, exportJSON, normalize, replaceData, updateSettings, useData } from '../lib/store';
+import { downloadBackup } from '../lib/backup';
+import { emptyData, normalize, replaceData, updateSettings, useData } from '../lib/store';
 import type { Lang, ThemePref } from '../lib/types';
 
 function Row({ title, sub, children }: { title: string; sub?: string; children: ReactNode }) {
@@ -25,14 +27,7 @@ export default function Settings() {
   const s = data.settings;
   const fileRef = useRef<HTMLInputElement>(null);
 
-  const doExport = () => {
-    const blob = new Blob([exportJSON()], { type: 'application/json' });
-    const a = document.createElement('a');
-    a.href = URL.createObjectURL(blob);
-    a.download = `focuslab-backup-${dayKey()}.json`;
-    a.click();
-    setTimeout(() => URL.revokeObjectURL(a.href), 1000);
-  };
+  const doExport = downloadBackup;
 
   const doImport = async (f: File) => {
     try {
@@ -98,8 +93,16 @@ export default function Settings() {
             <Switch on={s.sound} onChange={(v) => updateSettings({ sound: v })} label="sound" />
           </div>
         </Row>
-        <Row title={t('专注结束通知', 'Notify when focus ends')} sub={t('页面在后台时弹出系统通知', 'System notification when the tab is in the background')}>
+        <Row title={t('系统通知', 'System notifications')} sub={t('专注结束和专注抽查时，页面在后台也能提醒你', 'Alerts for focus end and attention probes while the tab is in the background')}>
           <Switch on={s.notify} onChange={requestNotify} label="notify" />
+        </Row>
+        <Row title={t('每日训练提醒', 'Daily training reminder')} sub={t('下载一个每天重复的日历提醒（Apple / Google / Outlook 日历都支持）', 'Download a daily repeating calendar reminder (works with Apple, Google and Outlook calendars)')}>
+          <div className="row">
+            <input type="time" className="input" style={{ width: 120 }} value={s.reminderTime} onChange={(e) => updateSettings({ reminderTime: e.target.value || '08:30' })} aria-label={t('提醒时间', 'Reminder time')} />
+            <button className="btn sm" onClick={() => downloadReminder(s.reminderTime, s.lang)} type="button">
+              <Icon name="calendar" size={15} /> {t('添加到日历', 'Add to calendar')}
+            </button>
+          </div>
         </Row>
       </div>
 
@@ -114,12 +117,38 @@ export default function Settings() {
         <Row title={t('数息练习时长', 'Breath counting length')}>
           <Segmented value={s.breathMin} onChange={(v) => updateSettings({ breathMin: v })} options={[3, 5, 10, 15].map((v) => ({ value: v, label: `${v}′` }))} />
         </Row>
+        <Row title={t('专注抽查', 'Attention probes')} sub={t('专注时段中随机询问"此刻注意力在哪"，测量并训练对走神的觉察', 'Random "where is your attention?" check-ins during focus sessions to measure and train awareness of mind-wandering')}>
+          <Segmented
+            value={s.probes ? s.probeMin : 0}
+            onChange={(v) => updateSettings(v ? { probes: true, probeMin: v } : { probes: false })}
+            options={[
+              { value: 0, label: t('关', 'Off') },
+              { value: 5, label: '~5′' },
+              { value: 10, label: '~10′' },
+              { value: 15, label: '~15′' },
+            ]}
+          />
+        </Row>
+        <Row title={t('Stroop 色觉友好配色', 'Colour-vision-friendly Stroop')} sub={t('改用蓝 / 黄 / 灰三色，适合红绿色弱', 'Uses blue / yellow / grey instead, suitable for red–green colour vision deficiency')}>
+          <Switch on={s.stroopCvd} onChange={(v) => updateSettings({ stroopCvd: v })} label="stroop cvd" />
+        </Row>
         <Row title={t('N-Back 双任务', 'Dual N-Back')} sub={t('同时记忆位置和字母', 'Track positions and letters together')}>
           <Switch on={s.nbackDual} onChange={(v) => updateSettings({ nbackDual: v })} label="dual" />
         </Row>
         <Row title={t('N-Back 朗读字母', 'Speak N-Back letters')} sub={t('关闭则在方块中显示字母', 'When off, letters are shown in the square')}>
           <Switch on={s.nbackAudio} onChange={(v) => updateSettings({ nbackAudio: v })} label="audio" />
         </Row>
+        {s.customTags.length > 0 && (
+          <Row title={t('自定义习惯标签', 'Custom habit tags')} sub={t('点击移除', 'Click to remove')}>
+            <div className="row wrap" style={{ gap: 6 }}>
+              {s.customTags.map((tag) => (
+                <button key={tag} className="chip" style={{ cursor: 'pointer' }} onClick={() => updateSettings({ customTags: s.customTags.filter((x) => x !== tag) })} type="button">
+                  {tag} <Icon name="x" size={12} />
+                </button>
+              ))}
+            </div>
+          </Row>
+        )}
         <Row title={t('重置训练难度', 'Reset difficulty levels')} sub={t('所有练习回到初始难度', 'All exercises go back to their starting level')}>
           <button
             className="btn sm"
@@ -144,7 +173,12 @@ export default function Settings() {
         >
           <span />
         </Row>
-        <Row title={t('导出备份', 'Export backup')} sub={t('下载 JSON 文件，可在其他设备导入', 'Download a JSON file you can import elsewhere')}>
+        <Row
+          title={t('导出备份', 'Export backup')}
+          sub={`${t('下载 JSON 文件，可在其他设备导入', 'Download a JSON file you can import elsewhere')} · ${
+            data.lastExportAt ? t('上次备份：{n} 天前', 'Last backup: {n} days ago', { n: daysBetween(dayKey(data.lastExportAt), dayKey()) }) : t('还没有备份过', 'Never backed up')
+          }`}
+        >
           <button className="btn sm" onClick={doExport} type="button">
             <Icon name="download" size={15} /> {t('导出', 'Export')}
           </button>

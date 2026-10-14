@@ -1,7 +1,8 @@
 import { useState } from 'react';
+import { TAGS } from '../content/habits';
 import { dayKey } from '../lib/date';
 import { useT } from '../lib/i18n';
-import { update, useData } from '../lib/store';
+import { update, updateSettings, useData } from '../lib/store';
 import type { CheckIn as CheckInT } from '../lib/types';
 import { Icon } from './Icon';
 import { Modal, Segmented, toast } from './ui';
@@ -40,10 +41,20 @@ export function CheckInModal({ onClose }: { onClose: () => void }) {
     },
   );
   const set = <K extends keyof CheckInT>(k: K, v: CheckInT[K]) => setC((x) => ({ ...x, [k]: v }));
+  const [newTag, setNewTag] = useState('');
+  const tags = c.tags || [];
+  const toggleTag = (id: string) => set('tags', tags.includes(id) ? tags.filter((x) => x !== id) : [...tags, id]);
+  const addCustom = () => {
+    const v = newTag.trim().slice(0, 24);
+    if (!v) return;
+    if (!data.settings.customTags.includes(v)) updateSettings({ customTags: [...data.settings.customTags, v] });
+    if (!tags.includes(`c:${v}`)) set('tags', [...tags, `c:${v}`]);
+    setNewTag('');
+  };
   const save = () => {
     update((d) => {
       d.checkins = d.checkins.filter((x) => x.date !== today);
-      d.checkins.push({ ...c, createdAt: Date.now() });
+      d.checkins.push({ ...c, tags, createdAt: Date.now() });
     });
     toast(t('已记录今日状态', 'Check-in saved'));
     onClose();
@@ -82,6 +93,26 @@ export function CheckInModal({ onClose }: { onClose: () => void }) {
             <span className="label">{t('过去 24 小时运动过', 'Exercised in last 24 h')}</span>
             <Segmented value={c.exercise ? 1 : 0} onChange={(v) => set('exercise', v === 1)} options={[{ value: 0, label: t('没有', 'No') }, { value: 1, label: t('有', 'Yes') }]} />
           </div>
+        </div>
+        <div className="field">
+          <div className="row between">
+            <span className="label">{t('今天的习惯（可稍后回来补充）', 'Today’s habits (you can update later)')}</span>
+          </div>
+          <div className="row wrap" style={{ gap: 6 }}>
+            {[...TAGS.map((x) => ({ id: x.id, label: t(x.label.zh, x.label.en) })), ...data.settings.customTags.map((x) => ({ id: `c:${x}`, label: x }))].map((x) => (
+              <button key={x.id} type="button" className={`chip ${tags.includes(x.id) ? 'accent' : ''}`} style={{ cursor: 'pointer' }} aria-pressed={tags.includes(x.id)} onClick={() => toggleTag(x.id)}>
+                {tags.includes(x.id) && <Icon name="check" size={12} stroke={3} />}
+                {x.label}
+              </button>
+            ))}
+          </div>
+          <div className="row" style={{ marginTop: 4 }}>
+            <input className="input" style={{ padding: '6px 10px' }} value={newTag} maxLength={24} onChange={(e) => setNewTag(e.target.value)} onKeyDown={(e) => e.key === 'Enter' && addCustom()} placeholder={t('添加自定义习惯，例如"上午不开会"', 'Add your own, e.g. "no morning meetings"')} />
+            <button className="btn sm" onClick={addCustom} type="button" aria-label={t('添加', 'Add')}>
+              <Icon name="plus" size={14} />
+            </button>
+          </div>
+          <span className="tiny muted">{t('积累一段时间后，FocusLab 会估计每个习惯对你专注的影响。', 'Over time, FocusLab estimates how each habit affects your focus.')}</span>
         </div>
       </div>
       <button className="btn primary lg block" style={{ marginTop: 24 }} onClick={save} type="button">

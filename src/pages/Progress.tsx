@@ -2,13 +2,17 @@ import { useMemo, useState } from 'react';
 import { ChartCard, ColumnChart, Heatmap, LineChart } from '../components/Charts';
 import { Icon } from '../components/Icon';
 import { Delta, Segmented } from '../components/ui';
-import { baselineScores, domainScores, focusIndex, indexHistory, insights, streak, timeOfDayProfile } from '../lib/analytics';
+import { ExperimentPicker, ExperimentReport } from '../components/Experiment';
+import { DISTRACTION_KINDS } from '../content/habits';
+import { ACHIEVEMENTS } from '../lib/achievements';
+import { baselineScores, domainScores, focusIndex, indexHistory, streak, timeOfDayProfile } from '../lib/analytics';
+import { allInsights, distractionRate, onTaskRate } from '../lib/personal';
 import { addDays, dayKey, dayRange, fmtMinutes, shortDate } from '../lib/date';
 import { bi, useT } from '../lib/i18n';
 import { mean } from '../lib/stats';
 import { update, useData } from '../lib/store';
 import type { TaskId } from '../lib/types';
-import { fmtMetric } from '../tasks/TaskRunner';
+import { fmtMetric } from '../tasks/format';
 import { ASSESSMENT, DOMAINS, TASKS, domainMeta, taskMeta } from '../tasks/registry';
 
 export default function Progress() {
@@ -30,7 +34,7 @@ export default function Progress() {
   const trainMs = results.reduce((s, r) => s + r.durationMs, 0);
   const weekFrom = addDays(today, -6);
   const weekFocus = data.sessions.filter((s) => s.date >= weekFrom).reduce((a, s) => a + s.focusMs, 0);
-  const ins = useMemo(() => insights(data), [data]);
+  const ins = useMemo(() => allInsights(data), [data]);
 
   if (!results.length && !data.sessions.length) {
     return (
@@ -190,6 +194,7 @@ export default function Progress() {
         <FocusColumns />
         <TimeOfDay />
       </div>
+      <FocusQuality />
 
       <div className="card" style={{ marginTop: 16 }}>
         <div className="card-head">
@@ -202,7 +207,155 @@ export default function Progress() {
       </div>
 
       <Benchmarks />
+      <Experiments />
+      <Achievements />
       <History />
+    </>
+  );
+}
+
+function FocusQuality() {
+  const t = useT();
+  const lang = t.lang;
+  const { sessions } = useData();
+  const recent = [...sessions].sort((a, b) => a.startedAt - b.startedAt).slice(-30);
+  const ot = onTaskRate(recent);
+  const dr = distractionRate(recent);
+  const counts = DISTRACTION_KINDS.map((k) => ({ k, n: recent.reduce((a, s) => a + s.distractions.filter((d) => (d.kind || 'other') === k.id).length, 0) }));
+  const total = counts.reduce((a, c) => a + c.n, 0);
+  const probes = recent.flatMap((s) => (s.probes || []).filter((p) => p.state !== 'missed'));
+  const states = [
+    { id: 'on', label: t('在任务上', 'On task'), color: 'var(--accent)' },
+    { id: 'mw', label: t('走神', 'Mind-wandering'), color: 'var(--d2)' },
+    { id: 'ext', label: t('被打断', 'Interrupted'), color: 'var(--d5)' },
+  ].map((x) => ({ ...x, n: probes.filter((p) => p.state === x.id).length }));
+  if (!recent.length) return null;
+  return (
+    <div className="grid grid-2" style={{ marginTop: 16 }}>
+      <div className="card">
+        <div className="card-head">
+          <div>
+            <h3>{t('专注抽查', 'Attention probes')}</h3>
+            <div className="card-sub">{t('最近 30 段专注中，提示响起那一刻注意力在哪', 'Where attention was when the chime sounded, last 30 sessions')}</div>
+          </div>
+          {ot && <span className="stat-value" style={{ fontSize: 22, margin: 0 }}>{Math.round(ot.rate * 100)}%</span>}
+        </div>
+        {probes.length ? (
+          <>
+            <div className="stackbar" role="img" aria-label={states.map((s) => `${s.label} ${s.n}`).join(', ')}>
+              {states.filter((s) => s.n).map((s) => (
+                <div key={s.id} style={{ flex: s.n, background: s.color }} title={`${s.label}: ${s.n}`} />
+              ))}
+            </div>
+            <div className="legend" style={{ marginTop: 10 }}>
+              {states.map((s) => (
+                <span key={s.id}>
+                  <i className="box" style={{ background: s.color }} />
+                  {s.label} <b className="tabnum">{s.n}</b>
+                </span>
+              ))}
+            </div>
+            <p className="tiny muted" style={{ marginTop: 10 }}>
+              {t('研究估计人们清醒时约有一半时间在走神。重要的不是从不走神，而是更快地发现并回来。', 'Research suggests people mind-wander about half their waking hours. The goal isn’t never drifting — it’s noticing and returning faster.')}
+            </p>
+          </>
+        ) : (
+          <div className="empty">{t('在专注页开启"专注抽查"后，这里会显示你在真实工作中的走神比例。', 'Turn on attention probes on the Focus page to see how often your mind wanders during real work.')}</div>
+        )}
+      </div>
+      <div className="card">
+        <div className="card-head">
+          <div>
+            <h3>{t('分心来源', 'Distraction sources')}</h3>
+            <div className="card-sub">{dr !== null ? t('每小时 {n} 次', '{n} per focused hour', { n: dr.toFixed(1) }) : t('最近 30 段专注', 'Last 30 sessions')}</div>
+          </div>
+        </div>
+        {total ? (
+          <div className="stack sm">
+            {counts
+              .filter((c) => c.n)
+              .sort((a, b) => b.n - a.n)
+              .map((c) => (
+                <div key={c.k.id} className="row" style={{ gap: 10 }}>
+                  <Icon name={c.k.icon} size={16} />
+                  <span className="small" style={{ width: 92 }}>
+                    {bi(c.k.label, lang)}
+                  </span>
+                  <div style={{ flex: 1, height: 12, background: 'var(--surface-2)', borderRadius: 4 }}>
+                    <div style={{ width: `${(c.n / total) * 100}%`, height: '100%', background: 'var(--accent)', borderRadius: '0 4px 4px 0' }} />
+                  </div>
+                  <span className="small tabnum" style={{ width: 28, textAlign: 'right', fontWeight: 650 }}>
+                    {c.n}
+                  </span>
+                </div>
+              ))}
+          </div>
+        ) : (
+          <div className="empty">{t('专注时按 D 记录分心并选择类型，这里会告诉你最该先解决哪一种。', 'Press D during focus to log distractions by type, and this shows which one to tackle first.')}</div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+function Experiments() {
+  const t = useT();
+  const { experiments } = useData();
+  const sorted = [...experiments].sort((a, b) => (a.status === 'active' ? -1 : b.status === 'active' ? 1 : b.startDate.localeCompare(a.startDate)));
+  const hasActive = experiments.some((e) => e.status === 'active');
+  return (
+    <>
+      <div className="section-title">{t('个人实验', 'Personal experiments')}</div>
+      {sorted.length > 0 && (
+        <div className="stack" style={{ marginBottom: 16 }}>
+          {sorted.slice(0, 4).map((e) => (
+            <ExperimentReport key={e.id} exp={e} />
+          ))}
+        </div>
+      )}
+      {!hasActive && (
+        <>
+          <p className="small text-2" style={{ marginBottom: 12, maxWidth: 760 }}>
+            {t(
+              '与其猜哪些建议对你有用，不如测一测：14 天里随机安排 ON / OFF 日，FocusLab 比较两组日子的训练表现、专注自评、分心频率和走神比例。',
+              'Instead of guessing which advice works for you, test it: 14 days of randomized ON / OFF days, comparing training performance, focus ratings, distraction rate and mind-wandering between the two.',
+            )}
+          </p>
+          <ExperimentPicker />
+        </>
+      )}
+    </>
+  );
+}
+
+function Achievements() {
+  const t = useT();
+  const lang = t.lang;
+  const { achievements } = useData();
+  const got = ACHIEVEMENTS.filter((a) => achievements[a.id]).length;
+  return (
+    <>
+      <div className="section-title">
+        {t('成就', 'Achievements')} · {got}/{ACHIEVEMENTS.length}
+      </div>
+      <div className="badges">
+        {ACHIEVEMENTS.map((a) => {
+          const at = achievements[a.id];
+          return (
+            <div key={a.id} className={`badge ${at ? 'on' : ''}`} title={at ? new Date(at).toLocaleDateString(lang === 'zh' ? 'zh-CN' : 'en-US') : ''}>
+              <span className="badge-icon">
+                <Icon name={a.icon} size={18} />
+              </span>
+              <div style={{ minWidth: 0 }}>
+                <div className="small" style={{ fontWeight: 650 }}>
+                  {bi(a.title, lang)}
+                </div>
+                <div className="tiny muted">{bi(a.desc, lang)}</div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
     </>
   );
 }

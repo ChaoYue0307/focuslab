@@ -4,15 +4,13 @@ import { makeT } from '../lib/i18n';
 import { nextN, scoreNback, type NbackBlock } from '../lib/scoring';
 import { shuffle } from '../lib/stats';
 import type { TaskProps } from '../lib/types';
-import { useKeys } from './common';
+import { isTouch, useKeys } from './common';
 import { ASSESS_LEVEL } from './registry';
 
 const LETTERS = ['C', 'H', 'K', 'L', 'Q', 'R', 'S', 'T'];
 const POSITIONS = [0, 1, 2, 3, 5, 6, 7, 8]; // 3×3 grid without the center
-const BLOCKS = 3;
 const TRIAL_MS = 3000;
 const STIM_MS = 500;
-const TARGETS = 6;
 
 /** A sequence of `len` symbols (0..alphabet-1) with exactly `targets` n-back matches. */
 export function nbackSequence(len: number, n: number, targets: number, alphabet: number): number[] {
@@ -31,11 +29,13 @@ export function nbackSequence(len: number, n: number, targets: number, alphabet:
 
 type Mark = 'hit' | 'miss' | null;
 
-export default function NBack({ level, mode, settings, lang, onComplete, onProgress }: TaskProps) {
+export default function NBack({ level, mode, settings, lang, onComplete, onProgress, practice }: TaskProps) {
+  const BLOCKS = practice ? 1 : 3;
+  const TARGETS = practice ? 4 : 6;
   const t = makeT(lang);
   const dual = settings.nbackDual;
   const audio = dual && settings.nbackAudio && speechAvailable() && settings.sound;
-  const [n, setN] = useState(mode === 'assessment' ? ASSESS_LEVEL.nback ?? 2 : Math.max(1, level));
+  const [n, setN] = useState(practice ? 1 : mode === 'assessment' ? ASSESS_LEVEL.nback ?? 2 : Math.max(1, level));
   const [block, setBlock] = useState(0);
   const [phase, setPhase] = useState<'run' | 'between'>('run');
   const [cell, setCell] = useState<number | null>(null);
@@ -50,7 +50,7 @@ export default function NBack({ level, mode, settings, lang, onComplete, onProgr
   // Run one block
   useEffect(() => {
     if (phase !== 'run') return;
-    const len = 20 + n;
+    const len = (practice ? 12 : 20) + n;
     const c = cur.current;
     c.posSeq = nbackSequence(len, n, TARGETS, POSITIONS.length);
     c.audSeq = nbackSequence(len, n, TARGETS, LETTERS.length);
@@ -224,7 +224,11 @@ export default function NBack({ level, mode, settings, lang, onComplete, onProgr
           </button>
         )}
       </div>
-      <div className="stage-hint">{t('与 {n} 步之前相同才按 · 不确定就不按', 'Press only when it matches {n} steps back · unsure? don’t press', { n })}</div>
+      <div className="stage-hint">
+        {isTouch()
+          ? t('与 {n} 步之前相同才点 · 不确定就不点', 'Tap only when it matches {n} steps back · unsure? don’t tap', { n })
+          : t('与 {n} 步之前相同才按 A / L · 不确定就不按', 'Press A / L only when it matches {n} steps back · unsure? don’t press', { n })}
+      </div>
     </>
   );
 }

@@ -7,7 +7,6 @@ import type { TaskProps } from '../lib/types';
 
 const W = 1000; // logical arena size
 const R = 26; // ball radius
-const ROUNDS = 10;
 const CUE_MS = 2200;
 const MOVE_MS = 5500;
 const MAX_LEVEL = 15;
@@ -21,12 +20,13 @@ interface Ball {
   picked: boolean;
 }
 
-export default function Mot({ level, lang, onComplete, onProgress }: TaskProps) {
+export default function Mot({ level, lang, onComplete, onProgress, practice }: TaskProps) {
+  const ROUNDS = practice ? 2 : 10;
   const t = makeT(lang);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [round, setRound] = useState(0);
   const [phase, setPhase] = useState<'cue' | 'move' | 'select' | 'reveal'>('cue');
-  const [lvl, setLvl] = useState(Math.max(1, Math.min(MAX_LEVEL, level)));
+  const [lvl, setLvl] = useState(practice ? 1 : Math.max(1, Math.min(MAX_LEVEL, level)));
   const [picked, setPicked] = useState(0);
   const balls = useRef<Ball[]>([]);
   const trials = useRef<MotTrial[]>([]);
@@ -53,6 +53,8 @@ export default function Mot({ level, lang, onComplete, onProgress }: TaskProps) 
       bs.push({ x, y, vx: Math.cos(a) * speed, vy: Math.sin(a) * speed, target: flags[i], picked: false });
     }
     balls.current = bs;
+    // Dev-only hook so automated play-tests can read ball state.
+    if (import.meta.env.DEV) (window as unknown as { __mot: Ball[] }).__mot = bs;
     setPicked(0);
     setPhase('cue');
     onProgress(round / ROUNDS);

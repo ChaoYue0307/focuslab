@@ -109,6 +109,7 @@ export default function Flow({ kind }: { kind: 'plan' | 'assess' }) {
 
   // Summary
   const done = data.results.filter((r) => r.startedAt >= startedAt);
+  document.title = `${label} · FocusLab`;
   const fi = focusIndex(domainScores(data.results));
   const st = streak(data);
   return (
@@ -131,10 +132,16 @@ export default function Flow({ kind }: { kind: 'plan' | 'assess' }) {
               </div>
             </ScoreRing>
             <div className="grow stack sm">
-              <span className="chip good" style={{ alignSelf: 'flex-start' }}>
-                <Icon name="check" size={13} /> {kind === 'assess' ? t('评估完成', 'Assessment complete') : t('今日训练完成', 'Session complete')}
-              </span>
-              <h1 style={{ fontSize: 26 }}>{kind === 'assess' ? t('很好，基准已更新', 'Benchmarks updated') : t('干得漂亮！', 'Nicely done!')}</h1>
+              {done.length ? (
+                <span className="chip good" style={{ alignSelf: 'flex-start' }}>
+                  <Icon name="check" size={13} /> {kind === 'assess' ? t('评估完成', 'Assessment complete') : t('今日训练完成', 'Session complete')}
+                </span>
+              ) : (
+                <span className="chip" style={{ alignSelf: 'flex-start' }}>
+                  {t('已跳过', 'Skipped')}
+                </span>
+              )}
+              <h1 style={{ fontSize: 26 }}>{!done.length ? t('下次继续', 'Next time, then') : kind === 'assess' ? t('很好，基准已更新', 'Benchmarks updated') : t('干得漂亮！', 'Nicely done!')}</h1>
               <div className="row small text-2" style={{ gap: 6 }}>
                 <Icon name="flame" size={16} style={{ color: 'var(--d2)' }} />
                 {t('连续 {n} 天', '{n}-day streak', { n: st.current })}
