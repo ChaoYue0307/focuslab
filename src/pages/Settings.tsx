@@ -90,11 +90,11 @@ export default function Settings() {
                 aria-label={t('音量', 'Volume')}
               />
             )}
-            <Switch on={s.sound} onChange={(v) => updateSettings({ sound: v })} label="sound" />
+            <Switch on={s.sound} onChange={(v) => updateSettings({ sound: v })} label={t('音效', 'Sound effects')} />
           </div>
         </Row>
         <Row title={t('系统通知', 'System notifications')} sub={t('专注结束和专注抽查时，页面在后台也能提醒你', 'Alerts for focus end and attention probes while the tab is in the background')}>
-          <Switch on={s.notify} onChange={requestNotify} label="notify" />
+          <Switch on={s.notify} onChange={requestNotify} label={t('系统通知', 'System notifications')} />
         </Row>
         <Row title={t('每日训练提醒', 'Daily training reminder')} sub={t('下载一个每天重复的日历提醒（Apple / Google / Outlook 日历都支持）', 'Download a daily repeating calendar reminder (works with Apple, Google and Outlook calendars)')}>
           <div className="row">
@@ -130,13 +130,13 @@ export default function Settings() {
           />
         </Row>
         <Row title={t('Stroop 色觉友好配色', 'Colour-vision-friendly Stroop')} sub={t('改用蓝 / 黄 / 灰三色，适合红绿色弱', 'Uses blue / yellow / grey instead, suitable for red–green colour vision deficiency')}>
-          <Switch on={s.stroopCvd} onChange={(v) => updateSettings({ stroopCvd: v })} label="stroop cvd" />
+          <Switch on={s.stroopCvd} onChange={(v) => updateSettings({ stroopCvd: v })} label={t('Stroop 色觉友好配色', 'Colour-vision-friendly Stroop')} />
         </Row>
         <Row title={t('N-Back 双任务', 'Dual N-Back')} sub={t('同时记忆位置和字母', 'Track positions and letters together')}>
-          <Switch on={s.nbackDual} onChange={(v) => updateSettings({ nbackDual: v })} label="dual" />
+          <Switch on={s.nbackDual} onChange={(v) => updateSettings({ nbackDual: v })} label={t('N-Back 双任务', 'Dual N-Back')} />
         </Row>
         <Row title={t('N-Back 朗读字母', 'Speak N-Back letters')} sub={t('关闭则在方块中显示字母', 'When off, letters are shown in the square')}>
-          <Switch on={s.nbackAudio} onChange={(v) => updateSettings({ nbackAudio: v })} label="audio" />
+          <Switch on={s.nbackAudio} onChange={(v) => updateSettings({ nbackAudio: v })} label={t('N-Back 朗读字母', 'Speak N-Back letters')} />
         </Row>
         {s.customTags.length > 0 && (
           <Row title={t('自定义习惯标签', 'Custom habit tags')} sub={t('点击移除', 'Click to remove')}>

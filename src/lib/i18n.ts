@@ -12,7 +12,7 @@ import type { Lang } from './types';
  * language is missing a string or mangles a {placeholder}.
  */
 
-export { LANGS, detectLang, isLang, localeOf, type LangMeta } from './langs';
+export { DEFAULT_LANG, LANGS, isLang, localeOf, type LangMeta } from './langs';
 import { localeOf } from './langs';
 
 /** Stable short id for an English source string (FNV-1a, base36). Must match scripts/i18n-extract.mjs. */

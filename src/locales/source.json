@@ -807,6 +807,10 @@
   "en": "Past reviews",
   "zh": "过往回顾"
  },
+ "1esenmp": {
+  "en": "Metric",
+  "zh": "指标"
+ },
  "1esox7r": {
   "en": "Attention escapes most when you’re stuck. Shrink the task to the next physical 2-minute action, like \"open the doc and write the first sentence\".",
   "zh": "卡住时注意力最容易逃跑。把任务缩小到\"接下来 2 分钟要做的具体动作\"，例如\"打开文档写下第一句话\"。"
@@ -1034,6 +1038,10 @@
  "1ipxqki": {
   "en": "Press Space or tap as soon as the counter appears",
   "zh": "计数器出现就按 空格 或点击屏幕"
+ },
+ "1iucaq2": {
+  "en": "Main navigation",
+  "zh": "主导航"
  },
  "1ivq5ab": {
   "en": "Retake",
@@ -2598,6 +2606,10 @@
  "hbehaf": {
   "en": "vs base",
   "zh": "较基线"
+ },
+ "hc65cv": {
+  "en": "Show data as a table",
+  "zh": "以表格查看数据"
  },
  "hh188h": {
   "en": "Train at different times of day and this will reveal when you focus best.",

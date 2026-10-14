@@ -561,7 +561,7 @@ function Benchmarks() {
           <thead>
             <tr>
               <th>{t('测试', 'Test')}</th>
-              <th>{t('指标', 'Measure')}</th>
+              <th>{t('指标', 'Metric')}</th>
               <th className="num">{t('第一次', 'First')}</th>
               <th className="num">{t('最近', 'Latest')}</th>
               <th className="num">{t('变化', 'Change')}</th>

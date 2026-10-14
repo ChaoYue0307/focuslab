@@ -22,14 +22,5 @@ export const LANGS: LangMeta[] = [
 export const isLang = (x: unknown): x is Lang => LANGS.some((l) => l.code === x);
 export const localeOf = (lang: Lang) => LANGS.find((l) => l.code === lang)?.locale ?? 'en-US';
 
-/** Best match for the browser's preferred languages. */
-export function detectLang(prefs: readonly string[] = typeof navigator !== 'undefined' ? navigator.languages || [navigator.language] : []): Lang {
-  for (const raw of prefs) {
-    const p = (raw || '').toLowerCase();
-    if (/^zh-(tw|hk|mo|hant)/.test(p) || p.includes('hant')) return 'zh-Hant';
-    if (p.startsWith('zh')) return 'zh';
-    const base = p.split('-')[0];
-    if (isLang(base)) return base;
-  }
-  return 'en';
-}
+/** Everyone starts in Simplified Chinese; other languages are one tap away (or via ?lang= links). */
+export const DEFAULT_LANG: Lang = 'zh';

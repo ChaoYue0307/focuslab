@@ -3,7 +3,8 @@ import path from 'node:path';
 import { describe, expect, it } from 'vitest';
 // @ts-expect-error — plain ESM build script without type declarations
 import { extract, keyOf as scriptKeyOf, placeholders } from '../../scripts/i18n-extract.mjs';
-import { detectLang, keyOf, LANGS, makeT, registerDict, tr } from './i18n';
+import { DEFAULT_LANG, keyOf, LANGS, makeT, registerDict, tr } from './i18n';
+import { defaultSettings, normalize } from './store';
 
 const dir = path.resolve(__dirname, '../locales');
 const source: Record<string, { en: string; zh: string }> = JSON.parse(fs.readFileSync(path.join(dir, 'source.json'), 'utf8'));
@@ -41,14 +42,10 @@ describe('i18n runtime', () => {
     expect(makeT('zh')('时段：{b}', 'Window: {b}', { b: { zh: '上午', en: 'morning' } })).toBe('时段：上午');
   });
 
-  it('detects the browser language', () => {
-    expect(detectLang(['zh-TW'])).toBe('zh-Hant');
-    expect(detectLang(['zh-Hans-CN'])).toBe('zh');
-    expect(detectLang(['ja-JP', 'en'])).toBe('ja');
-    expect(detectLang(['nl-NL', 'ko-KR'])).toBe('ko');
-    expect(detectLang(['pt-BR', 'en'])).toBe('pt');
-    expect(detectLang(['nl-NL', 'de-DE'])).toBe('de');
-    expect(detectLang(['ru'])).toBe('ru');
-    expect(detectLang(['nl-NL'])).toBe('en');
+  it('defaults to Simplified Chinese and repairs unknown languages', () => {
+    expect(DEFAULT_LANG).toBe('zh');
+    expect(defaultSettings().lang).toBe('zh');
+    expect(normalize({ settings: { lang: 'xx' }, results: [] }).settings.lang).toBe('zh');
+    expect(normalize({ settings: { lang: 'ja' }, results: [] }).settings.lang).toBe('ja');
   });
 });

@@ -265,14 +265,14 @@ function Setup(p: {
                 <div style={{ fontWeight: 600 }}>{t('开始前 1 分钟慢呼吸', '1-minute slow breathing first')}</div>
                 <div className="small muted">{t('约 6 次/分的慢呼吸，帮助平稳进入状态', 'About 6 breaths/min to settle in')}</div>
               </div>
-              <Switch on={p.primer} onChange={p.setPrimer} label="primer" />
+              <Switch on={p.primer} onChange={p.setPrimer} label={t('开始前 1 分钟慢呼吸', '1-minute slow breathing first')} />
             </div>
             <div className="row between">
               <div>
                 <div style={{ fontWeight: 600 }}>{t('记录离开本页面', 'Track leaving this page')}</div>
                 <div className="small muted">{t('仅当你的工作就在这个浏览器标签页中时开启', 'Only if your work happens in this browser tab')}</div>
               </div>
-              <Switch on={p.trackAway} onChange={p.setTrackAway} label="track away" />
+              <Switch on={p.trackAway} onChange={p.setTrackAway} label={t('记录离开本页面', 'Track leaving this page')} />
             </div>
           </div>
           <button className="btn primary lg block" onClick={p.onStart} type="button">
@@ -516,7 +516,7 @@ function Running({ active, persist, onFinish }: { active: Active; persist: (a: A
           <div className="grow">
             {t('你离开了 {d}。欢迎回来——继续：', 'You were away for {d}. Welcome back — continue with:', { d: fmtDuration(awayBanner) })} <b>{active.intention || t('当前任务', 'your task')}</b>
           </div>
-          <button className="icon-btn" onClick={() => setAwayBanner(null)} type="button" aria-label="close">
+          <button className="icon-btn" onClick={() => setAwayBanner(null)} type="button" aria-label={t('关闭', 'Close')}>
             <Icon name="x" size={16} />
           </button>
         </div>
@@ -699,7 +699,7 @@ function Review({ session, onSave }: { session: FocusSession; onSave: (patch: Pa
                 value={outcome || ''}
                 onChange={(v) => setOutcome(v as FocusSession['outcome'])}
                 options={[
-                  { value: 'done', label: t('完成', 'Done') },
+                  { value: 'done', label: t('完成', 'Yes') },
                   { value: 'partial', label: t('部分', 'Partly') },
                   { value: 'no', label: t('没有', 'No') },
                 ]}

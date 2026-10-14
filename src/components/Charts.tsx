@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
 import { parseDay, shortDate, weekdayShort } from '../lib/date';
-import { localeOf, tr } from '../lib/i18n';
+import { localeOf, tr, useT } from '../lib/i18n';
 import type { Lang, TrialPoint } from '../lib/types';
 
 function useWidth<T extends HTMLElement>(): [React.RefObject<T | null>, number] {
@@ -426,6 +426,7 @@ export function Heatmap({ end, value, lang, fmt }: { end: string; value: (d: str
 /** A card whose chart can be swapped for a plain table (accessibility + exact values). */
 export function ChartCard({ title, sub, right, table, children }: { title: ReactNode; sub?: ReactNode; right?: ReactNode; table?: ReactNode; children: ReactNode }) {
   const [asTable, setAsTable] = useState(false);
+  const t = useT();
   return (
     <div className="card">
       <div className="card-head">
@@ -436,7 +437,7 @@ export function ChartCard({ title, sub, right, table, children }: { title: React
         <div className="row">
           {right}
           {table && (
-            <button className={`icon-btn`} aria-pressed={asTable} title="Table" onClick={() => setAsTable(!asTable)} type="button" style={asTable ? { background: 'var(--surface-2)', color: 'var(--text)' } : undefined}>
+            <button className={`icon-btn`} aria-pressed={asTable} title={t('以表格查看数据', 'Show data as a table')} aria-label={t('以表格查看数据', 'Show data as a table')} onClick={() => setAsTable(!asTable)} type="button" style={asTable ? { background: 'var(--surface-2)', color: 'var(--text)' } : undefined}>
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round">
                 <path d="M3 3h18v18H3zM3 9h18M3 15h18M9 3v18" />
               </svg>

@@ -10,7 +10,8 @@
     "preview": "vite preview",
     "test": "vitest run",
     "typecheck": "tsc --noEmit",
-    "i18n": "node scripts/i18n-extract.mjs --write && node scripts/i18n-hant.mjs"
+    "i18n": "node scripts/i18n-extract.mjs --write && node scripts/i18n-hant.mjs",
+    "i18n:audit": "node scripts/i18n-audit.mjs"
   },
   "dependencies": {
     "react": "^19.3.0",

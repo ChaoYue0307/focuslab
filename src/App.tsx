@@ -210,7 +210,7 @@ export default function App() {
           <Suspense fallback={<Loading />}>{page}</Suspense>
         </div>
       </main>
-      <nav className="bottom-nav" aria-label="Main">
+      <nav className="bottom-nav" aria-label={t('主导航', 'Main navigation')}>
         {NAV.slice(0, 5).map((n) => (
           <a key={n.path} href={'#' + n.path} className={active === n.path || (n.path === '/learn' && active === '/settings') ? 'active' : ''}>
             <Icon name={n.icon} size={22} />

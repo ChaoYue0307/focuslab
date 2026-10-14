@@ -332,7 +332,7 @@ function Intro({
                 <div style={{ fontWeight: 600 }}>{t('双任务模式（位置 + 字母）', 'Dual mode (position + letter)')}</div>
                 <div className="small muted">{t('更难，但更全面地训练工作记忆', 'Harder, but trains working memory more broadly')}</div>
               </div>
-              <Toggle on={settings.nbackDual} onChange={(v) => updateSettings({ nbackDual: v })} label="dual" />
+              <Toggle on={settings.nbackDual} onChange={(v) => updateSettings({ nbackDual: v })} label={t('双任务模式（位置 + 字母）', 'Dual mode (position + letter)')} />
             </div>
             {settings.nbackDual && (
               <div className="row between" style={{ marginTop: 12 }}>
@@ -340,7 +340,7 @@ function Intro({
                   <div style={{ fontWeight: 600 }}>{t('朗读字母（需要声音）', 'Speak letters (needs sound)')}</div>
                   <div className="small muted">{speechAvailable() ? t('关闭后字母显示在方块中', 'When off, letters appear in the square') : t('此浏览器不支持语音，将显示字母', 'Speech not supported here — letters will be shown')}</div>
                 </div>
-                <Toggle on={settings.nbackAudio} onChange={(v) => updateSettings({ nbackAudio: v })} label="audio" />
+                <Toggle on={settings.nbackAudio} onChange={(v) => updateSettings({ nbackAudio: v })} label={t('朗读字母（需要声音）', 'Speak letters (needs sound)')} />
               </div>
             )}
           </div>
@@ -384,7 +384,7 @@ function Intro({
               <div style={{ fontWeight: 600 }}>{t('先做一段短练习（不计分）', 'Do a short practice round first (not scored)')}</div>
               <div className="small muted">{t('约 30 秒，带即时反馈。第一次做这个练习时推荐。', '~30 seconds with instant feedback. Recommended the first time.')}</div>
             </div>
-            <Toggle on={practice} onChange={setPractice} label="practice" />
+            <Toggle on={practice} onChange={setPractice} label={t('先做一段短练习（不计分）', 'Do a short practice round first (not scored)')} />
           </div>
         )}
 

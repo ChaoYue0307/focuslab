@@ -1,7 +1,8 @@
 {
   "name": "FocusLab · 专注力实验室",
   "short_name": "FocusLab",
-  "description": "Science-based attention training: measure, train and apply focus.",
+  "description": "基于认知科学的专注力训练：测量、训练、应用。Science-based attention training: measure, train and apply focus.",
+  "lang": "zh-CN",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",

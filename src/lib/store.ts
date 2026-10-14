@@ -1,12 +1,12 @@
 import { useSyncExternalStore } from 'react';
-import { detectLang, isLang } from './langs';
+import { DEFAULT_LANG, isLang } from './langs';
 import type { AppData, Settings } from './types';
 
 const KEY = 'focuslab:v1';
 
 export function defaultSettings(): Settings {
   return {
-    lang: detectLang(),
+    lang: DEFAULT_LANG,
     theme: 'system',
     sound: true,
     volume: 0.6,
