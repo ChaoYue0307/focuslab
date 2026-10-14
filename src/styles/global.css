@@ -1753,8 +1753,3 @@ table.data th.num {
     gap: 10px;
   }
 }
-@media (hover: none) {
-  .stage-hint .keys-only {
-    display: none;
-  }
-}
